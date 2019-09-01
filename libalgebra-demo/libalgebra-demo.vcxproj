@@ -58,15 +58,19 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="libalgebra_from_submodule.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="libalgebra_from_submodule.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="libalgebra_from_submodule.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="libalgebra_from_submodule.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -123,6 +127,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\libalgebra\addons\clone_unordered_map.h" />
+    <ClInclude Include="..\libalgebra\addons\gmpwrapper.h" />
+    <ClInclude Include="..\libalgebra\addons\sized_unordered_map.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\algebra.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\alg_types.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\basis_traits.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\constlog2.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\constpower.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\implimentation_types.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\libalgebra.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\lie.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\lie_basis.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\monomial_basis.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\multi_polynomial.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\polynomials.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\poly_basis.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\poly_lie.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\poly_lie_basis.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\sparse_vector.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\tensor.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\tensor_basis.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\utils.h" />
+    <ClInclude Include="..\libalgebra\libalgebra\_tensor_basis.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="libalgebra-demo.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
