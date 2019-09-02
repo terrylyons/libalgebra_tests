@@ -154,6 +154,9 @@
   <ItemGroup>
     <ClCompile Include="libalgebra-demo.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="libalgebra_from_submodule.props" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
