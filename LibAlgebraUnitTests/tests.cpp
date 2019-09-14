@@ -1,21 +1,31 @@
+// libalgebra functionality
 #include "libalgebra/alg_types.h"
-#include <UnitTest++/UnitTest++.h>
+
+// boost dependencies for current tests
 #include <boost/iostreams/device/mapped_file.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/operations.hpp> // exists
 #include <boost/filesystem/fstream.hpp>
+
+// std:: dependencies for current tests
 #include <iostream>
 #include <vector>
 #include <random>
 
-// debugging
+// the unit test framework
+#include <UnitTest++/UnitTest++.h>
+
+// a debugging tool - SHOW(X) outputs variable name X and its content to a stream (e.g. cout) 
 #include "SHOW.h"
 
+// the determining template variables
 const unsigned DEPTH = 5;
 const unsigned ALPHABET_SIZE = 5;
 const unsigned STEPS = 60;
 
-/// default provides access to a fixed Brownian path sampled over the unit interval
+/// brown_path - a class exposing a fixed Brownian path of dimension "ALPHABET_SIZE" 
+/// the path is evenly sampled at times 0, 1/Steps, 2/Steps, ..., 1.0 within the 
+/// unit interval. The path is presented as a one dimensional stream of doubles [begin(),end())
 struct brown_path
 {
 // state
@@ -59,6 +69,17 @@ struct brown_path
 	~brown_path() {}
 };
 
+/// brown_path_increments - This class is intended to be derived from in unit tests.
+/// It exposes a fixed Brownian path of dimension "ALPHABET_SIZE", and the path is 
+/// presented via the LIE representation of the (truncated to level "DEPTH") of the 
+/// path increments over the intervals 
+///         [0, 1/Steps), [1/Steps, 2/Steps), ..., [(Steps-1)/Steps, 1.0)
+/// within the unit interval. The path is presented as a stream of size "STEPS" of LIE elements 
+/// in a range [increments.begin(),increments.end())
+///
+/// In addition to the LIE representation of the path increments it provides the basic tensor objects and the maps 
+/// as well as helper functions that can calculate signatures and log signatures of the path over subintervals [b,e)
+///
 struct brown_path_increments : private brown_path
 {
 // types
@@ -130,33 +151,20 @@ TEST_FIXTURE(brown_path_increments, logsignature_versus_cbh)
 		vec_of_ptr_to_lie.push_back(&(*i));
 
 	// make logsignatures
-	LIE logsignature1 = maps.t2l(log(sig));
-	LIE logsignature2 = cbh.full(vec_of_ptr_to_lie);
+	LIE logsig1 = maps.t2l(log(sig));
+	LIE logsig2 = cbh.full(vec_of_ptr_to_lie);
 
 	// compare logsignatures
-	LIE error = logsignature1 - logsignature2;
-	for (auto k : error) {
+	LIE err = logsig1 - logsig2;
+	for (auto k : err) {
 		CHECK_CLOSE(k.second, 0., 7.0e-16);
 	}
 
 	// check dimension of log signature
-	CHECK_EQUAL(logsignature1.size(), 829);
+	CHECK_EQUAL(logsig1.size(), 829);
 }
 
-TEST_FIXTURE(brown_path_increments, check_multiplication)
-{
-	auto begin = increments.cbegin();
-	auto end = increments.cend();
-	TENSOR sig = signature(begin, end);
-	for (auto i = begin; i != end; i++) {
-		TENSOR err = sig - signature(begin, i) * signature(i, end);
-		for (auto k : err) {
-			CHECK_CLOSE(k.second, 0., 2.0e-15);
-		}
-	}
-}
-
-TEST_FIXTURE(brown_path_increments, simple_multiplication_check)
+TEST_FIXTURE(brown_path_increments, simple_multiplication)
 {
 	auto begin = increments.cbegin();
 	auto end = increments.cend();
@@ -170,7 +178,20 @@ TEST_FIXTURE(brown_path_increments, simple_multiplication_check)
 	}
 }
 
-TEST_FIXTURE(brown_path_increments, check_for_fine_changes_to_artithmetic)
+TEST_FIXTURE(brown_path_increments, long_multiplication)
+{
+	auto begin = increments.cbegin();
+	auto end = increments.cend();
+	TENSOR sig = signature(begin, end);
+	for (auto i = begin; i != end; i++) {
+		TENSOR err = sig - signature(begin, i) * signature(i, end);
+		for (auto k : err) {
+			CHECK_CLOSE(k.second, 0., 2.0e-15);
+		}
+	}
+}
+
+TEST_FIXTURE(brown_path_increments, fine_changes_to_artithmetic_using_memory_mapped_file)
 {
 	auto begin = increments.cbegin();
 	auto end = increments.cend();
@@ -216,7 +237,7 @@ TEST_FIXTURE(brown_path_increments, check_for_fine_changes_to_artithmetic)
 		}
 		TENSOR sig1 = signature(begin, end);
 		TENSOR err = sig1 - sig;
-		SHOW(err);
+		//SHOW(err);
 		CHECK_EQUAL(TENSOR(), err);
 	}
 }
