@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libalgebra-demo", "libalgeb
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libalgebra", "libalgebra\libalgebra.vcxproj", "{D378B45E-BF3A-4A14-A901-59E0016D7EB5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibAlgebraUnitTests", "LibAlgebraUnitTests\LibAlgebraUnitTests.vcxproj", "{C72E52F1-322A-4E0C-BE94-B59F824FC9AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{D378B45E-BF3A-4A14-A901-59E0016D7EB5}.Release|x64.Build.0 = Release|x64
 		{D378B45E-BF3A-4A14-A901-59E0016D7EB5}.Release|x86.ActiveCfg = Release|Win32
 		{D378B45E-BF3A-4A14-A901-59E0016D7EB5}.Release|x86.Build.0 = Release|Win32
+		{C72E52F1-322A-4E0C-BE94-B59F824FC9AC}.Debug|x64.ActiveCfg = Debug|x64
+		{C72E52F1-322A-4E0C-BE94-B59F824FC9AC}.Debug|x64.Build.0 = Debug|x64
+		{C72E52F1-322A-4E0C-BE94-B59F824FC9AC}.Debug|x86.ActiveCfg = Debug|Win32
+		{C72E52F1-322A-4E0C-BE94-B59F824FC9AC}.Debug|x86.Build.0 = Debug|Win32
+		{C72E52F1-322A-4E0C-BE94-B59F824FC9AC}.Release|x64.ActiveCfg = Release|x64
+		{C72E52F1-322A-4E0C-BE94-B59F824FC9AC}.Release|x64.Build.0 = Release|x64
+		{C72E52F1-322A-4E0C-BE94-B59F824FC9AC}.Release|x86.ActiveCfg = Release|Win32
+		{C72E52F1-322A-4E0C-BE94-B59F824FC9AC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

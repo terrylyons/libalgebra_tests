@@ -1,0 +1,5 @@
+C:/Users/tlyons.BKP/Source/Repos/libalgebra_tests/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/Users/tlyons.BKP/Source/Repos/libalgebra_tests/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/tlyons.BKP/Source/Repos/libalgebra_tests/out/build/x64-Debug/liblagebra-demo-cmake/CMakeFiles/edit_cache.dir
+C:/Users/tlyons.BKP/Source/Repos/libalgebra_tests/out/build/x64-Debug/liblagebra-demo-cmake/CMakeFiles/liblagebra-demo-cmake.dir
+C:/Users/tlyons.BKP/Source/Repos/libalgebra_tests/out/build/x64-Debug/liblagebra-demo-cmake/CMakeFiles/rebuild_cache.dir
