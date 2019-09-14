@@ -21,5 +21,13 @@
     <ClCompile Include="tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tests_libalgebra-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SHOW.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
