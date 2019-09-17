@@ -24,6 +24,9 @@
     <ClCompile Include="tests_libalgebra-demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tests_TENSOR_LIE_CBH_MAPS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SHOW.h">
