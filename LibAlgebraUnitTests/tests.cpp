@@ -67,8 +67,8 @@ namespace {
 			std::normal_distribution<double> distribution(0., 1. / sqrt(Steps()));//distribution(mean, std deviation)
 
 			// create random path with dimension width and steps increments, and so a (steps+1) x width C matrix. 
-			for (int i = 0; i < Steps(); ++i)
-				for (int j = 0; j < Width(); ++j) {
+			for (size_t i = 0; i < Steps(); ++i)
+				for (size_t j = 0; j < Width(); ++j) {
 					double increment = distribution(generator);
 					path[(std::size_t(i) + 1) * Width() + j] = path[std::size_t(i) * width + j] + increment;
 				}
@@ -112,7 +112,7 @@ namespace {
 		LIE LieDifference(const_scalar_iterator i) const
 		{
 			LIE increment;
-			for (int j = 0; j < Width(); j++)
+			for (size_t j = 0; j < Width(); j++)
 				// Hall basis elements start at index 1 with zero as a reserved parent index		
 				increment += LIE(j + 1, *(i + j + Width()) - *(i + j));
 			return increment;

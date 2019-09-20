@@ -112,7 +112,7 @@ namespace {
 			std::uniform_int_distribution<LET> distribution(1, ALPHABET_SIZE);
 
 			// create random categorical increments
-			for (int i = 0; i < Steps(); ++i)
+			for (size_t i = 0; i < Steps(); ++i)
 				increments[i] = LIE(distribution(generator), S(1));
 		}
 		// helper functions
