@@ -30,6 +30,9 @@
     <ClCompile Include="x64sigs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HallSetTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SHOW.h">
