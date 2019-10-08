@@ -96,6 +96,9 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)libalgebra</AdditionalIncludeDirectories>
+      <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
+      <OpenMP>GenerateParallelCode</OpenMP>
+      <UseMSVC>true</UseMSVC>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -113,6 +116,9 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)libalgebra</AdditionalIncludeDirectories>
+      <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
+      <OpenMP>GenerateParallelCode</OpenMP>
+      <UseMSVC>true</UseMSVC>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,6 +138,9 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)libalgebra</AdditionalIncludeDirectories>
+      <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
+      <OpenMP>GenerateParallelCode</OpenMP>
+      <UseMSVC>true</UseMSVC>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,6 +162,9 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)libalgebra</AdditionalIncludeDirectories>
+      <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
+      <OpenMP>GenerateParallelCode</OpenMP>
+      <UseMSVC>true</UseMSVC>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -163,13 +175,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LatticePathTests.cpp">
+      <UseMSVC Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</UseMSVC>
+      <UseMSVC Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</UseMSVC>
+      <UseMSVC Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</UseMSVC>
+      <UseMSVC Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</UseMSVC>
+    </ClCompile>
     <ClCompile Include="LibAlgebraUnitTests.cpp" />
     <ClCompile Include="HallSetTests.cpp" />
+    <ClCompile Include="makebm.cpp" />
+    <ClCompile Include="memfile.cpp" />
+    <ClCompile Include="speed_tests.cpp" />
     <ClCompile Include="tests.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="tests_libalgebra-demo.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -191,6 +212,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="alg_framework.h" />
+    <ClInclude Include="brown_path_increments.h" />
+    <ClInclude Include="makebm.h" />
+    <ClInclude Include="memfile.h" />
     <ClInclude Include="SHOW.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

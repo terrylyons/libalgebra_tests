@@ -33,9 +33,33 @@
     <ClCompile Include="HallSetTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LatticePathTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="speed_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="makebm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="memfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SHOW.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="alg_framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="makebm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="brown_path_increments.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="memfile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
