@@ -45,6 +45,9 @@
     <ClCompile Include="AlgebaFunctionsTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TreeBufferHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SHOW.h">
@@ -62,5 +65,20 @@
     <ClInclude Include="memfile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TreeBufferHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SigHelpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="time_and_details.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="categorical_path.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CurrentTestOutput.txt" />
   </ItemGroup>
 </Project>
