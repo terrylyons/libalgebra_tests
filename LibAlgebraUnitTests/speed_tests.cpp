@@ -6,6 +6,7 @@ Distributed under the terms of the GNU General Public License,
 Version 3. (See accompanying file License.txt)
 
 ************************************************************* */
+
 // libalgebra functionality
 #include "libalgebra/alg_types.h"
 
@@ -151,6 +152,7 @@ namespace {
 
 	TEST_FIXTURE(brown_path_increments, speed)
 	{
+		TEST_DETAILS();
 		TENSOR sig;
 		for (int count = 0; count < 100; ++count)
 			signature(increments.begin(), increments.end());

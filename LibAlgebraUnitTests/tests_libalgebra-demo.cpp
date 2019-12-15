@@ -25,6 +25,7 @@ Version 3. (See accompanying file License.txt)
 
 // a debugging tool - SHOW(X) outputs variable name X and its content to a stream (e.g. cout) 
 #include "SHOW.h"
+#include "time_and_details.h"
 
 namespace {
 
@@ -76,6 +77,7 @@ namespace {
 
 	TEST_FIXTURE(uni_env, LibAlgebraTestPolyLie)
 	{
+		TEST_DETAILS();
 		//'checks' the keyofletter function via this constructor
 		ALG::POLYLIE poly11(LET(2), S(1));
 		std::cout << poly11 << std::endl;
@@ -94,6 +96,7 @@ namespace {
 
 	TEST_FIXTURE(uni_env2, LibAlgebraTestCommutativePoly)
 	{
+		TEST_DETAILS();
 		typedef ALG::MULTIPOLY MULTIPOLY;
 		typedef ALG::MULTIPOLY1 MULTIPOLY1;// one dimensional polynomials
 		MULTIPOLY1 p0(S(7)), p1(1, 1), p2(2, 3), p3, x(0), y(2), z;
@@ -114,6 +117,7 @@ namespace {
 
 	TEST_FIXTURE(uni_env2, LibAlgebraTestLieandCBH)
 	{
+		TEST_DETAILS();
 		using std::cout;
 		using std::endl;
 		using std::vector;

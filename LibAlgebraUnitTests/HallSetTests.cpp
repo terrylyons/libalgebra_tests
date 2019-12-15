@@ -6,6 +6,7 @@
 
 // the unit test framework
 #include <UnitTest++/UnitTest++.h>
+#include "time_and_details.h"
 
 // validates the hall set and lie multiplication over it
 SUITE(hallset)
@@ -17,6 +18,7 @@ SUITE(hallset)
 
 		TEST_FIXTURE(SETUP65, hall_set_definition)
 		{
+			TEST_DETAILS();
 			// the basis type
 			typedef typename LIE::BASIS BASIS;
 			// the basis instance

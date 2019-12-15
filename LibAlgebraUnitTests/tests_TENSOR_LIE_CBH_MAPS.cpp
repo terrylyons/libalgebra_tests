@@ -26,13 +26,14 @@ Version 3. (See accompanying file License.txt)
 
 // a debugging tool - SHOW(X) outputs variable name X and its content to a stream (e.g. cout) 
 #include "SHOW.h"
+#include "time_and_details.h"
 
 
 // to allow redefinitions in other test modules
 namespace {
 	// the tensor shape variables
 	const unsigned DEPTH = 5;
-	const unsigned ALPHABET_SIZE = 2;
+	const unsigned ALPHABET_SIZE = 5;
 	const unsigned DEPTH2 = 4;
 	const unsigned ALPHABET_SIZE2 = 3;
 	const unsigned STEPS = 30;
@@ -76,9 +77,6 @@ namespace {
 		mutable MAPS2 maps2; // has cached state
 		mutable CBH2 cbh2; // has cached state
 	};
-
-
-
 
 	struct categorical_path : uni_env2
 	{
@@ -137,23 +135,124 @@ namespace {
 
 	TEST_FIXTURE(categorical_path, long_multiplication)
 	{
+		TEST_DETAILS();
 		auto begin = increments.cbegin();
 		auto end = increments.cend();
 		TENSOR sig = signature(begin, end);
 		for (auto i = begin; i != end; i++) {
 			TENSOR err = sig - signature(begin, i) * signature(i, end);
 			CHECK_EQUAL(TENSOR(), err);
-			size_t l = logsignature(begin, i).size();
-		    size_t r = logsignature(i, end).size();
-			size_t sl = signature(begin, i).size();
-			size_t sr = signature(i, end).size();
-			std::cout << l + r << " " << sl + sr << " ";
 		}
-		std::cout << " : " << LIE::basis.size() << " : " << TENSOR::basis.size() << "\n";
+	}
+
+	TEST_FIXTURE(categorical_path, bug)
+	{
+		TEST_DETAILS();
+		//4: { 1(4) }
+		//446 : { 1([3, [2, [2, [2, 3]]]]) }
+
+		LIE l1(1), l2(2), l3(3), l4(4);
+		LIE k1(l4);
+		LIE k2(l3 * (l2 * (l2 * (l2 * (l3)))));
+		LIE ans = k1 * k2;
+	}
+
+	TEST_FIXTURE(categorical_path, units)
+	{
+		TEST_DETAILS();
+		LET let(2);
+		S scalar(2);
+
+		LIE lzero;
+		//LIE lscalar(scalar); // not defined
+		LIE lnotscalar(let);
+
+		TENSOR tzero;
+		TENSOR tone(S(1));
+
+		TENSOR tscalar(scalar);
+		TENSOR tnotscalar(let);
+
+		// note LIE(S(4)) should be undefined behavior
+		// LIE(4) is not but treats the argument as a letter
+		auto begin = increments.cbegin();
+		auto end = increments.cend();
+		TENSOR sig = signature(begin, end);
+		LIE logsig = logsignature(begin, end);
+
+		CHECK_EQUAL(logsig, logsig + lzero);
+		CHECK_EQUAL(logsig, lzero + logsig);
+		CHECK_EQUAL(lzero, lzero + lzero);
+
+		CHECK_EQUAL(lzero, logsig * lzero);
+		CHECK_EQUAL(lzero, lzero * logsig);
+		CHECK_EQUAL(lzero, lzero * lzero);
+
+		CHECK_EQUAL(sig, sig + tzero);
+		CHECK_EQUAL(sig, tzero + sig);
+		CHECK_EQUAL(tzero, tzero + tzero);
+
+		CHECK_EQUAL(tzero, sig * tzero);
+		CHECK_EQUAL(tzero, tzero * sig);
+		CHECK_EQUAL(tzero, tzero * tzero);
+
+		CHECK_EQUAL(sig, sig * tone);
+		CHECK_EQUAL(sig, tone * sig);
+		CHECK_EQUAL(tone, tone * tone);
+
+		CHECK_EQUAL(sig * scalar, sig * tscalar);
+		CHECK_EQUAL(sig * scalar, tscalar * sig);
+		CHECK_EQUAL(tone * scalar * scalar, tscalar * tscalar);
+
+		// danger
+		CHECK(LIE(2) == LIE(2, 1));
+		CHECK(LIE(0) != LIE());
+		// 0 is not a letter in the LIE basis
+		CHECK(tnotscalar != tscalar);
+		// danger!! since there are conversions from int types to scalar
+	}
+
+	TEST_FIXTURE(categorical_path, CBH)
+	{
+		TEST_DETAILS();
+		auto begin = increments.cbegin();
+		auto end = increments.cend();
+		TENSOR sig = signature(begin, end);
+		LIE logsig = logsignature(begin, end);
+		CHECK(((exp(maps.l2t(logsig)) - sig) == TENSOR()));
+		CHECK(maps.t2l(log(sig)) == logsig);
+		CHECK(exp(log(sig)) == sig);
+	}
+
+	TEST_FIXTURE(categorical_path, LIE_PRODUCT)
+	{
+		TEST_DETAILS();
+		auto begin = increments.cbegin();
+		auto end = increments.cend();
+		size_t midpoint = (end - begin) / 2;
+		LIE l1 = logsignature(begin, begin + midpoint);
+		LIE l2 = logsignature(begin + midpoint, end);
+		TENSOR t1 = maps.l2t(l1);
+        TENSOR t2 = maps.l2t(l2);
+		TENSOR t = t1 * t2 - t2 * t1;
+		CHECK((maps.l2t(l1 * l2) - t) == TENSOR());
+	}
+
+	TEST_FIXTURE(categorical_path, AntipodeMap)
+	{
+		TEST_DETAILS();
+		auto begin = increments.cbegin();
+		auto end = increments.cend();
+		LIE l1 = logsignature(begin, end);
+		TENSOR t1 = maps.l2t(l1);
+
+		CHECK(inverse(exp(t1)) == reflect(exp(t1)));
+		CHECK(inverse(exp(t1))* exp(t1) == TENSOR(S(1)));
 	}
 
 	TEST_FIXTURE(uni_env, the_basis)
 	{
+		TEST_DETAILS();
 		// show the bases:
 		{
 			std::string expected(" 1 2 [1,2] [1,[1,2]] [2,[1,2]] [1,[1,[1,2]]] [2,[1,[1,2]]] [2,[2,[1,2]]] [1,[1,[1,[1,2]]]] [2,[1,[1,[1,2]]]] [2,[2,[1,[1,2]]]] [2,[2,[2,[1,2]]]] [[1,2],[1,[1,2]]] [[1,2],[2,[1,2]]]");
@@ -174,8 +273,10 @@ namespace {
 
 		}
 	}
+	
 	TEST_FIXTURE(uni_env, constructors)
 	{
+		TEST_DETAILS();
 		// construct  
 		   // a scalar
 		S s(3);
@@ -208,6 +309,7 @@ namespace {
 
 	TEST_FIXTURE(uni_env3, LibAlgebraTestLieandCBH)
 	{
+		TEST_DETAILS();
 		using std::cout;
 		using std::endl;
 		using std::vector;

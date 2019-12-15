@@ -24,11 +24,13 @@ Version 3. (See accompanying file License.txt)
 // Local frameworks
 #include "brown_path_increments.h"
 #include "memfile.h"
+#include "time_and_details.h"
 
 typedef brown_path_increments<5, 5, 60> pathsetup5560;
 
 TEST_FIXTURE(pathsetup5560, logsignature_versus_cbh)
 {
+	TEST_DETAILS();
 	// collect the signature
 	TENSOR sig = signature(increments.begin(), increments.end());
 
@@ -54,6 +56,7 @@ TEST_FIXTURE(pathsetup5560, logsignature_versus_cbh)
 
 TEST_FIXTURE(pathsetup5560, simple_multiplication)
 {
+	TEST_DETAILS();
 	auto begin = increments.cbegin();
 	auto end = increments.cend();
 	auto sig1 = signature(begin, begin + (end - begin) / 2);
@@ -68,6 +71,7 @@ TEST_FIXTURE(pathsetup5560, simple_multiplication)
 
 TEST_FIXTURE(pathsetup5560, long_multiplication)
 {
+	TEST_DETAILS();
 	auto begin = increments.cbegin();
 	auto end = increments.cend();
 	TENSOR sig = signature(begin, end);
@@ -81,6 +85,7 @@ TEST_FIXTURE(pathsetup5560, long_multiplication)
 
 TEST_FIXTURE(pathsetup5560, fine_changes_to_arithmetic_using_memory_mapped_file)
 {
+	TEST_DETAILS();
 	UNITTEST_TIME_CONSTRAINT(5000);
 	// the data from the framework
 	auto cbegin_framework = increments.cbegin();
