@@ -26,6 +26,7 @@ Version 3. (See accompanying file License.txt)
 
 // a debugging tool - SHOW(X) outputs variable name X and its content to a stream (e.g. cout) 
 #include "SHOW.h"
+#include "time_and_details.h"
 
 namespace {
 	// the determining template variables
