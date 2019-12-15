@@ -76,7 +76,7 @@ struct timer
 // a macro to identify and time a test to cout
 #ifndef TEST_DETAILS
 #ifndef SHO_NO
-#define TEST_DETAILS() std::cout << "\nFile : " << m_details.filename << "\nLine : " << m_details.lineNumber << "\nSuite : " << m_details.suiteName << "\nTest : " << m_details.testName << std::endl ; timer t;
+#define TEST_DETAILS() std::cout << "\nFile : " << m_details.filename << "\nLine : " << m_details.lineNumber << "\nSuite : " << m_details.suiteName << "\nTest : " << m_details.testName << std::endl ; timer t46390__LINE__;
 #else
 #define TEST_DETAILS()
 #endif
