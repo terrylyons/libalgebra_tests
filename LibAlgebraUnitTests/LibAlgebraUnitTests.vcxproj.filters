@@ -48,6 +48,9 @@
     <ClCompile Include="TreeBufferHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OMPSigsTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SHOW.h">
@@ -75,6 +78,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="categorical_path.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="log2ceil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
