@@ -171,7 +171,7 @@ namespace {
 		TENSOR tone(S(1));
 
 		TENSOR tscalar(scalar);
-		TENSOR tnotscalar(let);
+		TENSOR tnotscalar(let, S(1));
 
 		// note LIE(S(4)) should be undefined behavior
 		// LIE(4) is not but treats the argument as a letter
