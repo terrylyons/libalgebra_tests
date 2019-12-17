@@ -82,7 +82,7 @@ struct categorical_path : sigtools<DEPTH, ALPHABET_SIZE, S_t>
 		std::uniform_int_distribution<alg::LET> distribution(1, ALPHABET_SIZE);
 
 		// create random categorical increments
-		for (int i = 0; i < Steps(); ++i)
+		for (size_t i = 0; i != Steps(); ++i)
 			increments[i] = LIE(distribution(generator), S(1));
 	}
 };
