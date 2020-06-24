@@ -83,7 +83,8 @@ struct categorical_path : sigtools<DEPTH, ALPHABET_SIZE, S_t>
 
 		// create random categorical increments
 		for (size_t i = 0; i != Steps(); ++i)
-			increments[i] = LIE(distribution(generator), S(1));
+		//	increments[i] = LIE(distribution(generator), S(1));
+			increments[i] = LIE(1+generator() %ALPHABET_SIZE, S(1));
 	}
 };
 
