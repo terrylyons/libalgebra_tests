@@ -5,7 +5,9 @@
 #include <boost/filesystem/operations.hpp> // exists
 #include <boost/filesystem/fstream.hpp>
 // copy, sort, max
+#ifdef _MSC_VER
 #include <xutility>
+#endif
 #include <algorithm>
 // the unit test framework
 #include <UnitTest++/UnitTest++.h>

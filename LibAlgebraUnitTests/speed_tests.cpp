@@ -122,8 +122,8 @@ namespace {
 
 		/// brown_path_increments inherits its constructor
 		template<typename ...Ts>
-		brown_path_increments(Ts...)
-			: brown_path(Ts...) {
+		brown_path_increments(Ts... args)
+			: brown_path(args...) {
 			// convert sampled path to LIE increments
 			for (auto i = path.cbegin(); (i + Width()) != path.cend(); i += Width()) {
 				increments.emplace_back(LieDifference(i));

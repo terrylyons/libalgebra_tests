@@ -1,6 +1,7 @@
 #pragma once
 // the libalgebra framework
 #include "alg_framework.h"
+#include <random>
 
 template <typename alg::LET depth, typename alg::LET width, coefficient_t  S_t = Rational>
 struct sigtools: alg_framework <depth, width, S_t>
@@ -83,7 +84,7 @@ struct categorical_path : sigtools<DEPTH, ALPHABET_SIZE, S_t>
 
 		// create random categorical increments
 		for (size_t i = 0; i != Steps(); ++i)
-			increments[i] = LIE(distribution(generator), S(1));
+			increments[i] = LIE(1+generator()%ALPHABET_SIZE, S(1));
 	}
 };
 

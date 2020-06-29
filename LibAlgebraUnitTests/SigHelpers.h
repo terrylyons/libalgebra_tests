@@ -16,7 +16,7 @@ typename FRAMEWORK::TENSOR signature(ITERATOR_T begin, ITERATOR_T end, const FRA
 {
 	// omp friendly
 	ptrdiff_t N = end - begin;
-	typename FRAMEWORK::TENSOR signature(FRAMEWORK::S(1));
+	typename FRAMEWORK::TENSOR signature(typename FRAMEWORK::S(1));
 	for (ptrdiff_t i = 0; i < N; i++)
 		signature *= exp(context.maps.l2t(*(begin + i)));
 	return signature;
