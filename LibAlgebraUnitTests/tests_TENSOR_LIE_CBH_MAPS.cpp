@@ -1,7 +1,7 @@
 /* *************************************************************
 
 Copyright 2010-2019 Terry Lyons, Stephen Buckley, Djalil Chafai,
-Greg Gyurkó and Arend Janssen.
+Greg Gyurkï¿½ and Arend Janssen.
 
 Distributed under the terms of the GNU General Public License,
 Version 3. (See accompanying file License.txt)
@@ -302,8 +302,8 @@ namespace {
 		}
 
 		template<class LIE_T, typename ...Ts>
-		LIE_T adj(const LIE_T& outer, Ts...) {
-			return outer * adj(Ts...);
+		LIE_T adj(const LIE_T& outer, Ts... args) {
+			return outer * adj(args...);
 		}
 	};
 

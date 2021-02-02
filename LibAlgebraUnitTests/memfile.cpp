@@ -48,7 +48,7 @@ memfile::memfile(boost::filesystem::path filename, size_t numberOfBytes /*= 0*/)
 	// open the file for read and write
 	boost::iostreams::mapped_file_params params;
 	params.path = p.string();
-	params.mode = (read_only() == false) ? boost::iostreams::mapped_file_sink::readwrite : boost::iostreams::mapped_file_sink::priv;
+	params.flags = (read_only() == false) ? boost::iostreams::mapped_file_sink::readwrite : boost::iostreams::mapped_file_sink::priv;
 	file.open(params);
 	if (!(file.is_open()))
 		throw;

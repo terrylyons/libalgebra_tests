@@ -1,6 +1,7 @@
 #pragma once
 // the libalgebra framework
 #include "alg_framework.h"
+#include <random>
 
 template <typename alg::LET depth, typename alg::LET width, coefficient_t  S_t = Rational>
 struct sigtools: alg_framework <depth, width, S_t>

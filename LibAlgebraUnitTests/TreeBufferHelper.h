@@ -2,7 +2,12 @@
 #pragma once
 #include <stddef.h>  //ptrdiff_t
 #include <algorithm> //min
+#ifdef _MSC_VER
 #include <crtdbg.h>  //_ASSERT
+#else
+#define _ASSERT(expr) (void(0))
+#endif
+
 
 class CTreeBufferHelper
 {
