@@ -8,6 +8,7 @@
 
 #include <array>
 #include <cassert>
+#include <iterator>
 
 #include <libalgebra/libalgebra.h>
 
@@ -33,8 +34,8 @@ public:
 
     typedef std::array<SCALAR, BASIS::dimension> DATA;
 
-    typedef DATA::iterator iterator;
-    typedef DATA::const_iterator const_iterator;
+    class iterator;
+    class const_iterator;
 
     static const SCALAR one;
     static const SCALAR mone;
@@ -68,6 +69,71 @@ public:
     void swap(SmallVector& rhs) {
         m_data.swap(rhs);
     }
+
+
+public:
+
+    iterator begin()
+    {
+        return iterator(&m_data[0]);
+    }
+
+    const_iterator begin() const
+    {
+        return const_iterator(&m_data[0]);
+    }
+
+    iterator end()
+    {
+        return iterator(&m_data[0] + BASIS::dimension);
+    }
+
+    const_iterator end() const
+    {
+        return const_iterator(&m_data[0] + BASIS::dimension);
+    }
+
+
+public:
+
+    SCALAR& operator[](const KEY& k) { return m_data[k]; }
+    const SCALAR& operator[](const KEY& k) const { return m_data[k]; }
+
+    void clear()
+    {
+        m_data.fill(zero);
+    }
+
+    DIMN size() const
+    {
+        DIMN sz = 0;
+        for (DIMN i=0; i<BASIS::dimension; ++i)
+            if (m_data[i] != zero) ++sz;
+        return sz;
+    }
+
+    bool empty() const
+    {
+        for (DIMN i=0; i<BASIS::dimension; ++i)
+            if (m_data[i] == zero) return false;
+        return true;
+    }
+
+public:
+
+    SCALAR NormL1() const
+    {
+        SCALAR acc = 0;
+        for (DIMN i=0; i<BASIS::dimension; ++i)
+            acc += abs(m_data[i]);
+        return acc;
+    }
+
+public:
+
+    static bool comp(const KEY& k1, const KEY& k2) { return k1 < k2; }
+
+public:
 
     SmallVector operator-(void) const {
         SmallVector new_vec;
