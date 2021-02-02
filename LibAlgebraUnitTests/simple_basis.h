@@ -12,14 +12,14 @@ template <unsigned _D>
 class SimpleIntegerBasis
 {
 public:
-
+    static const unsigned dimension = _D;
     typedef unsigned KEY;
 
 
     friend std::ostream& operator<<(std::ostream& os,
             const std::pair<SimpleBasis*, KEY> arg) const
     {
-        return (os << '(' << arg << ')');
+        return (os << arg);
     }
 
 };
