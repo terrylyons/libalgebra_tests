@@ -30,11 +30,11 @@ struct Fixture
             return (upper_bound - lower_bound)*uniform01 + lower_bound;
         }
 
-        VECT rand_vec()
+        VECT rand_vec(S lower_bound = S(-5), S upper_bound = S(5))
         {
             VECT v;
             for (KEY i=0; i<BASIS::dimension; ++i)
-                v[i] = rand_scalar();
+                v[i] = rand_scalar(lower_bound, upper_bound);
             return v;
         }
 

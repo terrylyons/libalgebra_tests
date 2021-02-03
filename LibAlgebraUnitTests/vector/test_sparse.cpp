@@ -21,7 +21,9 @@ SUITE(sparse_vector) {
 #include "framework_fixture.h"
 #include "vector_arithmetic_suite.h"
 #include "vector_comparison_suite.h"
-
+#include "vector_element_access_suite.h"
+#include "vector_iterator_suite.h"
+#include "vector_properties_suite.h"
 
 }
 
