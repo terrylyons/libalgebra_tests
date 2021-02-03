@@ -8,18 +8,19 @@
 #include <iostream>
 #include <utility>
 
-template <unsigned _D>
+template <unsigned _D, typename _R>
 class SimpleIntegerBasis
 {
 public:
     static const unsigned dimension = _D;
     typedef unsigned KEY;
+    typedef _R RATIONAL;
 
 
     friend std::ostream& operator<<(std::ostream& os,
-            const std::pair<SimpleBasis*, KEY> arg) const
+            const std::pair<SimpleIntegerBasis*, KEY> arg)
     {
-        return (os << arg);
+        return (os << arg.second);
     }
 
 };

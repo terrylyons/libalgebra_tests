@@ -11,10 +11,12 @@ include_directories(libalgebra)
 file(GLOB SOURCES "LibAlgebraUnitTests/*.cpp")
 file(GLOB TENSOR_TESTS "LibAlgebraUnitTests/tensor/test_*.cpp")
 file(GLOB LIE_TESTS "LibAlgebraUnitTests/lie/test_*.cpp")
+file(GLOB VECTOR_TESTS "LibAlgebraUnitTests/vector/test_*.cpp")
 
 add_executable(test ${SOURCES}
         ${TENSOR_TESTS}
         ${LIE_TESTS}
+        ${VECTOR_TESTS}
         )
 target_include_directories(test PUBLIC "${PROJECT_BINARY_DIR}")
 target_link_libraries(test pthread UnitTest++ gmp ${Boost_LIBRARIES})
@@ -28,3 +30,8 @@ target_link_libraries(test_tensor pthread UnitTest++ gmp ${Boost_LIBRARIES})
 add_executable(test_lie "LibAlgebraUnitTests/lie/run_tests.cpp" ${LIE_TESTS})
 target_include_directories(test_lie PUBLIC "${PROJECT_BINARY_DIR}")
 target_link_libraries(test_lie pthread UnitTest++ gmp ${Boost_LIBRARIES})
+
+
+add_executable(test_vector "LibAlgebraUnitTests/lie/run_tests.cpp" ${VECTOR_TESTS})
+target_include_directories(test_vector PUBLIC "${PROJECT_BINARY_DIR}")
+target_link_libraries(test_vector pthread UnitTest++ gmp ${Boost_LIBRARIES})
