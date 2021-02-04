@@ -77,4 +77,21 @@
     }
 
 
+    TEST_FIXTURE(Fixture, test_swap_empty_full) {
+        TEST_DETAILS();
+        VECT left, right(rand_vec());
+        VECT lhs(left), rhs(right);
+        REQUIRE {
+            CHECK_EQUAL(left, lhs);
+            CHECK_EQUAL(right, rhs);
+        };
+
+        lhs.swap(rhs);
+
+        CHECK_EQUAL(left, rhs);
+        CHECK_EQUAL(right, lhs);
+    }
+
+
+
 #endif

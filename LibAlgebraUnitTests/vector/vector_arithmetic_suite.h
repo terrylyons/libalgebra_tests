@@ -34,8 +34,9 @@
         CHECK_EQUAL(expected, neut OP other);                    \
     }
 
-    TEST_BINARY_NEUTRAL(test_addition, +);
-    TEST_BINARY_NEUTRAL(test_subtraction, -);
+TEST_BINARY_NEUTRAL(test_addition, +);
+
+TEST_BINARY_NEUTRAL(test_subtraction, -);
 
 
 #undef TEST_BINARY_NEUTRAL
@@ -50,8 +51,9 @@
         CHECK_EQUAL(expected, lhs OP rhs);                       \
     }
 
-    TEST_BINARY_OPERATOR(test_addition, +);
-    TEST_BINARY_OPERATOR(test_subtraction, -);
+TEST_BINARY_OPERATOR(test_addition, +);
+
+TEST_BINARY_OPERATOR(test_subtraction, -);
 
 #undef TEST_BINARY_OPERATOR
 
@@ -81,8 +83,9 @@
         CHECK_EQUAL(expected, neut);                             \
     }
 
-    TEST_INPLACE_BINARY_NEUTRAL(test_inplace_addition, +=);
-    TEST_INPLACE_BINARY_NEUTRAL(test_inplace_subtraction, -=);
+TEST_INPLACE_BINARY_NEUTRAL(test_inplace_addition, +=);
+
+TEST_INPLACE_BINARY_NEUTRAL(test_inplace_subtraction, -=);
 
 #undef TEST_INPLACE_BINARY_NEUTRAL
 
@@ -97,8 +100,9 @@
         CHECK_EQUAL(expected, lhs);                              \
     }
 
-    TEST_INPLACE_BINARY_OPERATOR(test_inplace_addition, +=);
-    TEST_INPLACE_BINARY_OPERATOR(test_inplace_subtraction, -=);
+TEST_INPLACE_BINARY_OPERATOR(test_inplace_addition, +=);
+
+TEST_INPLACE_BINARY_OPERATOR(test_inplace_subtraction, -=);
 
 
 #undef TEST_INPLACE_BINARY_OPERATOR
@@ -114,8 +118,9 @@
         CHECK_EQUAL(expected, lhs OP rhs);                       \
     }
 
-    TEST_BINARY_OPERATOR_FUNC(test_coordmin, &, std::min);
-    TEST_BINARY_OPERATOR_FUNC(test_coordmax, |, std::max);
+TEST_BINARY_OPERATOR_FUNC(test_coordmin, &, std::min);
+
+TEST_BINARY_OPERATOR_FUNC(test_coordmax, |, std::max);
 
 #undef TEST_BINARY_OPERATOR_FUNC
 
@@ -131,8 +136,9 @@
         CHECK_EQUAL(expected, lhs);                              \
     }
 
-    TEST_INPLACE_BINARY_OPERATOR_FUNC(test_inplace_coordmin, &=, std::min);
-    TEST_INPLACE_BINARY_OPERATOR_FUNC(test_inplace_coordmax, |=, std::max);
+TEST_INPLACE_BINARY_OPERATOR_FUNC(test_inplace_coordmin, &=, std::min);
+
+TEST_INPLACE_BINARY_OPERATOR_FUNC(test_inplace_coordmax, |=, std::max);
 
 #undef TEST_INPLACE_BINARY_OPERATOR_FUNC
 
@@ -160,36 +166,31 @@
         CHECK_EQUAL(expected, lhs);          \
     }
 
-    TEST_FUSED_OP(add_scal_prod, +=, *, S);
-    TEST_FUSED_OP(sub_scal_prod, -=, *, S);
-    TEST_FUSED_OP(add_scal_div, +=, /, Q);
-    TEST_FUSED_OP(sub_scal_div, -=, /, Q);
+TEST_FUSED_OP(add_scal_prod, +=, *, S);
+
+TEST_FUSED_OP(sub_scal_prod, -=, *, S);
+
+TEST_FUSED_OP(add_scal_div, +=, /, Q);
+
+TEST_FUSED_OP(sub_scal_div, -=, /, Q);
 
 #undef TEST_FUSED_OP
 
-    TEST_FIXTURE(Fixture, test_unary_minus_neutral) {
-        TEST_DETAILS();
-        VECT neut, expected;
+TEST_FIXTURE (Fixture, test_unary_minus_neutral) {
+    TEST_DETAILS();
+    VECT neut, expected;
 
-        CHECK_EQUAL(expected, -neut);
-    }
+            CHECK_EQUAL(expected, -neut);
+}
 
-    TEST_FIXTURE(Fixture, test_unary_minus_random) {
-        TEST_DETAILS();
-        VECT vect = rand_vec(), expected;
-        for (KEY i=0; i<BASIS::dimension; ++i)
-            expected[i] = -vect[i];
+TEST_FIXTURE (Fixture, test_unary_minus_random) {
+    TEST_DETAILS();
+    VECT vect = rand_vec(), expected;
+    for (KEY i = 0; i < BASIS::dimension; ++i)
+        expected[i] = -vect[i];
 
-        CHECK_EQUAL(expected, -vect);
-    }
-
-
-
-
-
-
-
-
+            CHECK_EQUAL(expected, -vect);
+}
 
 
 #endif  // ifdef _VECTOR_TYPE
