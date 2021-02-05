@@ -8,9 +8,8 @@
 #include <libalgebra/alg_types.h>
 
 #include "../time_and_details.h"
+#include "../helpers.h"
 
-#define CHECK_VEC_CLOSE(expected, result, tol) \
-    CHECK_EQUAL(expected, result)
 
 using alg::DEG;
 using alg::LET;
@@ -46,7 +45,7 @@ SUITE(test_tensor_functions) {
         TENSOR ten(S(0));
         TENSOR expected {TKEY()};
 
-                CHECK_EQUAL(expected, exp(ten));
+        CHECK_EQUAL(expected, exp(ten));
     }
 
     TEST_FIXTURE(Fixture, test_exponential_tensor_unit) {
