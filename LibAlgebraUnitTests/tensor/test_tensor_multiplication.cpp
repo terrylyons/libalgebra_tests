@@ -48,7 +48,6 @@ SUITE (tensor_multiplication) {
             return k;
         }
 
-
     };
 
     TEST_FIXTURE(Fixture, test_product_tunit_tunit) {
@@ -175,9 +174,10 @@ SUITE (tensor_multiplication) {
         expected += TENSOR(TKEY(LET(1)));
         expected += TENSOR(TKEY(LET(4)));
 
-
         CHECK_EQUAL(expected, lhs * rhs);
-
     }
+
+
+
 
 }
