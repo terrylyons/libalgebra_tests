@@ -7,7 +7,10 @@ struct Fixture
     {
         typedef alg_types<2, 2, Rational> FIELD;
         typedef SimpleIntegerBasis<5, typename FIELD::RAT> BASIS;
-        typedef _VECTOR_TYPE<BASIS/*,  FIELD */
+        typedef _VECTOR_TYPE<BASIS
+#ifdef LIBALGEBRA_VECTORS_H
+        ,  FIELD
+#endif
 #ifdef _VECTOR_TYPE_ADDITIONAL_PARAMS
             , _VECTOR_TYPE_ADDITIONAL_PARAMS
 #endif

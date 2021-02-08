@@ -11,7 +11,11 @@
 #include "../time_and_details.h"
 #include <libalgebra/alg_types.h>
 
+#ifdef LIBALGEBRA_VECTORS_H
+using alg::vectors::sparse_vector;
+#else
 using alg::sparse_vector;
+#endif
 
 #define _VECTOR_TYPE sparse_vector
 #define _VECTOR_TYPE_ADDITIONAL_PARAMS std::unordered_map<typename BASIS::KEY, typename FIELD::S>
