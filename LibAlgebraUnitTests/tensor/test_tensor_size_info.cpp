@@ -77,4 +77,6 @@ SUITE(tensor_size_info) {
     TEST_TENSOR_SIZE(5, 10, 2441406);
 
 
+#undef TEST_TENSOR_SIZE
+
 }
