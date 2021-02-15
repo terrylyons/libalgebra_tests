@@ -44,6 +44,8 @@ public:
         return static_cast<KEY>(idx);
     }
 
+    KEY nextkey(const KEY& k) const
+    { return k + 1; }
 
 
 };
