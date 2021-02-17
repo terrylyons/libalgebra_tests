@@ -22,9 +22,7 @@ namespace {
         inline static void check(const VECT& expected, const VECT& actual, double tol)
         {
             VECT err = actual - expected;
-            for (auto& elt : err) {
-                CHECK_CLOSE(0.0, elt.second, tol);
-            }
+            CHECK_CLOSE(0.0, err.NormLInfinity(), tol);
         }
     };
 
