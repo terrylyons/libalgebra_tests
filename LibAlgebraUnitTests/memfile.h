@@ -11,6 +11,7 @@
 #include <algorithm>
 // the unit test framework
 #include <UnitTest++/UnitTest++.h>
+#include <libalgebra/libalgebra.h>
 
 struct	memfile
 {
@@ -58,7 +59,16 @@ void CHECK_compare_with_file(const SPARSEVECTOR_T& sig, const PATH_T& filepath)
 		// initialize sigfile
 		auto temp = sig.size();
 		auto temp2 = data_begin - data_end;
-		std::copy(sig.begin(), sig.end(), data_begin);
+		//std::copy(sig.begin(), sig.end(), data_begin);
+
+		value_type* out_it(data_begin);
+		for (typename SPARSEVECTOR_T::const_iterator it(sig.begin()); it != sig.end(); ++it) {
+		    *out_it = value_type(
+		            alg::utils::iterators::key<SPARSEVECTOR_T>(it),
+                    alg::utils::iterators::value<SPARSEVECTOR_T>(it)
+		            );
+		}
+
 		std::sort(data_begin, data_end
 			, [](const value_type lhs, const value_type rhs) {return lhs.first < rhs.first; });
 	}

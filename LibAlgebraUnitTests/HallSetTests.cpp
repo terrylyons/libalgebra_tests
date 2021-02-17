@@ -104,14 +104,15 @@ SUITE(hallset)
 				for (LET i = 1; i < hall_set.size(); ++i)
 					for (LET j = i + 1; j < hall_set.size(); ++j) {
 						// construct from LET type with constant one 
-						LIE k = LIE(i) * LIE(j);// NON empty homogeneous
+						const LIE k = LIE(i) * LIE(j);// NON empty homogeneous
 
 						if (basis.degree(i) + basis.degree(j) > DEPTH)
 							CHECK(LIE()== k);
 						else {
 							CHECK(k.size() > 0);
-							for (const auto& p : k)
-								CHECK(basis.degree(p.first) == basis.degree(i) + basis.degree(j));
+							for (typename LIE::const_iterator p(k.begin()); p != k.end(); ++p)
+								CHECK(basis.degree(alg::utils::iterators::key<LIE>(p))
+								      == basis.degree(i) + basis.degree(j));
 						}
 
 						// check that items not in the hall basis are not in reversemap

@@ -27,7 +27,10 @@
                                                                     \
         for (KEY i=0; i<BASIS::dimension; ++i) {                    \
             REQUIRE CHECK(it != end);                               \
-            CHECK_EQUAL(vect[iter::key<VECT>(it)], iter::value<VECT>(it));               \
+            CHECK_EQUAL(                                            \
+                vect[iter::key<VECT>(it)],                          \
+                iter::value<VECT>(it)                               \
+            );                                                      \
             ++it;                                                   \
         }                                                           \
     }                                                               \
@@ -39,8 +42,8 @@
                                                                     \
         REQUIRE CHECK(it != vect.end());                            \
                                                                     \
-        CHECK_EQUAL(KEY(1), iter::key<VECT>(it));                             \
-        CHECK_EQUAL(vect[KEY(1)], iter::value<VECT>(it));                      \
+        CHECK_EQUAL(KEY(1), iter::key<VECT>(it));                   \
+        CHECK_EQUAL(vect[KEY(1)], iter::value<VECT>(it));           \
     }                                                               \
                                                                     \
     TEST_FIXTURE(Fixture, test_ ## IT_TYPE ## _find_key_full_vec) { \
@@ -50,8 +53,8 @@
                                                                     \
         REQUIRE CHECK(it != vect.end());                            \
                                                                     \
-        CHECK_EQUAL(KEY(1), iter::key<VECT>(it));                             \
-        CHECK_EQUAL(vect[KEY(1)], iter::value<VECT>(it));                      \
+        CHECK_EQUAL(KEY(1), iter::key<VECT>(it));                   \
+        CHECK_EQUAL(vect[KEY(1)], iter::value<VECT>(it));           \
     }
 
     GENERATE_ITERATOR_TESTS(iterator);
