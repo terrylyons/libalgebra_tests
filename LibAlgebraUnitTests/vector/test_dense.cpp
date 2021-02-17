@@ -12,9 +12,10 @@
 #include <libalgebra/alg_types.h>
 #include <libalgebra/libalgebra.h>
 
+namespace iter = alg::utils::iterators;
+
 #ifdef LIBALGEBRA_VECTORS_H
 using alg::vectors::dense_vector;
-
 
 #define _VECTOR_TYPE dense_vector
 #undef _VECTOR_TYPE_ADDITIONAL_PARAMS

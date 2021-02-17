@@ -11,6 +11,8 @@
 #include "../time_and_details.h"
 #include <libalgebra/alg_types.h>
 
+namespace iter = alg::utils::iterators;
+
 #ifdef LIBALGEBRA_VECTORS_H
 using alg::vectors::sparse_vector;
 #else
