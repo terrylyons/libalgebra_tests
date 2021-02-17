@@ -27,7 +27,7 @@
                                                                     \
         for (KEY i=0; i<BASIS::dimension; ++i) {                    \
             REQUIRE CHECK(it != end);                               \
-            CHECK_EQUAL(vect[it->first], it->second);               \
+            CHECK_EQUAL(vect[iter::key<VECT>(it)], iter::value<VECT>(it));               \
             ++it;                                                   \
         }                                                           \
     }                                                               \
@@ -39,8 +39,8 @@
                                                                     \
         REQUIRE CHECK(it != vect.end());                            \
                                                                     \
-        CHECK_EQUAL(KEY(1), it->first);                             \
-        CHECK_EQUAL(vect[KEY(1)], it->second);                      \
+        CHECK_EQUAL(KEY(1), iter::key<VECT>(it));                             \
+        CHECK_EQUAL(vect[KEY(1)], iter::value<VECT>(it));                      \
     }                                                               \
                                                                     \
     TEST_FIXTURE(Fixture, test_ ## IT_TYPE ## _find_key_full_vec) { \
@@ -50,8 +50,8 @@
                                                                     \
         REQUIRE CHECK(it != vect.end());                            \
                                                                     \
-        CHECK_EQUAL(KEY(1), it->first);                             \
-        CHECK_EQUAL(vect[KEY(1)], it->second);                      \
+        CHECK_EQUAL(KEY(1), iter::key<VECT>(it));                             \
+        CHECK_EQUAL(vect[KEY(1)], iter::value<VECT>(it));                      \
     }
 
     GENERATE_ITERATOR_TESTS(iterator);
@@ -74,8 +74,8 @@ TEST_FIXTURE(Fixture, test_iterator_element_modification) {
         ++it;
         REQUIRE CHECK(it != vect.end());
     }
-    REQUIRE CHECK_EQUAL(k, it->first);
-    REQUIRE CHECK_EQUAL(old_val, it->second);
+    REQUIRE CHECK_EQUAL(k, iter::key<VECT>(it));
+    REQUIRE CHECK_EQUAL(old_val, iter::value<VECT>(it));
 
     it->second = S(6.5); // Out of range of the randomly generated elements
 
@@ -112,8 +112,8 @@ TEST_FIXTURE(Fixture, test_insert_from_pair) {
         out = vect.insert(pair);
 
     CHECK(out.second);
-    CHECK_EQUAL(pair.first, out.first->first);
-    CHECK_EQUAL(pair.second, out.first->second);
+    CHECK_EQUAL(pair.first, iter::key<VECT>(out.first));
+    CHECK_EQUAL(pair.second, iter::value<VECT>(out.first));
 }
 
 TEST_FIXTURE(Fixture, test_insert_fails_already_occupied) {
