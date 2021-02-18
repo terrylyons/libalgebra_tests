@@ -10,8 +10,7 @@
 #include "../simple_basis.h"
 #include "../time_and_details.h"
 #include <libalgebra/alg_types.h>
-
-namespace iter = alg::utils::iterators;
+#include "../compat.h"
 
 #ifdef LIBALGEBRA_VECTORS_H
 
@@ -32,7 +31,7 @@ SUITE(hybrid_vector) {
 #include "vector_arithmetic_suite.h"
 #include "vector_comparison_suite.h"
 #include "vector_element_access_suite.h"
-//#include "vector_iterator_suite.h"
+#include "vector_iterator_suite.h"
 #include "vector_properties_suite.h"
 
 }

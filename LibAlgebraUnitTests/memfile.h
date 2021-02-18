@@ -12,6 +12,7 @@
 // the unit test framework
 #include <UnitTest++/UnitTest++.h>
 #include <libalgebra/libalgebra.h>
+#include "compat.h"
 
 struct	memfile
 {
@@ -47,27 +48,27 @@ template <typename SPARSEVECTOR_T, typename PATH_T>
 void CHECK_compare_with_file(const SPARSEVECTOR_T& sig, const PATH_T& filepath)
 {
 	size_t numberOfElements = sig.size();
-	typedef typename std::pair< typename SPARSEVECTOR_T::KEY, typename SPARSEVECTOR_T::SCALAR > value_type;
+	typedef std::pair< typename SPARSEVECTOR_T::KEY, typename SPARSEVECTOR_T::SCALAR > value_type;
 	size_t numberOfBytes = numberOfElements * sizeof(value_type);
 	
 	memfile sigfile(filepath, numberOfBytes);
 
 	// construct content if not readonly
 	if (!sigfile.read_only()) {
+	    std::vector<value_type> tmp;
+	    tmp.reserve(numberOfElements);
+	    for (typename SPARSEVECTOR_T::const_iterator cit(sig.begin());
+	         cit != sig.end(); ++cit)
+        {
+	        tmp.push_back(value_type(iter::key<SPARSEVECTOR_T>(cit), iter::value<SPARSEVECTOR_T>(cit)));
+        }
+
 		value_type* data_begin = (value_type*)(sigfile.begin());
 		value_type* data_end = data_begin + numberOfElements;
 		// initialize sigfile
 		auto temp = sig.size();
 		auto temp2 = data_begin - data_end;
-		//std::copy(sig.begin(), sig.end(), data_begin);
-
-		value_type* out_it(data_begin);
-		for (typename SPARSEVECTOR_T::const_iterator it(sig.begin()); it != sig.end(); ++it) {
-		    *out_it = value_type(
-		            alg::utils::iterators::key<SPARSEVECTOR_T>(it),
-                    alg::utils::iterators::value<SPARSEVECTOR_T>(it)
-		            );
-		}
+		std::copy(tmp.begin(), tmp.end(), data_begin);
 
 		std::sort(data_begin, data_end
 			, [](const value_type lhs, const value_type rhs) {return lhs.first < rhs.first; });

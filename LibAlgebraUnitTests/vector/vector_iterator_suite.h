@@ -11,19 +11,19 @@
 
 #if defined(_VECTOR_TYPE)
 
-#define GENERATE_ITERATOR_TESTS(IT_TYPE)                            \
+#define GENERATE_ITERATOR_TESTS(IT_TYPE, BEGIN, END)                \
     TEST_FIXTURE(Fixture, test_ ## IT_TYPE ## _unidim_not_equal) {  \
         TEST_DETAILS();                                             \
         VECT vect(KEY(1));                                          \
                                                                     \
-        typename VECT:: IT_TYPE it(vect.begin()), itend(vect.end());\
+        typename VECT:: IT_TYPE it(vect. BEGIN()), itend(vect. END());\
         CHECK(it != itend);                                         \
     }                                                               \
                                                                     \
     TEST_FIXTURE(Fixture, test_ ## IT_TYPE ## _element_access) {    \
         TEST_DETAILS();                                             \
         VECT vect(rand_vec(S(1), S(5)));                            \
-        typename VECT:: IT_TYPE it(vect.begin()), end(vect.end());  \
+        typename VECT:: IT_TYPE it(vect. BEGIN()), end(vect. END());  \
                                                                     \
         for (KEY i=0; i<BASIS::dimension; ++i) {                    \
             REQUIRE CHECK(it != end);                               \
@@ -33,32 +33,11 @@
             );                                                      \
             ++it;                                                   \
         }                                                           \
-    }                                                               \
-                                                                    \
-    TEST_FIXTURE(Fixture, test_ ## IT_TYPE ## _find_key_unidim) {   \
-        TEST_DETAILS();                                             \
-        VECT vect(KEY(1));                                          \
-        typename VECT:: IT_TYPE it(vect.find(KEY(1)));              \
-                                                                    \
-        REQUIRE CHECK(it != vect.end());                            \
-                                                                    \
-        CHECK_EQUAL(KEY(1), iter::key<VECT>(it));                   \
-        CHECK_EQUAL(vect[KEY(1)], iter::value<VECT>(it));           \
-    }                                                               \
-                                                                    \
-    TEST_FIXTURE(Fixture, test_ ## IT_TYPE ## _find_key_full_vec) { \
-        TEST_DETAILS();                                             \
-        VECT vect(rand_vec());                                      \
-        typename VECT:: IT_TYPE it(vect.find(KEY(1)));              \
-                                                                    \
-        REQUIRE CHECK(it != vect.end());                            \
-                                                                    \
-        CHECK_EQUAL(KEY(1), iter::key<VECT>(it));                   \
-        CHECK_EQUAL(vect[KEY(1)], iter::value<VECT>(it));           \
     }
 
-    GENERATE_ITERATOR_TESTS(iterator);
-    GENERATE_ITERATOR_TESTS(const_iterator);
+
+    GENERATE_ITERATOR_TESTS(iterator, begin, end);
+    GENERATE_ITERATOR_TESTS(const_iterator, cbegin, cend);
 
 
 #undef GENERATOR_ITERATOR_TESTS
@@ -73,14 +52,14 @@ TEST_FIXTURE(Fixture, test_iterator_element_modification) {
 
     typename VECT::iterator it(vect.begin());
     REQUIRE CHECK(it != vect.end());
-    while (it->first != k) {
+    while (iter::key<VECT>(it) != k) {
         ++it;
         REQUIRE CHECK(it != vect.end());
     }
     REQUIRE CHECK_EQUAL(k, iter::key<VECT>(it));
     REQUIRE CHECK_EQUAL(old_val, iter::value<VECT>(it));
 
-    it->second = S(6.5); // Out of range of the randomly generated elements
+    iter::value<VECT>(it) = S(6.5); // Out of range of the randomly generated elements
 
     CHECK_EQUAL(S(6.5), vect[k]);
 }
@@ -107,7 +86,7 @@ TEST_FIXTURE(Fixture, test_insert_vector_iterator) {
 TEST_FIXTURE(Fixture, test_insert_from_pair) {
     TEST_DETAILS();
 
-    std::pair<KEY, S> pair(KEY(1), rand_scalar());
+    std::pair<const KEY, S> pair(KEY(1), rand_scalar());
     VECT vect;
     REQUIRE CHECK(vect.empty());
 
@@ -122,7 +101,7 @@ TEST_FIXTURE(Fixture, test_insert_from_pair) {
 TEST_FIXTURE(Fixture, test_insert_fails_already_occupied) {
     TEST_DETAILS();
 
-    std::pair<KEY, S> pair(KEY(1), S(6)); // 6 is greater than bound
+    std::pair<const KEY, S> pair(KEY(1), S(6)); // 6 is greater than bound
     VECT vect(rand_vec());
 
     std::pair<typename VECT::iterator, bool>
@@ -131,5 +110,28 @@ TEST_FIXTURE(Fixture, test_insert_fails_already_occupied) {
     CHECK(!out.second);
     CHECK(vect[KEY(1)] != S(6));
 }
+
+TEST_FIXTURE(Fixture, test_iterator_find_key_unidim) {
+        TEST_DETAILS();
+        VECT vect(KEY(1));
+        typename VECT::iterator it(vect.find(KEY(1)));
+
+        REQUIRE CHECK(it != vect.end());
+
+        CHECK_EQUAL(KEY(1), iter::key<VECT>(it));
+        CHECK_EQUAL(vect[KEY(1)], iter::value<VECT>(it));
+    }
+
+TEST_FIXTURE(Fixture, test_iterator_find_key_full_vec) {
+        TEST_DETAILS();
+        VECT vect(rand_vec());
+        typename VECT::iterator it(vect.find(KEY(1)));
+
+        REQUIRE CHECK(it != vect.end());
+
+        CHECK_EQUAL(KEY(1), iter::key<VECT>(it));
+        CHECK_EQUAL(vect[KEY(1)], iter::value<VECT>(it));
+    }
+
 
 #endif

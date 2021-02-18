@@ -7,6 +7,7 @@
 // the unit test framework
 #include <UnitTest++/UnitTest++.h>
 #include "time_and_details.h"
+#include "compat.h"
 
 // validates the hall set and lie multiplication over it
 SUITE(hallset)
@@ -104,14 +105,14 @@ SUITE(hallset)
 				for (LET i = 1; i < hall_set.size(); ++i)
 					for (LET j = i + 1; j < hall_set.size(); ++j) {
 						// construct from LET type with constant one 
-						const LIE k = LIE(i) * LIE(j);// NON empty homogeneous
+						LIE k = LIE(i) * LIE(j);// NON empty homogeneous
 
 						if (basis.degree(i) + basis.degree(j) > DEPTH)
 							CHECK(LIE()== k);
 						else {
 							CHECK(k.size() > 0);
-							for (typename LIE::const_iterator p(k.begin()); p != k.end(); ++p)
-								CHECK(basis.degree(alg::utils::iterators::key<LIE>(p))
+							for (typename LIE::iterator p(k.begin()); p != k.end(); ++p)
+								CHECK(basis.degree(iter::key<LIE>(p))
 								      == basis.degree(i) + basis.degree(j));
 						}
 
