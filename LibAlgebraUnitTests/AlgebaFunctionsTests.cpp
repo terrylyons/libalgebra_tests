@@ -53,7 +53,7 @@ TEST_FIXTURE(pathsetup5560, logsignature_versus_cbh)
 	//}
 
 	// check dimension of log signature
-	CHECK_EQUAL(logsig1.size(), 829);
+	CHECK_EQUAL(829, logsig1.size());
 }
 
 TEST_FIXTURE(pathsetup5560, simple_multiplication)
