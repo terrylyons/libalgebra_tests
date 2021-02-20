@@ -12,6 +12,13 @@
 #if defined(_VECTOR_TYPE)
 
 #define GENERATE_ITERATOR_TESTS(IT_TYPE, BEGIN, END)                \
+    TEST_FIXTURE(Fixture, test_ ## IT_TYPE ## _empty_equal) {       \
+        TEST_DETAILS();                                             \
+        VECT empty_vec;                                           \
+                                                                    \
+        CHECK(empty_vec. BEGIN() == empty_vec. END());              \
+    }                                                               \
+                                                                    \
     TEST_FIXTURE(Fixture, test_ ## IT_TYPE ## _unidim_not_equal) {  \
         TEST_DETAILS();                                             \
         VECT vect(KEY(1));                                          \

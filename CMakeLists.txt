@@ -1,15 +1,16 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(CMAKE_CXX_STANDARD 98)
+#set(CMAKE_CXX_STANDARD 98)
 
 project(LibAlgebraUnitTests VERSION 1.0)
+set(CMAKE_CXX_FLAGS "-g -fno-omit-frame-pointer ${CMAKE_CXX_FLAGS}")
 
 find_package(UnitTest++ REQUIRED)
 find_package(Boost COMPONENTS filesystem iostreams REQUIRED)
 
 include_directories(libalgebra)
 
-file(GLOB SOURCES "LibAlgebraUnitTests/*.cpp")
+file(GLOB SOURCES  "LibAlgebraUnitTests/*.cpp")
 file(GLOB TENSOR_TESTS "LibAlgebraUnitTests/tensor/test_*.cpp")
 file(GLOB LIE_TESTS "LibAlgebraUnitTests/lie/test_*.cpp")
 file(GLOB VECTOR_TESTS "LibAlgebraUnitTests/vector/test_*.cpp")

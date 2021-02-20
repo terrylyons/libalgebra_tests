@@ -53,7 +53,8 @@ SUITE(test_tensor_functions) {
 
         TENSOR ten {TKEY()};
         TENSOR expected(exp_to_depth(S(1), 5, S(1)));
-        CHECK_VEC_CLOSE(expected, exp(ten), 2.0e-15);
+        TENSOR result(exp(ten));
+        CHECK_VEC_CLOSE(expected, result, 2.0e-15);
     }
 
     TEST_FIXTURE(Fixture, test_exponential_single_letter) {
@@ -62,7 +63,7 @@ SUITE(test_tensor_functions) {
 
         TENSOR ten (letter, S(1));
         TENSOR expected = exp_to_depth(ten, 5, S(1));
-        TENSOR result {exp(ten)};
+        TENSOR result (exp(ten));
 
         CHECK_VEC_CLOSE(expected, result, 2.0e-15);
     }
