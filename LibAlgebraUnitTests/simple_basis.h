@@ -47,6 +47,8 @@ public:
     KEY nextkey(const KEY& k) const
     { return k + 1; }
 
+    DIMN max_dimension()
+    { return dimension; }
 
 };
 

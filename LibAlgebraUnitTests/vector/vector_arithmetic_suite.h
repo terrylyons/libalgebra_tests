@@ -126,11 +126,37 @@ TEST_BINARY_OPERATOR_FUNC(test_coordmax, |, std::max);
 
 
 #define TEST_INPLACE_BINARY_OPERATOR_FUNC(NAME, OP, FUNC)        \
+    TEST_FIXTURE(Fixture, NAME ## _random_neutral) {             \
+        TEST_DETAILS();                                          \
+        VECT lhs(rand_vec()), rhs, expected;                     \
+        for (KEY i=0; i<BASIS::dimension; ++i) {                 \
+            std::pair<const KEY, S> p(i, FUNC(lhs[i], S(0)));    \
+            expected.insert(p);                                  \
+        }                                                        \
+                                                                 \
+        lhs OP rhs;                                              \
+        CHECK_EQUAL(expected, lhs);                              \
+    }                                                            \
+                                                                 \
+    TEST_FIXTURE(Fixture, NAME ## _neutral_random) {             \
+        TEST_DETAILS();                                          \
+        VECT lhs, rhs(rand_vec()), expected;                     \
+        for (KEY i=0; i<BASIS::dimension; ++i) {                 \
+            std::pair<const KEY, S> p(i, FUNC(S(0), rhs[i]));    \
+            expected.insert(p);                                  \
+        }                                                        \
+                                                                 \
+        lhs OP rhs;                                              \
+        CHECK_EQUAL(expected, lhs);                              \
+    }                                                            \
+                                                                 \
     TEST_FIXTURE(Fixture, NAME ## _random_random) {              \
         TEST_DETAILS();                                          \
         VECT lhs = rand_vec(), rhs = rand_vec(), expected;       \
-        for (KEY i=0; i < BASIS::dimension; ++i)                 \
-            expected[i] = FUNC (lhs[i], rhs[i]);                 \
+        for (KEY i=0; i < BASIS::dimension; ++i)  {              \
+            std::pair<const KEY, S> p(i, FUNC(lhs[i], rhs[i]));  \
+            expected.insert(p);                                  \
+        }                                                        \
                                                                  \
         lhs OP rhs;                                              \
         CHECK_EQUAL(expected, lhs);                              \
