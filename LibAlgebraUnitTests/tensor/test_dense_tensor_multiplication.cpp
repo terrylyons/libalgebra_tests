@@ -59,6 +59,20 @@ SUITE (dense_tensor_multiplication) {
 
     };
 
+    TEST_FIXTURE(Fixture, test_product_tunit_zero) {
+        TEST_DETAILS();
+        TENSOR lhs(tunit), rhs, expected;
+
+        CHECK_EQUAL(expected, lhs * rhs);
+    }
+
+    TEST_FIXTURE(Fixture, test_product_zero_tunit) {
+        TEST_DETAILS();
+        TENSOR lhs, rhs(tunit), expected;
+
+        CHECK_EQUAL(expected, lhs * rhs);
+    }
+
     TEST_FIXTURE(Fixture, test_product_tunit_tunit) {
         TEST_DETAILS();
 

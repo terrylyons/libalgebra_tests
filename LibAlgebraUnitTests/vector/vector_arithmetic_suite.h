@@ -180,7 +180,7 @@ TEST_FIXTURE (Fixture, test_unary_minus_neutral) {
     TEST_DETAILS();
     VECT neut, expected;
 
-            CHECK_EQUAL(expected, -neut);
+    CHECK_EQUAL(expected, -neut);
 }
 
 TEST_FIXTURE (Fixture, test_unary_minus_random) {
@@ -189,9 +189,24 @@ TEST_FIXTURE (Fixture, test_unary_minus_random) {
     for (KEY i = 0; i < BASIS::dimension; ++i)
         expected[i] = -vect[i];
 
-            CHECK_EQUAL(expected, -vect);
+    CHECK_EQUAL(expected, -vect);
 }
 
+TEST_FIXTURE(Fixture, test_unary_minus_plus_original_gives_netural) {
+    TEST_DETAILS();
+    VECT lhs, rhs(rand_vec()), expected;
+
+    lhs = -rhs;
+
+    CHECK_EQUAL(expected, lhs + rhs);
+}
+
+TEST_FIXTURE(Fixture, test_random_original_plus_unary_minus_gives_netural) {
+    TEST_DETAILS();
+    VECT lhs(rand_vec()), rhs(-lhs), expected;
+
+    CHECK_EQUAL(expected, lhs + rhs);
+}
 
 #endif  // ifdef _VECTOR_TYPE
 
