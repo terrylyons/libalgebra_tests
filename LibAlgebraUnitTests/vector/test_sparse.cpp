@@ -21,6 +21,8 @@ using alg::sparse_vector;
 
 #define _VECTOR_TYPE sparse_vector
 #define _VECTOR_TYPE_ADDITIONAL_PARAMS std::unordered_map<typename BASIS::KEY, typename FIELD::S>
+#define _TVECTOR_TYPE_ADDITIONAL_PARAMS \
+    std::unordered_map<typename TBASIS::KEY, typename FIELD::S, typename TBASIS::KEY::hash>
 
 SUITE(sparse_vector) {
 
@@ -31,6 +33,7 @@ SUITE(sparse_vector) {
 #include "vector_iterator_suite.h"
 #include "vector_properties_suite.h"
 #include "vector_norm_suite.h"
+#include "vector_binary_transform_suite.h"
 
 }
 

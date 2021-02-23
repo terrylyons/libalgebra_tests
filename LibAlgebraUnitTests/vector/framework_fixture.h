@@ -19,6 +19,18 @@ struct Fixture
         typedef typename FIELD::S S;
         typedef typename FIELD::Q Q;
         typedef typename BASIS::KEY KEY;
+        typedef typename FIELD::LET LET;
+
+        typedef alg::free_tensor_basis<S, Q, 2, 5> TBASIS;
+        typedef typename TBASIS::KEY TKEY;
+        typedef _VECTOR_TYPE<TBASIS
+#ifdef LIBALGEBRA_VECTORS_H
+        , FIELD
+#endif
+#ifdef _TVECTOR_TYPE_ADDITIONAL_PARAMS
+        , _TVECTOR_TYPE_ADDITIONAL_PARAMS
+#endif
+        > TVECT;
 
         typedef std::mt19937 RNG;
 
@@ -38,6 +50,20 @@ struct Fixture
             VECT v;
             for (KEY i=0; i<BASIS::dimension; ++i)
                 v[i] = rand_scalar(lower_bound, upper_bound);
+            return v;
+        }
+
+        TVECT rand_tvec(const DEG deg, S lower_bound = S(-5), S upper_bound = S(5))
+        {
+            TVECT v;
+            TKEY k;
+            TBASIS& basis(v.basis);
+
+            while (basis.degree(k) <= deg) {
+                v[k] = rand_scalar(lower_bound, upper_bound);
+                k = basis.nextkey(k);
+            }
+
             return v;
         }
 

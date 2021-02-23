@@ -76,6 +76,18 @@
         CHECK_EQUAL(S(0), vect[k]);
     }
 
+    TEST_FIXTURE(Fixture, test_erase_size_reduced) {
+        TEST_DETAILS();
+        VECT vect = rand_vec(S(1), S(5));
+        KEY k(1);
+
+        size_t old_size(vect.size());
+        REQUIRE CHECK(old_size > 0);
+        vect.erase(k);
+
+        CHECK_EQUAL(old_size - 1, vect.size());
+    }
+
 
     TEST_FIXTURE(Fixture, test_swap_empty_full) {
         TEST_DETAILS();
@@ -92,6 +104,25 @@
         CHECK_EQUAL(right, lhs);
     }
 
+    TEST_FIXTURE(Fixture, test_degree_empty) {
+        TEST_DETAILS();
+        TVECT vect;
 
+        CHECK_EQUAL(0, vect.degree());
+    }
+
+    TEST_FIXTURE(Fixture, test_degree_vector_deg1_fill) {
+        TEST_DETAILS();
+        TVECT vect(rand_tvec(1));
+
+        CHECK_EQUAL(1, vect.degree());
+    }
+
+    TEST_FIXTURE(Fixture, test_degree_deg2_fill) {
+        TEST_DETAILS();
+        TVECT vect(rand_tvec(2));
+
+        CHECK_EQUAL(2, vect.degree());
+    }
 
 #endif

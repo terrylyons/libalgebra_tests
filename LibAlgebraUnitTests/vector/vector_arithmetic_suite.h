@@ -107,6 +107,145 @@ TEST_INPLACE_BINARY_OPERATOR(test_inplace_subtraction, -=);
 
 #undef TEST_INPLACE_BINARY_OPERATOR
 
+TEST_FIXTURE(Fixture, test_inplace_scalar_mul_zero) {
+    TEST_DETAILS();
+
+    VECT vect(rand_vec()), expected;
+
+    vect *= S(0);
+
+    CHECK_EQUAL(expected, vect);
+}
+
+TEST_FIXTURE(Fixture, test_inplace_scalar_mul_1_ident) {
+    TEST_DETAILS();
+    VECT vect(rand_vec()), expected(vect);
+
+    vect *= S(1);
+
+    CHECK_EQUAL(expected, vect);
+}
+
+TEST_FIXTURE(Fixture, test_inplace_scalar_mul_mone) {
+    TEST_DETAILS();
+    VECT vect(rand_vec()), expected(-vect);
+    vect *= S(-1);
+
+    CHECK_EQUAL(expected, vect);
+}
+
+
+TEST_FIXTURE(Fixture, test_inplace_scalar_mul_random) {
+    TEST_DETAILS();
+
+    S sca (rand_scalar());
+    VECT vect(rand_vec()), expected;
+
+    for (KEY i=0; i < BASIS::dimension; ++i) {
+        expected[i] = vect[i] * sca;
+    }
+
+    vect *= sca;
+    CHECK_EQUAL(expected, vect);
+}
+
+
+TEST_FIXTURE(Fixture, test_inplace_rat_div_one_ident) {
+    TEST_DETAILS();
+    VECT vect(rand_vec()), expected(vect);
+
+    vect /= Q(1);
+    CHECK_EQUAL(expected, vect);
+}
+
+TEST_FIXTURE(Fixture, test_inplace_rat_div_mone) {
+    TEST_DETAILS();
+    VECT vect(rand_vec()), expected(-vect);
+
+    vect /= Q(-1);
+    CHECK_EQUAL(expected, vect);
+}
+
+
+TEST_FIXTURE(Fixture, test_inplace_rat_div_random) {
+    TEST_DETAILS();
+
+    Q rat (rand_scalar(S(1), S(5)));
+    VECT vect(rand_vec()), expected;
+
+    for (KEY i=0; i < BASIS::dimension; ++i) {
+        expected[i] = vect[i] / rat;
+    }
+
+    vect /= rat;
+    CHECK_EQUAL(expected, vect);
+}
+
+TEST_FIXTURE(Fixture, test_scalar_mul_zero) {
+    TEST_DETAILS();
+
+    VECT vect(rand_vec()), expected;
+
+    CHECK_EQUAL(expected, vect * S(0));
+}
+
+TEST_FIXTURE(Fixture, test_scalar_mul_1_ident) {
+    TEST_DETAILS();
+    VECT vect(rand_vec()), expected(vect);
+
+    CHECK_EQUAL(expected, vect * S(1));
+}
+
+TEST_FIXTURE(Fixture, test_scalar_mul_mone) {
+    TEST_DETAILS();
+    VECT vect(rand_vec()), expected(-vect);
+
+    CHECK_EQUAL(expected, vect * S(-1));
+}
+
+
+TEST_FIXTURE(Fixture, test_scalar_mul_random) {
+    TEST_DETAILS();
+
+    S sca (rand_scalar());
+    VECT vect(rand_vec()), expected;
+
+    for (KEY i=0; i < BASIS::dimension; ++i) {
+        expected[i] = vect[i] * sca;
+    }
+
+    CHECK_EQUAL(expected, vect * sca);
+}
+
+
+TEST_FIXTURE(Fixture, test_rat_div_one_ident) {
+    TEST_DETAILS();
+    VECT vect(rand_vec()), expected(vect);
+
+
+    CHECK_EQUAL(expected, vect / Q(1));
+}
+
+TEST_FIXTURE(Fixture, test_rat_div_mone) {
+    TEST_DETAILS();
+    VECT vect(rand_vec()), expected(-vect);
+
+    CHECK_EQUAL(expected, vect/ Q(-1));
+}
+
+
+TEST_FIXTURE(Fixture, test_rat_div_random) {
+    TEST_DETAILS();
+
+    Q rat (rand_scalar(S(1), S(5)));
+    VECT vect(rand_vec()), expected;
+
+    for (KEY i=0; i < BASIS::dimension; ++i) {
+        expected[i] = vect[i] / rat;
+    }
+
+    CHECK_EQUAL(expected, vect / rat);
+}
 
 #define TEST_BINARY_OPERATOR_FUNC(NAME, OP, FUNC)                \
     TEST_FIXTURE(Fixture, NAME ## _random_random) {              \
