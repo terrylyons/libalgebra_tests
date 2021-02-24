@@ -26,17 +26,17 @@ SUITE(OMP_SIGNATURES)
 		std::cout << "framework bound sequential signature: ";
 		{
 			timer seqsig_t;
-			sig = signature(begin(increments), end(increments));
+			sig = signature(increments.begin(), increments.end());
 		}
 		std::cout << "template sequential signature: ";
 		{
 			timer seqsig_t;
-			sig1 = ::signature(begin(increments), end(increments), *this);
+			sig1 = ::signature(increments.begin(), increments.end(), *this);
 		}
 		std::cout << "parallel signature: ";
 		{
 			timer seqsig_t;
-			sig2 = ::o_signature(begin(increments), end(increments), *this);
+			sig2 = ::o_signature(increments.begin(), increments.end(), *this);
 		} 
 		//std::cout << sig << " \n" << sig1 << std::endl;
 		//std::cout << sig.NormL1() << " " << (sig - sig12).NormL1() << std::endl;

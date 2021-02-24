@@ -1,7 +1,7 @@
 #pragma once
 // the libalgebra framework
 #include "alg_framework.h"
-#include <random>
+#include "rng.h"
 
 template <typename alg::LET depth, typename alg::LET width, coefficient_t  S_t = Rational>
 struct sigtools: alg_framework <depth, width, S_t>
@@ -76,11 +76,11 @@ struct categorical_path : sigtools<DEPTH, ALPHABET_SIZE, S_t>
 		// set up random number generation
 			// seeded generator	
 		unsigned int seed = (const unsigned int&)0x6d35f0e5b8f6c603;//std::random_device seed; unsigned int seed = seed();
-		std::mt19937 generator;
+		mt19937 generator;
 		generator.seed(seed);
 
 		// rng
-		std::uniform_int_distribution<alg::LET> distribution(1, ALPHABET_SIZE);
+		UNIFORM_INT_DIST<alg::LET> distribution(1, ALPHABET_SIZE);
 
 		// create random categorical increments
 		for (size_t i = 0; i != Steps(); ++i)

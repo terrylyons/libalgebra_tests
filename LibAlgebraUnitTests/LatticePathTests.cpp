@@ -8,7 +8,6 @@
 // a timer class
 #include "time_and_details.h"
 #include <iostream>
-#include <random>
 #include <algorithm>
 
 // the test cases
@@ -53,7 +52,7 @@ SUITE(lattice_paths)
 			TEST_DETAILS();
 			sig = p.signature(p.begin(), p.end());
 			logs = p.logsignature(p.begin(), p.end());
-			auto u = p.maps.t2l(log(sig));
+			LIE u = p.maps.t2l(log(sig));
 		}
 		//categorical_path::LIE logsig = p.maps.t2l(log(sig));
 		report_outcomes(logs, sig, *this);
@@ -72,7 +71,7 @@ SUITE(lattice_paths)
 			TEST_DETAILS();
 			sig = p.signature(p.begin(), p.end());
 			logs = p.logsignature(p.begin(), p.end());
-			auto u = p.maps.t2l(log(sig));
+			LIE u = p.maps.t2l(log(sig));
 		}
 		//categorical_path::LIE logsig = p.maps.t2l(log(sig));
 		report_outcomes(logs, sig, *this);
@@ -91,7 +90,7 @@ SUITE(lattice_paths)
 			TEST_DETAILS();
 			sig = p.signature(p.begin(), p.end());
 			logs = p.logsignature(p.begin(), p.end());
-			auto u = p.maps.t2l(log(sig));
+			LIE u = p.maps.t2l(log(sig));
 		}
 		//categorical_path::LIE logsig = p.maps.t2l(log(sig));
 		report_outcomes(logs, sig, *this);
@@ -110,7 +109,7 @@ SUITE(lattice_paths)
 			TEST_DETAILS();
 			sig = p.signature(p.begin(), p.end());
 			logs = p.logsignature(p.begin(), p.end());
-			auto u = p.maps.t2l(log(sig));
+			LIE u = p.maps.t2l(log(sig));
 		}
 		//categorical_path::LIE logsig = p.maps.t2l(log(sig));
 		report_outcomes(logs, sig, *this);
@@ -130,7 +129,7 @@ SUITE(lattice_paths)
 			TEST_DETAILS();
 			sig = p.signature(p.begin(), p.end());
 			logs = p.logsignature(p.begin(), p.end());
-			auto u = p.maps.t2l(log(sig));
+			LIE u = p.maps.t2l(log(sig));
 		}
 		//categorical_path::LIE logsig = p.maps.t2l(log(sig));
 		report_outcomes(logs, sig, *this);
@@ -149,7 +148,7 @@ SUITE(lattice_paths)
 			TEST_DETAILS();
 			sig = p.signature(p.begin(), p.end());
 			logs = p.logsignature(p.begin(), p.end());
-			auto u = p.maps.t2l(log(sig));
+			LIE u = p.maps.t2l(log(sig));
 		}
 		//categorical_path::LIE logsig = p.maps.t2l(log(sig));
 		report_outcomes(logs, sig, *this);

@@ -15,17 +15,22 @@
 #include <boost/mpl/logical.hpp>
 
 
+
 namespace iter {
 
-#define ENABLE_IF_PAIR(OTYPE, VTYPE, KT, VT)                                    \
+#define ENABLE_IF_PAIR(OTYPE, ITER, KT, VT)                                     \
     typename boost::enable_if<                                                  \
         typename boost::mpl::and_<                                              \
             typename boost::is_same<                                            \
-                typename boost::remove_cv<typename VTYPE ::first_type>::type,   \
+                typename boost::remove_cv<                                      \
+                    typename std::iterator_traits<Iterator>::value_type::first_type                                 \
+                    >::type,                                                    \
                 KT                                                              \
             >::type,                                                            \
             typename boost::is_same<                                            \
-                typename boost::remove_cv<typename VTYPE ::second_type>::type,  \
+                typename boost::remove_cv<                                      \
+                    typename std::iterator_traits<Iterator>::value_type::second_type                                \
+                >::type,                                                        \
                 VT                                                              \
             >::type                                                             \
         >::type,                                                                \
@@ -33,20 +38,16 @@ namespace iter {
     >::type
 
 
-template <typename Vector,
-        typename Iterator,
-        typename ValueType = typename std::iterator_traits<Iterator>::value_type,
-        typename Reference = typename std::iterator_traits<Iterator>::reference>
-ENABLE_IF_PAIR(typename Vector::KEY, ValueType, typename Vector::KEY, typename Vector::SCALAR)
+template <typename Vector, typename Iterator>
+ENABLE_IF_PAIR(typename Vector::KEY, Iterator, typename Vector::KEY, typename Vector::SCALAR)
 key(Iterator& it)
 { return it->first; }
 
-template <typename Vector,
-        typename Iterator,
-        typename ValueType = typename std::iterator_traits<Iterator>::value_type,
-        typename Reference = typename std::iterator_traits<Iterator>::reference,
-        typename OutType = typename alg::utils::copy_constness<Reference, typename Vector::SCALAR>::type >
-ENABLE_IF_PAIR(OutType, ValueType, typename Vector::KEY, typename Vector::SCALAR)
+template <typename Vector, typename Iterator>
+typename alg::utils::copy_constness<
+        typename std::iterator_traits<Iterator>::reference,
+        ENABLE_IF_PAIR(typename Vector::SCALAR, Iterator, typename Vector::KEY, typename Vector::SCALAR)
+>::type
 value(Iterator& it)
 { return it->second; }
 

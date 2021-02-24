@@ -59,7 +59,7 @@ SUITE(square_free) {
 #define TEST_SQUARE_FREE(NUMBER, EXPECTED)                                  \
     TEST(test_square_free_ ## NUMBER) {                                     \
         TEST_DETAILS();                                                     \
-        typedef square_free<divisor_calc<NUMBER>> SF;                       \
+        typedef square_free<divisor_calc<NUMBER> > SF;                       \
         CHECK_EQUAL(EXPECTED, SF::ans);                                   \
     }
 

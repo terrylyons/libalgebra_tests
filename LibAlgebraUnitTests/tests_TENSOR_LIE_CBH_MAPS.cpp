@@ -19,7 +19,7 @@ Version 3. (See accompanying file License.txt)
 // std:: dependencies for current tests
 #include <iostream>
 #include <vector>
-#include <random>
+
 
 // the unit test framework
 #include <UnitTest++/UnitTest++.h>
@@ -27,7 +27,7 @@ Version 3. (See accompanying file License.txt)
 // a debugging tool - SHOW(X) outputs variable name X and its content to a stream (e.g. cout) 
 #include "SHOW.h"
 #include "time_and_details.h"
-
+#include "rng.h"
 
 // to allow redefinitions in other test modules
 namespace {
@@ -103,11 +103,11 @@ namespace {
 			// set up random number generation
 				// seeded generator	
 			unsigned int seed = (const unsigned int&)0x6d35f0e5b8f6c603;//std::random_device seed; unsigned int seed = seed();
-			std::mt19937 generator;
+			mt19937 generator;
 			generator.seed(seed);
 
 			// rng
-			std::uniform_int_distribution<LET> distribution(1, ALPHABET_SIZE);
+			UNIFORM_INT_DIST<LET> distribution(1, ALPHABET_SIZE);
 
 			// create random categorical increments
 			for (size_t i = 0; i < Steps(); ++i)
@@ -136,10 +136,10 @@ namespace {
 	TEST_FIXTURE(categorical_path, long_multiplication)
 	{
 		TEST_DETAILS();
-		auto begin = increments.cbegin();
-		auto end = increments.cend();
+		typename std::vector<LIE>::const_iterator begin = increments.begin();
+		typename std::vector<LIE>::const_iterator end = increments.end();
 		TENSOR sig = signature(begin, end);
-		for (auto i = begin; i != end; i++) {
+		for (typename std::vector<LIE>::const_iterator i = begin; i != end; i++) {
 			TENSOR err = sig - signature(begin, i) * signature(i, end);
 			CHECK_EQUAL(TENSOR(), err);
 		}
@@ -175,8 +175,8 @@ namespace {
 
 		// note LIE(S(4)) should be undefined behavior
 		// LIE(4) is not but treats the argument as a letter
-		auto begin = increments.cbegin();
-		auto end = increments.cend();
+		typename std::vector<LIE>::const_iterator begin = increments.begin();
+        typename std::vector<LIE>::const_iterator end = increments.end();
 		TENSOR sig = signature(begin, end);
 		LIE logsig = logsignature(begin, end);
 
@@ -215,8 +215,8 @@ namespace {
 	TEST_FIXTURE(categorical_path, CBH)
 	{
 		TEST_DETAILS();
-		auto begin = increments.cbegin();
-		auto end = increments.cend();
+        typename std::vector<LIE>::const_iterator begin = increments.begin();
+        typename std::vector<LIE>::const_iterator end = increments.end();
 		TENSOR sig = signature(begin, end);
 		LIE logsig = logsignature(begin, end);
 		CHECK(((exp(maps.l2t(logsig)) - sig) == TENSOR()));
@@ -227,8 +227,8 @@ namespace {
 	TEST_FIXTURE(categorical_path, LIE_PRODUCT)
 	{
 		TEST_DETAILS();
-		auto begin = increments.cbegin();
-		auto end = increments.cend();
+        typename std::vector<LIE>::const_iterator begin = increments.begin();
+        typename std::vector<LIE>::const_iterator end = increments.end();
 		size_t midpoint = (end - begin) / 2;
 		LIE l1 = logsignature(begin, begin + midpoint);
 		LIE l2 = logsignature(begin + midpoint, end);
@@ -241,8 +241,8 @@ namespace {
 	TEST_FIXTURE(categorical_path, AntipodeMap)
 	{
 		TEST_DETAILS();
-		auto begin = increments.cbegin();
-		auto end = increments.cend();
+        typename std::vector<LIE>::const_iterator begin = increments.begin();
+        typename std::vector<LIE>::const_iterator end = increments.end();
 		LIE l1 = logsignature(begin, end);
 		TENSOR t1 = maps.l2t(l1);
 

@@ -17,7 +17,7 @@ class simple_algebra_basis : public SimpleIntegerBasis<Dimension, typename Field
     // We have to jump through some hoops at the moment to get the final algebra type that
     // will be used.
     typedef alg::algebra<simple_algebra_basis, Field,
-            ALGEBRA_TESTS_VECT_TYPE<simple_algebra_basis, Field>> ALG;
+            ALGEBRA_TESTS_VECT_TYPE<simple_algebra_basis, Field> > ALG;
 public:
 
     typedef typename Field::Q RATIONAL;
@@ -28,7 +28,7 @@ public:
 
     // Property tags
     typedef alg::basis::without_degree degree_tag;
-    typedef alg::basis::ordered<std::less<KEY>> ordering_tag;
+    typedef alg::basis::ordered<std::less<KEY> > ordering_tag;
 
     const ALG m_algzero;
     std::vector<ALG> m_mulcache;

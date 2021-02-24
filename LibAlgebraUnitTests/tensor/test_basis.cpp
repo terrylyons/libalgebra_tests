@@ -19,8 +19,7 @@ struct BasisTool
     typedef alg::shuffle_tensor_basis<S, R, W, D> STBASIS;
     typedef typename TBASIS::KEY KEY;
 
-    template <std::size_t N>
-    KEY make_key(std::array<LET, N> letters)
+    KEY make_key(const LET* letters, std::size_t N)
     {
         KEY k;
         for (int i=0; i<N; ++i)
@@ -81,11 +80,11 @@ SUITE (tensor_basis) {
 
         TBASIS basis;
 
-        std::array<LET, 3> letters {1, 2, 3}, exp_letters {1, 2, 4};
+        LET in[] = {1,2,3};
+        KEY k = make_key(in,3);
 
-        KEY k = make_key(letters);
-
-        CHECK_EQUAL(make_key(exp_letters), basis.nextkey(k));
+        LET expected[] = {1,2,4};
+        CHECK_EQUAL(make_key(expected, 3), basis.nextkey(k));
 
     }
 }
@@ -109,24 +108,20 @@ SUITE(free_tensor_basis) {
         FTBASIS basis;
 
         KEY k1;
-        std::array<LET, 1> let2 {1};
-        std::array<LET, 1> elet {1};
-        KEY expected = make_key(elet);
+        KEY expected = KEY(LET(1));
 
-        CHECK_EQUAL(expected, basis.prod(make_key(let2), k1));
-        CHECK_EQUAL(expected, basis.prod(k1, make_key(let2)));
+        CHECK_EQUAL(expected, basis.prod(KEY(LET(1)), k1));
+        CHECK_EQUAL(expected, basis.prod(k1, KEY(LET(1))));
     }
 
     TEST_FIXTURE(Framework55Double, test_prod_deg1_deg1) {
         TEST_DETAILS()
 
         FTBASIS basis;
-        std::array<LET, 1> let1 {1};
-        std::array<LET, 1> let2 {2};
-        std::array<LET, 2> elet {1, 2};
 
-        KEY expected = make_key(elet);
-        KEY result = basis.prod(make_key(let1), make_key(let2));
+        LET expected_let[] = {1,2};
+        KEY expected = make_key(expected_let, 2);
+        KEY result = basis.prod(KEY(LET(1)), KEY(LET(2)));
 
         CHECK_EQUAL((DEG) 2, basis.degree(result));
         CHECK_EQUAL(expected, result);
@@ -136,12 +131,11 @@ SUITE(free_tensor_basis) {
         TEST_DETAILS()
 
         FTBASIS basis;
-        std::array<LET, 1> let1 {1};
-        std::array<LET, 2> let2 {2, 3};
-        std::array<LET, 3> elet {1, 2, 3};
 
-        KEY expected = make_key(elet);
-        KEY result = basis.prod(make_key(let1), make_key(let2));
+        LET rhs_let[] = {2,3};
+        LET expected_let[] = {1,2,3};
+        KEY expected = make_key(expected_let, 3);
+        KEY result = basis.prod(KEY(LET(1)), make_key(rhs_let, 2));
 
         CHECK_EQUAL((DEG) 3, basis.degree(result));
         CHECK_EQUAL(expected, result);

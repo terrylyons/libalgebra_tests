@@ -74,7 +74,7 @@ TEST_FIXTURE(Fixture, test_iterator_element_modification) {
 TEST_FIXTURE(Fixture, test_insert_vector_iterator) {
     TEST_DETAILS();
 
-    std::vector<std::pair<KEY, S>> tmp;
+    std::vector<std::pair<KEY, S> > tmp;
     tmp.reserve(BASIS::dimension);
     for (KEY i=0; i<BASIS::dimension; ++i) {
         tmp.push_back(std::pair<KEY, S>(i, rand_scalar()));

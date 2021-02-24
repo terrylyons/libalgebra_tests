@@ -4,6 +4,7 @@
 #define LIBALGEBRA_UNITTEST_HELPERS_H
 
 #include <libalgebra/alg_types.h>
+#include <boost/type_traits.hpp>
 
 namespace {
 
@@ -30,8 +31,8 @@ namespace {
     inline void check_vec_almost_equal(const VECT& expected, const VECT& actual, double tol)
     {
         typedef typename VECT::SCALAR S;
-        using RatType = typename alg_types<2,2,Rational>::S;
-        check_vec_almost_equal_impl<std::is_same<S, RatType>::value>::
+        typedef typename alg_types<2,2,Rational>::S RatType;
+        check_vec_almost_equal_impl<boost::is_same<S, RatType>::value>::
             check(expected, actual, tol);
     }
 

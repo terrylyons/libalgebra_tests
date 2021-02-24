@@ -16,15 +16,15 @@ struct Fixture
 
     typedef simple_algebra_basis<5, field> BASIS;
     typedef alg::vectors::vector<BASIS, field,
-    ALGEBRA_TESTS_VECT_TYPE<BASIS, field>> VECT;
+    ALGEBRA_TESTS_VECT_TYPE<BASIS, field> > VECT;
     typedef alg::algebra<BASIS, field,
-    ALGEBRA_TESTS_VECT_TYPE<BASIS, field>> ALG;
+    ALGEBRA_TESTS_VECT_TYPE<BASIS, field> > ALG;
 
     typedef typename BASIS::KEY KEY;
     typedef typename field::S S;
     typedef typename field::Q Q;
 
-    typedef std::mt19937 RNG;
+    typedef mt19937 RNG;
 
     RNG m_rng;
 

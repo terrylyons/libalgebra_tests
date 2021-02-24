@@ -2,8 +2,6 @@
 // Created by sam on 03/02/2021.
 //
 
-#include <random>
-#include <unordered_map>
 
 #include <UnitTest++/UnitTest++.h>
 
@@ -12,6 +10,7 @@
 #include <libalgebra/alg_types.h>
 #include <libalgebra/libalgebra.h>
 #include "../compat.h"
+#include "../rng.h"
 
 #ifdef LIBALGEBRA_VECTORS_H
 using alg::vectors::dense_vector;

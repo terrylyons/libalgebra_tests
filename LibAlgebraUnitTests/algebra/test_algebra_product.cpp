@@ -2,7 +2,6 @@
 // Created by sam on 12/02/2021.
 //
 
-#include <random>
 
 #include <UnitTest++/UnitTest++.h>
 
@@ -10,6 +9,7 @@
 #include <libalgebra/alg_types.h>
 #include "../simple_basis.h"
 #include "../time_and_details.h"
+#include "../rng.h"
 
 using alg::DEG;
 

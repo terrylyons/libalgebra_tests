@@ -2,8 +2,8 @@
 // Created by sam on 03/02/2021.
 //
 
-#include <random>
-#include <unordered_map>
+
+#include <map>
 
 #include <UnitTest++/UnitTest++.h>
 
@@ -12,6 +12,8 @@
 #include <libalgebra/alg_types.h>
 
 #include "../compat.h"
+#include "../rng.h"
+
 
 #ifdef LIBALGEBRA_VECTORS_H
 using alg::vectors::sparse_vector;
@@ -20,9 +22,9 @@ using alg::sparse_vector;
 #endif
 
 #define _VECTOR_TYPE sparse_vector
-#define _VECTOR_TYPE_ADDITIONAL_PARAMS std::unordered_map<typename BASIS::KEY, typename FIELD::S>
+#define _VECTOR_TYPE_ADDITIONAL_PARAMS std::map<typename BASIS::KEY, typename FIELD::S>
 #define _TVECTOR_TYPE_ADDITIONAL_PARAMS \
-    std::unordered_map<typename TBASIS::KEY, typename FIELD::S, typename TBASIS::KEY::hash>
+    std::map<typename TBASIS::KEY, typename FIELD::S>
 
 SUITE(sparse_vector) {
 

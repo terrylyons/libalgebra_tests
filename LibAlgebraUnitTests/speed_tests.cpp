@@ -19,7 +19,7 @@ Version 3. (See accompanying file License.txt)
 // std:: dependencies for current tests
 #include <iostream>
 #include <vector>
-#include <random>
+
 
 // the unit test framework
 #include <UnitTest++/UnitTest++.h>
@@ -27,6 +27,8 @@ Version 3. (See accompanying file License.txt)
 // a debugging tool - SHOW(X) outputs variable name X and its content to a stream (e.g. cout) 
 #include "SHOW.h"
 #include "time_and_details.h"
+#include "rng.h"
+
 
 namespace {
 	// the determining template variables
@@ -62,11 +64,11 @@ namespace {
 			// set up random number generation
 				// seeded generator	
 			unsigned int seed = (const unsigned int&)0x6d35f0e5b8f6c603;//std::random_device seed; unsigned int seed = seed();
-			std::mt19937 generator;
+			mt19937 generator;
 			generator.seed(seed);
 
 			// rng
-			std::normal_distribution<double> distribution(0., 1. / sqrt(Steps()));//distribution(mean, std deviation)
+			NORMAL_DIST<double> distribution(0., 1. / sqrt(Steps()));//distribution(mean, std deviation)
 
 			// create random path with dimension width and steps increments, and so a (steps+1) x width C matrix. 
 			for (size_t i = 0; i < Steps(); ++i)
@@ -125,8 +127,9 @@ namespace {
 		brown_path_increments(Ts... args)
 			: brown_path(args...) {
 			// convert sampled path to LIE increments
-			for (auto i = path.cbegin(); (i + Width()) != path.cend(); i += Width()) {
-				increments.emplace_back(LieDifference(i));
+			typename std::vector<double>::const_iterator iend (path.end());
+			for (typename std::vector<double>::const_iterator i = path.begin(); (i + Width()) != iend; i += Width()) {
+				increments.push_back(LieDifference(i));
 			}
 			// remove path data
 			brown_path::path.clear();

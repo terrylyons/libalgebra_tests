@@ -25,7 +25,7 @@ public:
 public:
     // Property tags
     typedef alg::basis::without_degree degree_tag;
-    typedef alg::basis::ordered<std::less<KEY>> ordering_tag;
+    typedef alg::basis::ordered<std::less<KEY> > ordering_tag;
 
 
     friend std::ostream& operator<<(std::ostream& os,

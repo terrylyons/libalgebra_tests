@@ -32,8 +32,7 @@ struct Fixture
 #endif
         > TVECT;
 
-        typedef std::mt19937 RNG;
-
+        typedef mt19937 RNG;
         RNG m_rng;
 
 

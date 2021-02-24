@@ -33,8 +33,8 @@ SUITE(hall_basis) {
         typedef double SCALAR;
 
 
-        using KEY = typename alg::hall_basis<test_alphabet_size>::KEY;
-        const std::vector<std::pair<size_t, size_t>>& get_hall_set_degree_ranges() const
+        typedef typename alg::hall_basis<test_alphabet_size>::KEY KEY;
+        const std::vector<std::pair<size_t, size_t> >& get_hall_set_degree_ranges() const
         {
             return hall_set_degree_ranges;
         }
@@ -56,14 +56,14 @@ SUITE(hall_basis) {
 
     TEST(test_basis_created_correct_num_letters) {
         TEST_DETAILS();
-        TestBasis basis {};
+        TestBasis basis;
 
         CHECK_EQUAL(test_alphabet_size, basis.get_letters().size());
     }
 
     TEST(test_basis_created_ltk_size) {
         TEST_DETAILS();
-        TestBasis basis {};
+        TestBasis basis;
 
         CHECK_EQUAL(test_alphabet_size, basis.get_ltk().size());
     }
@@ -71,7 +71,7 @@ SUITE(hall_basis) {
 
     TEST(test_growup_functionality) {
         TEST_DETAILS();
-        TestBasis basis {};
+        TestBasis basis;
 
         CHECK_EQUAL(2, basis.get_hall_set_degree_ranges().size());
 
@@ -83,7 +83,7 @@ SUITE(hall_basis) {
 
     TEST(test_degree) {
         TEST_DETAILS();
-        TestBasis basis {};
+        TestBasis basis;
 
         CHECK_EQUAL(0, basis.degree(0));
         for (LET i=1; i<=test_alphabet_size+1; ++i) {
@@ -94,7 +94,7 @@ SUITE(hall_basis) {
 
     TEST(test_key_of_letter) {
         TEST_DETAILS();
-        TestBasis basis {};
+        TestBasis basis;
 
         for (LET i=1; i<=test_alphabet_size; ++i) {
             CHECK_EQUAL(KEY(i), basis.keyofletter(i));
@@ -104,7 +104,7 @@ SUITE(hall_basis) {
 
     TEST(test_lparent_of_key_base_letters) {
         TEST_DETAILS();
-        TestBasis basis {};
+        TestBasis basis;
 
         for (LET i=1; i<=test_alphabet_size; ++i) {
             CHECK_EQUAL(0, basis.lparent(i));
@@ -114,7 +114,7 @@ SUITE(hall_basis) {
 
     TEST(test_rparent_of_key_base_letters) {
         TEST_DETAILS();
-        TestBasis basis {};
+        TestBasis basis;
 
         for (LET i=1; i<=test_alphabet_size; ++i) {
             CHECK_EQUAL(i, basis.rparent(i));
@@ -124,7 +124,7 @@ SUITE(hall_basis) {
 
     TEST(test_lparent_of_key_higher_key) {
         TEST_DETAILS();
-        TestBasis basis {};
+        TestBasis basis;
 
         KEY key = test_alphabet_size + 1;
         CHECK_EQUAL(1, basis.lparent(key));
@@ -133,7 +133,7 @@ SUITE(hall_basis) {
 
     TEST(test_rparent_of_key_higher_key) {
         TEST_DETAILS();
-        TestBasis basis {};
+        TestBasis basis;
 
         KEY key = test_alphabet_size + 1;
         CHECK_EQUAL(2, basis.rparent(key));
@@ -141,7 +141,7 @@ SUITE(hall_basis) {
 
     TEST(test_is_letter_for_letters) {
         TEST_DETAILS();
-        TestBasis basis {};
+        TestBasis basis;
 
         for (LET i=1; i<=test_alphabet_size; ++i) {
             CHECK(basis.letter(i));
@@ -150,7 +150,7 @@ SUITE(hall_basis) {
 
     TEST(test_is_letter_non_letter) {
         TEST_DETAILS();
-        TestBasis basis {};
+        TestBasis basis;
 
         KEY key = test_alphabet_size + 1;
         CHECK(!basis.letter(key));

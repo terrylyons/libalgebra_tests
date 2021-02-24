@@ -1,15 +1,15 @@
 #include "makebm.h"
 #include <vector>
-#include <random>
+#include "rng.h"
 
 void makebm(std::vector<double>& pathi, const size_t steps, const size_t width)
 {
 
 	// set up random number generation
 	unsigned int seed = (const unsigned int&)0x6d35f0e5b8f6c603;//std::random_device seed; unsigned int seed = seed();
-	std::mt19937 generator;
+	mt19937 generator;
 	generator.seed(seed);
-	std::normal_distribution<double> distribution(0., 1. / sqrt(steps));//distribution(mean, std deviation)
+	NORMAL_DIST<double> distribution(0., 1. / sqrt(steps));//distribution(mean, std deviation)
 
 	// create random path with dimension width and steps increments, and so a (steps+1) x width C matrix. 
 	std::vector<double> path((steps + 1) * width, 0.);

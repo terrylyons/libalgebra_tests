@@ -43,7 +43,7 @@ SUITE(test_tensor_functions) {
     TEST_FIXTURE(Fixture, tensor_exponential_zero) {
         TEST_DETAILS();
         TENSOR ten(S(0));
-        TENSOR expected {TKEY()};
+        TENSOR expected (S(1));
 
         CHECK_EQUAL(expected, exp(ten));
     }
@@ -51,7 +51,7 @@ SUITE(test_tensor_functions) {
     TEST_FIXTURE(Fixture, test_exponential_tensor_unit) {
         TEST_DETAILS();
 
-        TENSOR ten {TKEY()};
+        TENSOR ten (TENSOR::VECT::one);
         TENSOR expected(exp_to_depth(S(1), 5, S(1)));
         TENSOR result(exp(ten));
         CHECK_VEC_CLOSE(expected, result, 2.0e-15);
@@ -101,8 +101,8 @@ SUITE(test_tensor_functions) {
     TEST_FIXTURE(Fixture, test_log_tensor_unit) {
         TEST_DETAILS();
 
-        TENSOR tunit {TKEY()};
-        TENSOR zero {S(0)};
+        TENSOR tunit ( TENSOR::VECT::one );
+        TENSOR zero (S(0));
 
         CHECK_EQUAL(zero, log(tunit));
     }
@@ -110,8 +110,8 @@ SUITE(test_tensor_functions) {
     TEST_FIXTURE(Fixture, test_log_tensor_with_no_explicit_unit) {
         TEST_DETAILS();
 
-        TENSOR tunit {TKEY()};
-        TENSOR no_unit {LET(1), S(1)};
+        TENSOR tunit ( TENSOR::VECT::one );
+        TENSOR no_unit (LET(1), S(1));
         TENSOR ten = tunit + no_unit;
 
         CHECK_EQUAL(log(ten), log(no_unit));
@@ -120,7 +120,7 @@ SUITE(test_tensor_functions) {
     TEST_FIXTURE(Fixture, test_log_exp_round_trip_single_letter) {
         TEST_DETAILS();
 
-        TENSOR ten {LET(1), S(1)};
+        TENSOR ten (LET(1), S(1));
 
         CHECK_VEC_CLOSE(ten, log(exp(ten)), 2.0e-15);
     }
@@ -128,8 +128,8 @@ SUITE(test_tensor_functions) {
     TEST_FIXTURE(Fixture, test_exp_log_round_trip_single_letter) {
         TEST_DETAILS();
 
-        TENSOR ten {LET(1), S(1)};
-        TENSOR expected = TENSOR{TKEY()} + ten;
+        TENSOR ten (LET(1), S(1));
+        TENSOR expected = TENSOR(TKEY()) + ten;
 
         CHECK_VEC_CLOSE(expected, exp(log(ten)), 2.0e-15);
     }

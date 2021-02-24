@@ -14,6 +14,8 @@
 #include <libalgebra/libalgebra.h>
 #include "compat.h"
 
+#include <libalgebra/basis/basis.h>
+
 struct	memfile
 {
 public:
@@ -66,12 +68,12 @@ void CHECK_compare_with_file(const SPARSEVECTOR_T& sig, const PATH_T& filepath)
 		value_type* data_begin = (value_type*)(sigfile.begin());
 		value_type* data_end = data_begin + numberOfElements;
 		// initialize sigfile
-		auto temp = sig.size();
-		auto temp2 = data_begin - data_end;
+		size_t temp = sig.size();
+		size_t temp2 = data_begin - data_end;
 		std::copy(tmp.begin(), tmp.end(), data_begin);
 
-		std::sort(data_begin, data_end
-			, [](const value_type lhs, const value_type rhs) {return lhs.first < rhs.first; });
+		typename alg::basis::basis_traits<typename SPARSEVECTOR_T::BASIS>::ordering_tag::pair_order order;
+		std::sort(data_begin, data_end, order);
 	}
 
 	// check the read only allocation is the anticipated size
@@ -84,7 +86,7 @@ void CHECK_compare_with_file(const SPARSEVECTOR_T& sig, const PATH_T& filepath)
 	// compare the calculated with the stored data
 	CHECK_EQUAL(sig.size(), numberOfElements);
 	SPARSEVECTOR_T sig_saved_version;
-	for (auto a = data_cbegin; a < data_cend; a++)
+	for (const value_type *a = data_cbegin; a != data_cend; a++)
 		sig_saved_version[a->first] = a->second;
 	SPARSEVECTOR_T err = sig - sig_saved_version;
 	CHECK_EQUAL(SPARSEVECTOR_T(), err);
