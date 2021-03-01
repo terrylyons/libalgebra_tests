@@ -38,8 +38,8 @@ SUITE (hybrid_tensor_multiplication) {
                 alg::vectors::basic_resize_manager,
                 std::vector<typename field::S>,
                 std::map<KEY, typename field::S>
-                > DENSE;
-        typedef alg::algebra<TBASIS, field, DENSE> TENSOR;
+                > HYBRID;
+        typedef alg::algebra<TBASIS, field, alg::algebras::default_multiply<TBASIS>, HYBRID> TENSOR;
 
         const TENSOR tunit;
         const TENSOR tzero;

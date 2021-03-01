@@ -30,7 +30,7 @@ SUITE (dense_tensor_multiplication) {
         };
 
         typedef alg::vectors::dense_vector<TBASIS, field> DENSE;
-        typedef alg::algebra<TBASIS, field, DENSE> TENSOR;
+        typedef alg::algebra<TBASIS, field, alg::algebras::default_multiply<TBASIS>, DENSE> TENSOR;
         typedef typename TENSOR::SCALAR SCALAR;
 
         const TENSOR tunit;
@@ -61,14 +61,14 @@ TEST_FIXTURE(Fixture, test_product_tunit_zero) {
     TEST_DETAILS();
     TENSOR lhs(tunit), rhs, expected;
 
-            CHECK_EQUAL(expected, lhs * rhs);
+    CHECK_EQUAL(expected, lhs * rhs);
 }
 
 TEST_FIXTURE(Fixture, test_product_zero_tunit) {
     TEST_DETAILS();
     TENSOR lhs, rhs(tunit), expected;
 
-            CHECK_EQUAL(expected, lhs * rhs);
+    CHECK_EQUAL(expected, lhs * rhs);
 }
 
 
@@ -77,7 +77,7 @@ TEST_FIXTURE(Fixture, test_product_tunit_tunit) {
 
     TENSOR lhs(tunit), rhs(tunit);
 
-            CHECK_EQUAL(tunit, lhs * rhs);
+    CHECK_EQUAL(tunit, lhs * rhs);
 }
 
 TEST_FIXTURE(Fixture, test_product_unidim_deg_1_tunit) {
@@ -88,7 +88,7 @@ TEST_FIXTURE(Fixture, test_product_unidim_deg_1_tunit) {
     TENSOR lhs(tunit), rhs(make_key(k1, 1));
 
     TENSOR expected(rhs);
-            CHECK_EQUAL(expected, lhs * rhs);
+    CHECK_EQUAL(expected, lhs * rhs);
 }
 
 TEST_FIXTURE(Fixture, test_product_unidim_deg_1_1) {
@@ -101,7 +101,7 @@ TEST_FIXTURE(Fixture, test_product_unidim_deg_1_1) {
     LET ek[] = {1, 2};
     TENSOR expected(make_key(ek,2));
 
-            CHECK_EQUAL(expected, lhs * rhs);
+    CHECK_EQUAL(expected, lhs * rhs);
 }
 
 TEST_FIXTURE(Fixture, test_product_unidim_deg_1_deg_2) {
@@ -114,7 +114,7 @@ TEST_FIXTURE(Fixture, test_product_unidim_deg_1_deg_2) {
     LET ek[] = {1, 2, 3};
     TENSOR expected(make_key(ek, 3));
 
-            CHECK_EQUAL(expected, lhs * rhs);
+    CHECK_EQUAL(expected, lhs * rhs);
 }
 
 TEST_FIXTURE(Fixture, test_product_unidim_deg_2_deg_1) {
@@ -127,7 +127,7 @@ TEST_FIXTURE(Fixture, test_product_unidim_deg_2_deg_1) {
     LET ek[] = {1, 2, 3};
     TENSOR expected(make_key(ek, 3));
 
-            CHECK_EQUAL(expected, lhs * rhs);
+    CHECK_EQUAL(expected, lhs * rhs);
 }
 
 
@@ -140,7 +140,7 @@ TEST_FIXTURE(Fixture, test_product_unidim_deg_3_deg_3_overflow_removed) {
 
     TENSOR expected(tzero);
 
-            CHECK_EQUAL(expected, lhs * rhs);
+    CHECK_EQUAL(expected, lhs * rhs);
 }
 
 TEST_FIXTURE(Fixture, test_product_multiple_terms) {

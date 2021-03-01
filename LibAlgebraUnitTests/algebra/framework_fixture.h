@@ -17,7 +17,7 @@ struct Fixture
     typedef simple_algebra_basis<5, field> BASIS;
     typedef alg::vectors::vector<BASIS, field,
     ALGEBRA_TESTS_VECT_TYPE<BASIS, field> > VECT;
-    typedef alg::algebra<BASIS, field,
+    typedef alg::algebra<BASIS, field, pointwise_multiplication,
     ALGEBRA_TESTS_VECT_TYPE<BASIS, field> > ALG;
 
     typedef typename BASIS::KEY KEY;
