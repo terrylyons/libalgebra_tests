@@ -47,6 +47,10 @@ struct pointwise_multiplication
 template <DEG Dimension, typename Field>
 class simple_algebra_basis : public SimpleIntegerBasis<Dimension, typename Field::Q>
 {
+#ifndef LIBALGEBRA_ALGEBRA_H
+    typedef alg::algebra<simple_algebra_basis, Field,
+    ALGEBRA_TESTS_VECT_TYPE<simple_algebra_basis, Field> > ALG;
+#endif
 public:
 
     typedef typename Field::Q RATIONAL;
@@ -59,6 +63,23 @@ public:
     typedef alg::basis::without_degree degree_tag;
     typedef alg::basis::ordered<std::less<KEY> > ordering_tag;
 
+    const ALG m_algzero;
+    std::vector<ALG> m_mulcache;
 
+    simple_algebra_basis() : m_algzero(), m_mulcache()
+    {
+        m_mulcache.reserve(Dimension);
+        for (KEY i = 0; i < Dimension; ++i) {
+            m_mulcache.push_back(ALG(i, typename Field::S(1)));
+        }
+    }
+
+    const ALG& prod(const KEY& k1, const KEY& k2) const
+    {
+        if (k1 == k2) {
+            return m_mulcache[k1];
+        }
+        return m_algzero;
+    }
 };
 

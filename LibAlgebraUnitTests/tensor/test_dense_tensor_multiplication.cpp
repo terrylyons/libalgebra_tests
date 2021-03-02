@@ -30,7 +30,11 @@ SUITE (dense_tensor_multiplication) {
         };
 
         typedef alg::vectors::dense_vector<TBASIS, field> DENSE;
-        typedef alg::algebra<TBASIS, field, alg::algebras::default_multiply<TBASIS>, DENSE> TENSOR;
+        typedef alg::algebra<TBASIS, field,
+#ifdef LIBALGEBRA_ALGEBRAS_H
+                alg::algebras::default_multiply<TBASIS>,
+#endif
+        DENSE> TENSOR;
         typedef typename TENSOR::SCALAR SCALAR;
 
         const TENSOR tunit;

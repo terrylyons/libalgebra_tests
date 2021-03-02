@@ -39,7 +39,11 @@ SUITE (hybrid_tensor_multiplication) {
                 std::vector<typename field::S>,
                 std::map<KEY, typename field::S>
                 > HYBRID;
-        typedef alg::algebra<TBASIS, field, alg::algebras::default_multiply<TBASIS>, HYBRID> TENSOR;
+        typedef alg::algebra<TBASIS, field,
+#ifdef LIBALGEBRA_ALGEBRAS_H
+        alg::algebras::default_multiply<TBASIS>,
+#endif
+        HYBRID> TENSOR;
 
         const TENSOR tunit;
         const TENSOR tzero;
