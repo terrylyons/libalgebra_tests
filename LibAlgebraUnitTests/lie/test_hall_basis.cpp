@@ -84,9 +84,10 @@ SUITE(hall_basis) {
     TEST(test_degree) {
         TEST_DETAILS();
         TestBasis basis;
+        basis.growup(2);
 
         CHECK_EQUAL(0, basis.degree(0));
-        for (LET i=1; i<=test_alphabet_size+1; ++i) {
+        for (LET i=1; i<=test_alphabet_size; ++i) {
             CHECK_EQUAL(1, basis.degree(i));
         }
     }

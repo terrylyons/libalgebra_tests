@@ -10,7 +10,7 @@
 
 
 #if __cplusplus >= 201103L
-namespace chrono = std::chrono
+namespace chrono = std::chrono;
 #else
 namespace chrono = boost::chrono;
 #endif
