@@ -14,16 +14,21 @@
 
 #include "generic_lie_increment.h"
 
-template <unsigned Width>
+template <unsigned Width, typename Integer=int32_t>
 class generic_path
 {
-    std::vector<generic_lie_increment<Width, std::int32_t> > m_increments;
+    std::vector<generic_lie_increment<Width, Integer> > m_increments;
 public:
 
-    generic_path(std::vector<generic_lie_increment<Width, std::int32_t> > increments)
+    generic_path(const generic_path& other) : m_increments(other.m_increments)
+    {}
+
+    explicit
+    generic_path(std::vector<generic_lie_increment<Width, Integer> > increments)
         : m_increments(increments)
     {
     }
+
 
     size_t length() const
     {
@@ -38,6 +43,8 @@ public:
         typename Framework::MAPS maps;
 
         size_t end = std::min(end_increment, m_increments.size());
+        assert(start_increment >= 0);
+        assert(end <= m_increments.size());
 
         Tensor result(typename Tensor::SCALAR(1));
         for (size_t i=start_increment; i<end; ++i) {

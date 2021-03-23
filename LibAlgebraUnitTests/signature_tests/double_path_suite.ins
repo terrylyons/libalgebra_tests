@@ -11,7 +11,7 @@ struct double_fixture : Fixture
 
     double expected_error;
 
-    double_fixture() : Fixture(), expected_error(2.0e-15)
+    double_fixture() : Fixture(), expected_error(expected_double_error)
     {}
 
     typename sparse_framework::TENSOR sparse_signature(size_t start=0, size_t end=-1) const

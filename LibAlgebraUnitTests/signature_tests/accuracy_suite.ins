@@ -3,13 +3,9 @@
 struct accuracy_fixture : Fixture
 {
 
-    float expected_float_error;
-    double expected_double_error;
 
-    accuracy_fixture() :
-        Fixture(),
-        expected_double_error(1.0e-15),
-        expected_float_error(4.0e-8)
+
+    accuracy_fixture() : Fixture()
     {}
 
     using Fixture::float_sparse_framework;
@@ -84,7 +80,7 @@ struct accuracy_fixture : Fixture
     typename float_hybrid_framework::TENSOR
     hybrid_tensor_float_convert(const Tensor& arg) const
     {
-        typename float_dense_framework::TENSOR result;
+        typename float_hybrid_framework::TENSOR result;
         typedef typename Tensor::const_iterator citer;
 
         for (citer cit(arg.begin()); cit != arg.end(); ++cit) {
@@ -168,7 +164,7 @@ struct accuracy_fixture : Fixture
     typename float_hybrid_framework::LIE
     hybrid_lie_float_convert(const Lie& arg) const
     {
-        typename float_dense_framework::LIE result;
+        typename float_hybrid_framework::LIE result;
         typedef typename Lie::const_iterator citer;
 
         for (citer cit(arg.begin()); cit != arg.end(); ++cit) {
@@ -430,7 +426,7 @@ TEST_FIXTURE(accuracy_fixture, test_accuracy_signature_sparse_dense)
             signature<double_dense_framework>();
 
     typename rational_sparse_framework::TENSOR sparse_base = path.template
-            signature<rational_hybrid_framework>();
+            signature<rational_sparse_framework>();
     typename float_sparse_framework::TENSOR sparse_float = path.template
             signature<float_sparse_framework>();
     typename double_sparse_framework::TENSOR sparse_double = path.template
@@ -460,14 +456,14 @@ TEST_FIXTURE(accuracy_fixture, test_accuracy_signature_sparse_hybrid)
             signature<double_hybrid_framework>();
 
     typename rational_sparse_framework::TENSOR sparse_base = path.template
-            signature<rational_hybrid_framework>();
+            signature<rational_sparse_framework>();
     typename float_sparse_framework::TENSOR sparse_float = path.template
             signature<float_sparse_framework>();
     typename double_sparse_framework::TENSOR sparse_double = path.template
             signature<double_sparse_framework>();
 
     typename rational_field::S rational_error =
-            (hybrid_base - dense_tensor_rational_convert(sparse_base)).NormLInf();
+            (hybrid_base - hybrid_tensor_rational_convert(sparse_base)).NormLInf();
     float float_error = (hybrid_float - hybrid_tensor_float_convert(sparse_float)).NormLInf();
     double double_error = (hybrid_double - hybrid_tensor_double_convert(sparse_double)).NormLInf();
 

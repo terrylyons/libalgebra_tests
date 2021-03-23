@@ -1,16 +1,20 @@
 //
-// Created by sam on 11/03/2021.
+// Created by sam on 16/03/2021.
 //
 
 #include <algorithm>
+#include <cmath>
 #include <vector>
+#include <exception>
 #include <map>
 
+#include <boost/math/common_factor_rt.hpp>
+#include <boost/math/special_functions/fpclassify.hpp>
+#include <boost/math/special_functions/modf.hpp>
 #include <UnitTest++/UnitTest++.h>
 
 #include <libalgebra/libalgebra.h>
 #include <libalgebra/alg_types.h>
-
 
 #include "../time_and_details.h"
 #include "../rng.h"
@@ -20,80 +24,83 @@
 #include "generic_lie_increment.h"
 #include "generic_path.h"
 
-template <unsigned Width>
-generic_path<Width> make_innovative_path(unsigned length)
+namespace {
+
+    template <typename Integer>
+    generic_coefficient<Integer> convert_to_generic(double arg, Integer prec)
+    {
+        double integ = NAN;
+        double fract = boost::math::modf(arg, &integ);
+
+        assert (!boost::math::isnan(integ));
+
+        Integer integral_part = static_cast<Integer>(integ);
+        Integer scaled_fract = static_cast<Integer>(round(fract * static_cast<double>(prec)));
+
+        Integer gcd1 = boost::math::gcd(scaled_fract, prec);
+        assert (gcd1 != 0);
+
+        Integer fract_part_num = scaled_fract / gcd1;
+        Integer fract_part_den = prec / gcd1;
+
+        Integer tmp = fract_part_den * integral_part + fract_part_num;
+        Integer gcd2 = boost::math::gcd(tmp, fract_part_den);
+        assert (gcd2 != 0);
+
+        return generic_coefficient<Integer>(tmp / gcd2, fract_part_den / gcd2);
+    }
+
+}
+
+template <unsigned Width, typename Integer, typename Rng>
+inline generic_lie_increment<Width, Integer>
+make_brownian_increment(double stdev, Rng rng)
 {
+    std::vector<generic_coefficient<Integer> > tmp;
+    tmp.reserve(Width);
+
+    NORMAL_DIST<double> normal(0.0, stdev);
+
+    for (unsigned i=0; i < Width; ++i) {
+        tmp.push_back(convert_to_generic<Integer>(normal(rng), 1000));
+    }
+
+    return generic_lie_increment<Width, Integer>(tmp);
+}
+
+
+template <unsigned Width>
+generic_path<Width> make_brownian_path(unsigned length=Width)
+{
+    assert (length > 0);
     std::vector<generic_lie_increment<Width, int32_t> > tmp;
     tmp.reserve(length);
-    mt19937 rng;
-    UNIFORM_INT_DIST<int32_t> dist(0, Width-1);
 
-    UNIFORM_INT_DIST<int32_t> distn(-5, 5);
-    UNIFORM_INT_DIST<int32_t> distd(1, 60);
+    mt19937 rng(12345);
+    double stdev = 1.0 / sqrt(static_cast<double>(length));
 
-    std::vector<size_t> seen;
-    seen.reserve(length);
-
-    size_t key = dist(rng);
-    std::vector<generic_coefficient<int32_t> > incr_tmp;
-    incr_tmp.reserve(Width);
-    for (size_t i=0; i <Width; ++i) {
-        if (i == key) {
-            incr_tmp.push_back(generic_coefficient<int32_t>(distn(rng), distd(rng)));
-        } else {
-            incr_tmp.push_back(generic_coefficient<int32_t>(0, 1));
-        }
+    for (std::size_t i=0; i<length; ++i) {
+        generic_lie_increment<Width, int32_t> incr (make_brownian_increment<Width, int32_t>(stdev, rng));
+        tmp.push_back(incr);
     }
-    tmp.push_back(generic_lie_increment<Width, int32_t>(incr_tmp));
-    seen.push_back(key);
-
-    for (size_t i=1; i < length; ++i) {
-        while (std::find(seen.begin(), seen.end(), key) != seen.end()) {
-            key = dist(rng);
-        }
-        incr_tmp.clear();
-        incr_tmp.reserve(Width);
-        for (size_t i=0; i <Width; ++i) {
-            if (i == key) {
-                incr_tmp.push_back(generic_coefficient<int32_t>(distn(rng), distd(rng)));
-            } else {
-                incr_tmp.push_back(generic_coefficient<int32_t>(0, 1));
-            }
-        }
-        tmp.push_back(generic_lie_increment<Width, int32_t>(incr_tmp));;
-        seen.push_back(key);
-    }
-    assert(tmp.size() == length);
 
     return generic_path<Width>(tmp);
 }
 
-namespace {
 
-#if __cplusplus >= 201103UL
-    constexpr
-#endif
-    inline size_t binomial_coeff(size_t n, size_t k)
-    {
-        return (k > n) ? 0 :
-               (k == 0 || k == n) ? 1 :
-               binomial_coeff(n-1, k-1) + binomial_coeff(n-1, k);
-    }
-
-}
-
-
-
-
-template <unsigned Width, unsigned Depth>
+template <unsigned Width, unsigned Depth, unsigned Length>
 struct GenericFixture
 {
     static const unsigned width = Width;
     static const unsigned depth = Depth;
-    generic_path<width> path;
+    static const unsigned length = Length;
+
+    generic_path<Width> path;
+
 
     float expected_float_error;
     double expected_double_error;
+
 
     struct rational_field
     {
@@ -111,13 +118,13 @@ struct GenericFixture
         typedef alg::vectors::sparse_vector<
                 TBASIS,
                 alg::TrivialCoeffs<TBASIS>,
-                std::map<typename TBASIS::KEY, S>
+                std::map < typename TBASIS::KEY, S>
         > SPTENS;
 
         typedef alg::vectors::sparse_vector<
                 LBASIS,
                 alg::TrivialCoeffs<LBASIS>,
-                std::map<typename LBASIS::KEY, S>
+                std::map < typename LBASIS::KEY, S>
         > SPLIE;
 
         typedef alg::free_tensor<S, Q, width, depth, SPTENS> TENSOR;
@@ -338,23 +345,27 @@ struct GenericFixture
         typedef alg::maps<S, Q, width, depth, TENSOR, LIE> MAPS;
     };
 
-    GenericFixture() : path(make_innovative_path<width>(width)),
-                       expected_double_error(1.0e-12),
-                       expected_float_error(1.0e-6f)
+    GenericFixture() : path(make_brownian_path<Width>(Length)),
+                       expected_double_error(2.0e-12),
+                       expected_float_error(7.0e-4f)
     {}
 
-    size_t sig_support(unsigned increments=width)
+    size_t sig_support(unsigned increments=length)
     {
-        return binomial_coeff(increments + depth, depth);
+        if (increments == 0) {
+            return 1;
+        } else {
+            typename rational_dense_framework::TBASIS basis;
+            return basis.start_of_degree(depth+1);
+        }
+
     }
+
 };
 
+SUITE(brownian_path_5_5_10_tests) {
 
-
-
-SUITE(innovative_path_5_tests) {
-
-typedef GenericFixture<5, 5> Fixture;
+    typedef GenericFixture<5U, 5U, 10U> Fixture;
 
 #include "double_path_suite.ins"
 #include "float_path_suite.ins"
@@ -364,9 +375,10 @@ typedef GenericFixture<5, 5> Fixture;
 }
 
 
-SUITE(innovative_path_10_tests) {
 
-    typedef GenericFixture<10, 3> Fixture;
+SUITE(brownian_path_5_5_50_tests) {
+
+typedef GenericFixture<5U, 5U, 50U> Fixture;
 
 #include "double_path_suite.ins"
 #include "float_path_suite.ins"
@@ -375,9 +387,11 @@ SUITE(innovative_path_10_tests) {
 
 }
 
-SUITE(innovative_path_15_tests) {
 
-    typedef GenericFixture<15, 2> Fixture;
+
+SUITE(brownian_path_10_2_10_tests) {
+
+typedef GenericFixture<10, 2, 10> Fixture;
 
 #include "double_path_suite.ins"
 #include "float_path_suite.ins"

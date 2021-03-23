@@ -16,23 +16,30 @@
 template <typename Integer>
 struct generic_coefficient
 {
-    Integer numerator, denominator;
+    Integer numerator;
+    Integer denominator;
 
-    CONSTEXPR generic_coefficient() : numerator(0), denominator(1)
+    generic_coefficient() : numerator(0), denominator(1)
     {}
 
-    CONSTEXPR generic_coefficient(Integer a, Integer b) : numerator(a), denominator(b)
+    generic_coefficient(Integer a, Integer b) : numerator(a), denominator(b)
     {}
 
-    explicit CONSTEXPR generic_coefficient(Integer i) : numerator(i), denominator(1)
+    explicit generic_coefficient(Integer i) : numerator(i), denominator(1)
     {}
 
-    explicit CONSTEXPR operator float() const
+    generic_coefficient& operator=(const generic_coefficient& other)
+    {
+        numerator = other.numerator;
+        denominator = other.denominator;
+    }
+
+    explicit operator float() const
     {
         return float(numerator) / denominator;
     }
 
-    explicit CONSTEXPR operator double() const
+    explicit operator double() const
     {
         return double(numerator) / denominator;
     }
@@ -43,13 +50,7 @@ struct generic_coefficient
         return Rational(numerator) / Rational(denominator);
     }
 
-    template <typename RandomSource>
-    static generic_coefficient rand(RandomSource& rng)
-    {
-        UNIFORM_INT_DIST<int32_t> distn(-5, 5);
-        UNIFORM_INT_DIST<int32_t> distd(1, 60);
-        return generic_coefficient(distn(rng), distd(rng));
-    }
+
 
 };
 

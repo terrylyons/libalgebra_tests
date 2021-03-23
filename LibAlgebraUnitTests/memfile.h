@@ -13,6 +13,7 @@
 #include <UnitTest++/UnitTest++.h>
 #include <libalgebra/libalgebra.h>
 #include "compat.h"
+#include "helpers.h"
 
 #include <libalgebra/basis/basis.h>
 
@@ -88,6 +89,7 @@ void CHECK_compare_with_file(const SPARSEVECTOR_T& sig, const PATH_T& filepath)
 	SPARSEVECTOR_T sig_saved_version;
 	for (const value_type *a = data_cbegin; a != data_cend; a++)
 		sig_saved_version[a->first] = a->second;
-	SPARSEVECTOR_T err = sig - sig_saved_version;
-	CHECK_EQUAL(SPARSEVECTOR_T(), err);
+	//SPARSEVECTOR_T err = sig - sig_saved_version;
+	//CHECK_EQUAL(SPARSEVECTOR_T(), err);
+	CHECK_VEC_CLOSE(sig_saved_version, sig, 1e-15);
 }

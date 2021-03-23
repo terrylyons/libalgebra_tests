@@ -4,7 +4,7 @@ COEFFICIENT_TEST(test_sparse_sig_support)
 {
     TEST_DETAILS();
 
-    for (unsigned i=0; i < width; ++i) {
+    for (unsigned i=0; i < path.length(); ++i) {
         CHECK_EQUAL(sig_support(i), sparse_signature(0, i).size());
     }
 
