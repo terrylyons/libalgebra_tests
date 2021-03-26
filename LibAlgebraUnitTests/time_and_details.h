@@ -86,7 +86,7 @@ struct timer
 			<< " sec";
 	}
 };
-
+#if 0
 // a macro to identify and time a test to cout
 #ifndef TEST_DETAILS
 #ifndef SHO_NO
@@ -95,4 +95,7 @@ struct timer
 #define TEST_DETAILS()
 #endif
 #else
+#endif
+#else
+#define TEST_DETAILS()
 #endif
