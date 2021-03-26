@@ -140,5 +140,45 @@ TEST_FIXTURE(Fixture, test_iterator_find_key_full_vec) {
         CHECK_EQUAL(vect[KEY(1)], iter::value<VECT>(it));
     }
 
+TEST_FIXTURE(Fixture, test_iterator_long_vector) {
+    TEST_DETAILS();
+
+
+    TVECT vect;
+    TKEY kunit, key1(1UL), key2(2UL);
+    vect.add_scal_prod(kunit, S(1));
+    vect.add_scal_prod(key1, S(2));
+    vect.add_scal_prod(key2, S(3));
+    vect.add_scal_prod(key1 * key1, S(4));
+    vect.add_scal_prod(key1 * key2, S(5));
+    vect.add_scal_prod(key2 * key1, S(6));
+    vect.add_scal_prod(key2 * key2, S(7));
+
+    vect.add_scal_prod(key2 * key2 * key1, S(8));
+    vect.add_scal_prod(key2 * key2 * key2 * key1, S(9));
+
+    std::vector<float> out;
+    out.reserve(9);
+
+    typename TVECT::iterator it;
+    for (it =vect.begin(); it!=vect.end(); ++it) {
+        if (it->value() != TVECT::zero) {
+            out.push_back(static_cast<float>(it->value()));
+        }
+    }
+
+    REQUIRE CHECK_EQUAL(9, out.size());
+
+    std::sort(out.begin(), out.end());
+    std::vector<float> expected;
+    expected.reserve(9);
+    for (int i=1; i<=9; ++i) {
+        expected.push_back(static_cast<float>(i));
+    }
+
+    CHECK_ARRAY_EQUAL(expected, out, 9);
+
+}
+
 
 #endif
