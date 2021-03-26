@@ -35,7 +35,7 @@ SUITE (hybrid_tensor_multiplication) {
         typedef alg::vectors::hybrid_vector<
                 TBASIS,
                 field,
-                alg::vectors::basic_resize_manager,
+                alg::vectors::policy::basic_resize_policy,
                 std::vector<typename field::S>,
                 std::map<KEY, typename field::S>
                 > HYBRID;

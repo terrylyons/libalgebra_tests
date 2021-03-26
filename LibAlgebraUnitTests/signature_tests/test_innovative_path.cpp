@@ -158,7 +158,7 @@ struct GenericFixture
         typedef alg::vectors::hybrid_vector<
                 TBASIS,
                 alg::TrivialCoeffs<TBASIS>,
-                alg::vectors::basic_resize_manager,
+                alg::vectors::policy::basic_resize_policy,
                 std::vector<S>,
                 std::map<typename TBASIS::KEY, S>
         > HTENS;
@@ -166,7 +166,7 @@ struct GenericFixture
         typedef alg::vectors::hybrid_vector<
                 LBASIS,
                 alg::TrivialCoeffs<LBASIS>,
-                alg::vectors::basic_resize_manager,
+                alg::vectors::policy::basic_resize_policy,
                 std::vector<S>,
                 std::map<typename LBASIS::KEY, S>
         > HLIE;
@@ -239,7 +239,7 @@ struct GenericFixture
         typedef alg::vectors::hybrid_vector<
                 TBASIS,
                 alg::TrivialCoeffs<TBASIS>,
-                alg::vectors::basic_resize_manager,
+                alg::vectors::policy::basic_resize_policy,
                 std::vector<S>,
                 std::map<typename TBASIS::KEY, S>
         > HTENS;
@@ -247,7 +247,7 @@ struct GenericFixture
         typedef alg::vectors::hybrid_vector<
                 LBASIS,
                 alg::TrivialCoeffs<LBASIS>,
-                alg::vectors::basic_resize_manager,
+                alg::vectors::policy::basic_resize_policy,
                 std::vector<S>,
                 std::map<typename LBASIS::KEY, S>
         > HLIE;
@@ -320,7 +320,7 @@ struct GenericFixture
         typedef alg::vectors::hybrid_vector<
                 TBASIS,
                 alg::TrivialCoeffs<TBASIS>,
-                alg::vectors::basic_resize_manager,
+                alg::vectors::policy::basic_resize_policy,
                 std::vector<S>,
                 std::map<typename TBASIS::KEY, S>
         > HTENS;
@@ -328,7 +328,7 @@ struct GenericFixture
         typedef alg::vectors::hybrid_vector<
                 LBASIS,
                 alg::TrivialCoeffs<LBASIS>,
-                alg::vectors::basic_resize_manager,
+                alg::vectors::policy::basic_resize_policy,
                 std::vector<S>,
                 std::map<typename LBASIS::KEY, S>
         > HLIE;

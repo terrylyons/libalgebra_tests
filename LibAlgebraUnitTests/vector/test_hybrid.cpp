@@ -22,11 +22,11 @@ using alg::vectors::hybrid_vector;
 
 #define _VECTOR_TYPE hybrid_vector
 #define _VECTOR_TYPE_ADDITIONAL_PARAMS                                      \
-    alg::vectors::basic_resize_manager,                                     \
+    alg::vectors::policy::basic_resize_policy,                                     \
     std::vector<typename FIELD::S>,                                         \
     std::map<typename BASIS::KEY, typename FIELD::S>
 #define _TVECTOR_TYPE_ADDITIONAL_PARAMS                                      \
-    alg::vectors::basic_resize_manager,                                     \
+    alg::vectors::policy::basic_resize_policy,                                     \
     std::vector<typename FIELD::S>,                                         \
     std::map<typename TBASIS::KEY, typename FIELD::S>
 
