@@ -40,6 +40,23 @@
             );                                                      \
             ++it;                                                   \
         }                                                           \
+    }                                                               \
+                                                                    \
+    TEST_FIXTURE(Fixture, test_ ## IT_TYPE ## _long_iterator_not_eq) {\
+        TVECT vect;                                                    \
+        TKEY kunit, key1(1UL), key2(2UL);                              \
+        vect.add_scal_prod(kunit, S(1));                               \
+        vect.add_scal_prod(key1, S(2));                                \
+        vect.add_scal_prod(key2, S(3));                                \
+        vect.add_scal_prod(key1 * key1, S(4));                         \
+        vect.add_scal_prod(key1 * key2, S(5));                         \
+        vect.add_scal_prod(key2 * key1, S(6));                         \
+        vect.add_scal_prod(key2 * key2, S(7));                         \
+                                                                       \
+        vect.add_scal_prod(key2 * key2 * key1, S(8));                  \
+        vect.add_scal_prod(key2 * key2 * key2 * key1, S(9));        \
+                                                                    \
+        CHECK(vect. BEGIN() != vect. END());                        \
     }
 
 
@@ -142,7 +159,6 @@ TEST_FIXTURE(Fixture, test_iterator_find_key_full_vec) {
 
 TEST_FIXTURE(Fixture, test_iterator_long_vector) {
     TEST_DETAILS();
-
 
     TVECT vect;
     TKEY kunit, key1(1UL), key2(2UL);
