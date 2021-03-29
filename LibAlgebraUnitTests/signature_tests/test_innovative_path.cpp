@@ -339,7 +339,7 @@ struct GenericFixture
     };
 
     GenericFixture() : path(make_innovative_path<width>(width)),
-                       expected_double_error(1.0e-12),
+                       expected_double_error(1.0e-14),
                        expected_float_error(1.0e-6f)
     {}
 
