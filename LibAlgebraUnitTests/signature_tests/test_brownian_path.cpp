@@ -8,7 +8,8 @@
 #include <exception>
 #include <map>
 
-#include <boost/math/common_factor_rt.hpp>
+#pragma warning(suppress:4616) 
+#include <boost/math/common_factor_rt.hpp> // deprecated
 #include <boost/math/special_functions/fpclassify.hpp>
 #include <boost/math/special_functions/modf.hpp>
 #include <UnitTest++/UnitTest++.h>

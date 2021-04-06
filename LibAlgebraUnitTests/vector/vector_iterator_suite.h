@@ -44,7 +44,7 @@
                                                                     \
     TEST_FIXTURE(Fixture, test_ ## IT_TYPE ## _long_iterator_not_eq) {\
         TVECT vect;                                                    \
-        TKEY kunit, key1(1UL), key2(2UL);                              \
+        TKEY kunit, key1(TKEY::LET(1UL)), key2(TKEY::LET(2UL));                              \
         vect.add_scal_prod(kunit, S(1));                               \
         vect.add_scal_prod(key1, S(2));                                \
         vect.add_scal_prod(key2, S(3));                                \
@@ -161,7 +161,7 @@ TEST_FIXTURE(Fixture, test_iterator_long_vector) {
     TEST_DETAILS();
 
     TVECT vect;
-    TKEY kunit, key1(1UL), key2(2UL);
+    TKEY kunit, key1(TKEY::LET(1UL)), key2(TKEY::LET(2UL));
     vect.add_scal_prod(kunit, S(1));
     vect.add_scal_prod(key1, S(2));
     vect.add_scal_prod(key2, S(3));

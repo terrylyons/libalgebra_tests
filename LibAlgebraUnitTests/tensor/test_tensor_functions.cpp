@@ -31,10 +31,10 @@ SUITE(test_tensor_functions) {
     T exp_to_depth(T x, size_t depth, S one) {
         T result (one);
         T xn(one);
-        size_t fact = 1;
+        S fact = 1;
         for (size_t i=1; i<=depth; ++i) {
             xn *= x;
-            fact *= i;
+            fact *= double(i);
             result += (xn / fact);
         }
         return result;

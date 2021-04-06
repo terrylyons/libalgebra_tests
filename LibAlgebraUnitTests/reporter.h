@@ -6,7 +6,7 @@
 #define LIBALGEBRAUNITTESTS_REPORTER_H
 #include <iostream>
 
-#include <UnitTest++/UnitTest++.h>
+#include <C:\Users\tlyons\source\vcpkg\installed\x64-windows\include\UnitTest++/UnitTest++.h>
 
 class reporter : public UnitTest::TestReporter
 {
