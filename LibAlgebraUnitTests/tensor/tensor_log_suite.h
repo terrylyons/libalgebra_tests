@@ -34,7 +34,7 @@
     TEST_FIXTURE(fixture, tensor_log_2_keys) {
         TEST_DETAILS();
 
-        KEY key1(1UL), key2(2UL);
+        KEY key1(KEY::LET(1UL)), key2(KEY::LET(2UL));
         TENSOR arg;
         arg.add_scal_prod(key1, S(0.647183));
         arg.add_scal_prod(key2, S(0.368154));
@@ -50,7 +50,7 @@
     TEST_FIXTURE(fixture, tensor_log_2_keys_and_unit) {
         TEST_DETAILS();
 
-        KEY key1(1UL), key2(2UL), kunit;
+        KEY key1(KEY::LET(1UL)), key2(KEY::LET(2UL)), kunit;
         TENSOR arg;
         arg.add_scal_prod(kunit, S(1));
         arg.add_scal_prod(key1, S(0.647183));
@@ -68,8 +68,8 @@
         TEST_DETAILS();
 
         KEY key;
-        key.push_back(1UL);
-        key.push_back(2UL);
+        key.push_back(KEY::LET(1UL));
+        key.push_back(KEY::LET(2UL));
 
         TENSOR arg;
         arg.add_scal_prod(key, S(0.212346));
@@ -86,8 +86,8 @@
         TEST_DETAILS();
 
         KEY key, kunit;
-        key.push_back(1UL);
-        key.push_back(2UL);
+        key.push_back(KEY::LET(1UL));
+        key.push_back(KEY::LET(2UL));
 
         TENSOR arg;
         arg.add_scal_prod(kunit, S(1));
@@ -105,10 +105,10 @@
         TEST_DETAILS();
 
         KEY key1, key2;
-        key1.push_back(1UL);
-        key1.push_back(2UL);
-        key2.push_back(3UL);
-        key2.push_back(4UL);
+        key1.push_back(KEY::LET(1UL));
+        key1.push_back(KEY::LET(2UL));
+        key2.push_back(KEY::LET(3UL));
+        key2.push_back(KEY::LET(4UL));
 
         TENSOR arg;
         arg.add_scal_prod(key1, S(0.898525));
@@ -127,10 +127,10 @@
         TEST_DETAILS();
 
         KEY key1, key2, kunit;
-        key1.push_back(1UL);
-        key1.push_back(2UL);
-        key2.push_back(3UL);
-        key2.push_back(4UL);
+        key1.push_back(KEY::LET(1UL));
+        key1.push_back(KEY::LET(2UL));
+        key2.push_back(KEY::LET(3UL));
+        key2.push_back(KEY::LET(4UL));
 
         TENSOR arg;
         arg.add_scal_prod(kunit, S(1));

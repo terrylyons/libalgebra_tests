@@ -2,7 +2,6 @@
 // Created by sam on 12/02/2021.
 //
 
-
 #include <UnitTest++/UnitTest++.h>
 
 #include <libalgebra/libalgebra.h>
@@ -15,8 +14,7 @@ using alg::DEG;
 
 
 SUITE(dense_algebra) {
-#define ALGEBRA_TESTS_VECT_TYPE \
-    alg::vectors::dense_vector
+#define ALGEBRA_TESTS_VECT_TYPE alg::vectors::dense_vector
 
 #include "simple_algebra_basis.h"
 #include "framework_fixture.h"

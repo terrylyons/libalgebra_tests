@@ -1,7 +1,7 @@
 TEST_FIXTURE(fixture, tensor_log_exp_roundtrip_letter) {
 TEST_DETAILS();
 
-KEY key(1UL);
+KEY key(KEY::LET(1UL));
 
 TENSOR arg(key);
 
@@ -13,7 +13,7 @@ CHECK_VEC_CLOSE(arg, result, expected_error);
 TEST_FIXTURE(fixture, tensor_log_exp_roundtrip_2_letter) {
 TEST_DETAILS();
 
-KEY key1(1UL), key2(2UL);
+KEY key1(KEY::LET(1UL)), key2(KEY::LET(2UL));
 
 TENSOR arg;
 arg.add_scal_prod(key1, S(0.627431));
@@ -27,8 +27,8 @@ CHECK_VEC_CLOSE(arg, result, expected_error);
 TEST_FIXTURE(fixture, tensor_log_exp_roundtrip_degree_2_key) {
 TEST_DETAILS();
 
-KEY key(1UL);
-key.push_back(2UL);
+KEY key(KEY::LET(1UL));
+key.push_back(KEY::LET(2UL));
 
 TENSOR arg;
 arg.add_scal_prod(key, S(0.627431));
@@ -41,8 +41,8 @@ CHECK_VEC_CLOSE(arg, result, expected_error);
 TEST_FIXTURE(fixture, tensor_log_exp_roundtrip_deg_1_and_2_keys) {
 TEST_DETAILS();
 
-KEY key1(1UL), key2(2UL);
-key2.push_back(3UL);
+KEY key1(KEY::LET(1UL)), key2(KEY::LET(2UL));
+key2.push_back(KEY::LET(3UL));
 
 TENSOR arg;
 arg.add_scal_prod(key1, S(0.724582));
@@ -56,9 +56,9 @@ CHECK_VEC_CLOSE(arg, result, expected_error);
 TEST_FIXTURE(fixture, tensor_log_exp_roundtrip_degree_2_2_keys) {
 TEST_DETAILS();
 
-KEY key1(1UL), key2(3UL);
-key1.push_back(2UL);
-key2.push_back(4UL);
+KEY key1(KEY::LET(1UL)), key2(KEY::LET(3UL));
+key1.push_back(KEY::LET(2UL));
+key2.push_back(KEY::LET(4UL));
 
 TENSOR arg;
 arg.add_scal_prod(key1, S(0.627431));
@@ -73,7 +73,7 @@ CHECK_VEC_CLOSE(arg, result, expected_error);
 TEST_FIXTURE(fixture, tensor_exp_log_roundtrip_letter) {
 TEST_DETAILS();
 
-KEY key(1UL), kunit;
+KEY key(KEY::LET(1UL)), kunit;
 
 TENSOR arg(key), tunit(kunit);
 
@@ -85,7 +85,7 @@ CHECK_VEC_CLOSE(arg + tunit, result, expected_error);
 TEST_FIXTURE(fixture, tensor_exp_log_roundtrip_2_letter) {
 TEST_DETAILS();
 
-KEY key1(1UL), key2(2UL), kunit;
+KEY key1(KEY::LET(1UL)), key2(KEY::LET(2UL)), kunit;
 
 TENSOR arg, tunit(kunit);
 arg.add_scal_prod(key1, S(0.627431));
@@ -99,8 +99,8 @@ CHECK_VEC_CLOSE(arg + tunit, result, expected_error);
 TEST_FIXTURE(fixture, tensor_exp_log_roundtrip_degree_2_key) {
 TEST_DETAILS();
 
-KEY key(1UL), kunit;
-key.push_back(2UL);
+KEY key(KEY::LET(1UL)), kunit;
+key.push_back(KEY::LET(2UL));
 
 TENSOR arg, tunit(kunit);
 arg.add_scal_prod(key, S(0.627431));
@@ -113,8 +113,8 @@ CHECK_VEC_CLOSE(arg + tunit, result, expected_error);
 TEST_FIXTURE(fixture, tensor_exp_log_roundtrip_deg_1_and_2_keys) {
 TEST_DETAILS();
 
-KEY key1(1UL), key2(2UL), kunit;
-key2.push_back(3UL);
+KEY key1(KEY::LET(1UL)), key2(KEY::LET(2UL)), kunit;
+key2.push_back(KEY::LET(3UL));
 
 TENSOR arg, tunit(kunit);
 arg.add_scal_prod(key1, S(0.724582));
@@ -128,9 +128,9 @@ CHECK_VEC_CLOSE(arg + tunit, result, expected_error);
 TEST_FIXTURE(fixture, tensor_exp_log_roundtrip_degree_2_2_keys) {
 TEST_DETAILS();
 
-KEY key1(1UL), key2(3UL), kunit;
-key1.push_back(2UL);
-key2.push_back(4UL);
+KEY key1(KEY::LET(1UL)), key2(KEY::LET(3UL)), kunit;
+key1.push_back(KEY::LET(2UL));
+key2.push_back(KEY::LET(4UL));
 
 
 TENSOR arg, tunit(kunit);

@@ -60,9 +60,9 @@ SUITE(square_free) {
     TEST(test_square_free_ ## NUMBER) {                                     \
         TEST_DETAILS();                                                     \
         typedef square_free<divisor_calc<NUMBER> > SF;                       \
-        CHECK_EQUAL(EXPECTED, SF::ans);                                   \
+        CHECK_EQUAL(EXPECTED, (bool)SF::ans);                                   \
     }
-
+// there is a potential for error here unless square free returns bool does true == 3 ? No if true converts to an integer!
     TEST_SQUARE_FREE(2, true);
     TEST_SQUARE_FREE(3, true);
     TEST_SQUARE_FREE(4, false);

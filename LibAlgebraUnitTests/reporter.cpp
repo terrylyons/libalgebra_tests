@@ -24,7 +24,7 @@ void reporter::ReportFailure(const UnitTest::TestDetails &test, const char *fail
     fprintf(stderr, errorFormat, test.suiteName, test.lineNumber, 1, test.testName, failure);
 #else
     char const* const errorFormat = "%s(%d): error: Failure in %s: %s\n";
-      fprintf(stderr, errorFormat, details.filename, details.lineNumber, details.testName, failure);
+      fprintf(stderr, errorFormat, test.filename, test.lineNumber, test.testName, failure);
 #endif
 }
 

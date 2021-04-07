@@ -49,7 +49,9 @@ class simple_algebra_basis : public SimpleIntegerBasis<Dimension, typename Field
 {
 #ifndef LIBALGEBRA_ALGEBRA_H
     typedef alg::algebra<simple_algebra_basis, Field,
-    ALGEBRA_TESTS_VECT_TYPE<simple_algebra_basis, Field> > ALG;
+         alg::vectors::dense_vector<simple_algebra_basis, Field> > ALG;
+         //alg::vectors::sparse_vector<simple_algebra_basis, Field> > ALG;
+        //ALGEBRA_TESTS_VECT_TYPE < simple_algebra_basis, Field> > ALG;
 #endif
 public:
 

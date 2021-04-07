@@ -34,7 +34,7 @@ struct fixture
         T tone(S(1));
 
         for (size_t i=Depth; i>=1; --i) {
-            result *= (x / Q(i));
+            result *= (x / Q(double(i)));
             result += tone;
         }
         return result;
@@ -56,9 +56,9 @@ struct fixture
         for (unsigned i = Depth; i >= 1; --i) {
 
             if (i % 2 == 0) {
-                result -= (tunit / Q(i));
+                result -= (tunit / Q(double(i)));
             } else {
-                result += (tunit / Q(i));
+                result += (tunit / Q(double(i)));
             }
             result *= xx;
         }
