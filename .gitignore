@@ -350,6 +350,8 @@ build/CMakeCache.txt
 build/compile_commands.json
 build/Makefile
 
+*/out/
+
 *.raw
 
 .vscode
