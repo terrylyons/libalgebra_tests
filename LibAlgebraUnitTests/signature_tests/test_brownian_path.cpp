@@ -38,14 +38,14 @@ namespace {
         Integer integral_part = static_cast<Integer>(integ);
         Integer scaled_fract = static_cast<Integer>(round(fract * static_cast<double>(prec)));
 
-        Integer gcd1 = boost::math::gcd(scaled_fract, prec);
+        Integer gcd1 = boost::integer::gcd(scaled_fract, prec);
         assert (gcd1 != 0);
 
         Integer fract_part_num = scaled_fract / gcd1;
         Integer fract_part_den = prec / gcd1;
 
         Integer tmp = fract_part_den * integral_part + fract_part_num;
-        Integer gcd2 = boost::math::gcd(tmp, fract_part_den);
+        Integer gcd2 = boost::integer::gcd(tmp, fract_part_den);
         assert (gcd2 != 0);
 
         return generic_coefficient<Integer>(tmp / gcd2, fract_part_den / gcd2);
