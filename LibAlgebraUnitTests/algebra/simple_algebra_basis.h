@@ -47,16 +47,17 @@ struct pointwise_multiplication
 template <DEG Dimension, typename Field>
 class simple_algebra_basis : public SimpleIntegerBasis<Dimension, typename Field::Q>
 {
-#ifndef LIBALGEBRA_ALGEBRA_H
-    typedef alg::algebra<simple_algebra_basis, Field,
-         //alg::vectors::dense_vector<simple_algebra_basis, Field> > ALG;
-         //alg::vectors::sparse_vector<simple_algebra_basis, Field> > ALG;
-        ALGEBRA_TESTS_VECT_TYPE < simple_algebra_basis, Field> > ALG;
-#endif
+
 public:
 
     typedef typename Field::Q RATIONAL;
     typedef unsigned KEY;
+
+
+    typedef alg::algebra<simple_algebra_basis, Field,
+            //alg::vectors::dense_vector<simple_algebra_basis, Field> > ALG;
+            //alg::vectors::sparse_vector<simple_algebra_basis, Field> > ALG;
+            ALGEBRA_TESTS_VECT_TYPE < simple_algebra_basis, Field> > ALG;
 
     static const DEG dimension = Dimension;
     static const DEG MAX_DEGREE = 0;
