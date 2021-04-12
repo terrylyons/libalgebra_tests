@@ -7,13 +7,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(LibAlgebraUnitTests VERSION 1.0)
 #set(CMAKE_CXX_FLAGS "-g -p -pg -fno-omit-frame-pointer -Wall ${CMAKE_CXX_FLAGS}")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj")
 #set(CMAKE_CXX_FLAGS_RELEASE  "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
 #set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -funroll-loops")
 
 if(WIN32)
 ## better remove this and add it to the command line as machine specific
 #list(APPEND CMAKE_MODULE_PATH "c:/dev/vcpkg/scripts/buildsystems/")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj")
 else()
 endif()
 
@@ -71,7 +71,7 @@ add_executable(test ${SOURCES}
         ${SIGNATURE_TESTS}
         LibAlgebraUnitTests/reporter.cpp LibAlgebraUnitTests/reporter.h)
 
-target_include_directories(test PUBLIC "${PROJECT_BINARY_DIR}")
+target_include_directories(test PRIVATE "${PROJECT_BINARY_DIR}")
 target_link_libraries(test PRIVATE UnitTest++ "${Bignum_LIBRARY}" ${Boost_LIBRARIES})
 target_link_libraries(test PUBLIC OpenMP::OpenMP_CXX)
 
