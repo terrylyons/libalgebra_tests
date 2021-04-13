@@ -96,6 +96,7 @@ SUITE(hall_basis) {
     TEST(test_key_of_letter) {
         TEST_DETAILS();
         TestBasis basis;
+        basis.growup(1);
 
         for (LET i=1; i<=test_alphabet_size; ++i) {
             CHECK_EQUAL(KEY(i), basis.keyofletter(i));
@@ -106,6 +107,7 @@ SUITE(hall_basis) {
     TEST(test_lparent_of_key_base_letters) {
         TEST_DETAILS();
         TestBasis basis;
+        basis.growup(1);
 
         for (LET i=1; i<=test_alphabet_size; ++i) {
             CHECK_EQUAL(0, basis.lparent(i));
@@ -116,6 +118,7 @@ SUITE(hall_basis) {
     TEST(test_rparent_of_key_base_letters) {
         TEST_DETAILS();
         TestBasis basis;
+        basis.growup(1);
 
         for (LET i=1; i<=test_alphabet_size; ++i) {
             CHECK_EQUAL(i, basis.rparent(i));
@@ -126,6 +129,7 @@ SUITE(hall_basis) {
     TEST(test_lparent_of_key_higher_key) {
         TEST_DETAILS();
         TestBasis basis;
+        basis.growup(2);
 
         KEY key = test_alphabet_size + 1;
         CHECK_EQUAL(1, basis.lparent(key));
@@ -135,6 +139,7 @@ SUITE(hall_basis) {
     TEST(test_rparent_of_key_higher_key) {
         TEST_DETAILS();
         TestBasis basis;
+        basis.growup(2);
 
         KEY key = test_alphabet_size + 1;
         CHECK_EQUAL(2, basis.rparent(key));
@@ -143,6 +148,7 @@ SUITE(hall_basis) {
     TEST(test_is_letter_for_letters) {
         TEST_DETAILS();
         TestBasis basis;
+        basis.growup(2);
 
         for (LET i=1; i<=test_alphabet_size; ++i) {
             CHECK(basis.letter(i));
@@ -152,6 +158,7 @@ SUITE(hall_basis) {
     TEST(test_is_letter_non_letter) {
         TEST_DETAILS();
         TestBasis basis;
+        basis.growup(2);
 
         KEY key = test_alphabet_size + 1;
         CHECK(!basis.letter(key));
