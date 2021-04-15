@@ -19,6 +19,8 @@ struct generic_coefficient
     Integer numerator;
     Integer denominator;
 
+    typedef alg_types<2, 2, Rational>::SCA rational_t;
+
     generic_coefficient() : numerator(0), denominator(1)
     {}
 
@@ -44,10 +46,9 @@ struct generic_coefficient
         return double(numerator) / denominator;
     }
 
-    template <typename Rational>
-    explicit operator Rational() const
+    explicit operator rational_t() const
     {
-        return Rational(numerator) / Rational(denominator);
+        return rational_t(numerator) / rational_t(denominator);
     }
 
 

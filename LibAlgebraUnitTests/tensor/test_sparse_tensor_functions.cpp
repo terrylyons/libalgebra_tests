@@ -110,9 +110,10 @@ SUITE(sparse_tensor_functions_double) {
 
 SUITE(sparse_tensor_functions_rational) {
 
+    typedef typename alg_types<2, 2, Rational>::SCA Rat;
     struct rational_field {
-        typedef mpq_class S;
-        typedef mpq_class Q;
+        typedef Rat S;
+        typedef Rat Q;
     };
 
     typedef fixture<rational_field, 5, 5> fixture;

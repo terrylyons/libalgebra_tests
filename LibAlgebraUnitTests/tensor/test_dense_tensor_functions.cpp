@@ -109,9 +109,11 @@ SUITE(dense_tensor_functions_double) {
 
 SUITE(dense_tensor_functions_rational) {
 
+    typedef typename alg_types<2, 2, Rational>::SCA Scalar;
+
     struct rational_field {
-        typedef mpq_class S;
-        typedef mpq_class Q;
+        typedef Scalar S;
+        typedef Scalar Q;
     };
 
     typedef fixture<rational_field, 5, 5> fixture;
