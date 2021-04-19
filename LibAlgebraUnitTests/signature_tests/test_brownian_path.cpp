@@ -77,7 +77,7 @@ generic_path<Width> make_brownian_path(unsigned length=Width)
     std::vector<generic_lie_increment<Width, int32_t> > tmp;
     tmp.reserve(length);
 
-    mt19937 rng(12345);
+    mt19937 rng;
     double stdev = 1.0 / sqrt(static_cast<double>(length));
 
     for (std::size_t i=0; i<length; ++i) {
