@@ -6,16 +6,17 @@
 #define LIBALGEBRAUNITTESTS_GENERIC_LIE_INCREMENT_H
 
 #include <vector>
+#include <boost/array.hpp>
 
 #include "generic_coefficient.h"
 
 template <unsigned Width, typename Integer>
 class generic_lie_increment
 {
-    std::vector<generic_coefficient<Integer> > m_data;
+    boost::array<generic_coefficient<Integer>, Width> m_data;
 public:
 
-    generic_lie_increment() : m_data(Width)
+    generic_lie_increment() : m_data(0)
     {
     }
 
@@ -25,10 +26,11 @@ public:
 
     explicit
     generic_lie_increment(std::vector<generic_coefficient<Integer> > incr)
-        : m_data(incr)
+        : m_data()
     {
-        if (m_data.size() > Width) {
-            m_data.resize(Width);
+        assert(incr.size() == Width);
+        for (size_t i=0; i<Width; ++i) {
+            m_data[i] = incr[i];
         }
     }
 

@@ -34,6 +34,7 @@ struct generic_coefficient
     {
         numerator = other.numerator;
         denominator = other.denominator;
+        return *this;
     }
 
     explicit operator float() const

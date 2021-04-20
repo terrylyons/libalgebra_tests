@@ -7,6 +7,8 @@
 #include <vector>
 #include <exception>
 #include <map>
+#include <sstream>
+#include <utility>
 
 #pragma warning(suppress:4616) 
 #include <boost/integer/common_factor_rt.hpp> // deprecated
@@ -20,6 +22,7 @@
 #include "../time_and_details.h"
 #include "../rng.h"
 #include "../helpers.h"
+#include "../memfile.h"
 
 #include "generic_coefficient.h"
 #include "generic_lie_increment.h"
@@ -71,19 +74,43 @@ make_brownian_increment(double stdev, Rng rng)
 
 
 template <unsigned Width>
-generic_path<Width> make_brownian_path(unsigned length=Width)
+generic_path<Width> make_brownian_path(size_t length=Width)
 {
+    typedef generic_lie_increment<Width, int32_t> value_type;
     assert (length > 0);
-    std::vector<generic_lie_increment<Width, int32_t> > tmp;
+    std::vector<value_type> tmp;
     tmp.reserve(length);
+    std::stringstream fns;
+    fns << "../Brownian_path_" << Width << '_' << length << ".raw";
 
-    mt19937 rng;
-    double stdev = 1.0 / sqrt(static_cast<double>(length));
+    size_t num_bytes = length * sizeof(value_type);
+    memfile saved(fns.str(), num_bytes);
 
-    for (std::size_t i=0; i<length; ++i) {
-        generic_lie_increment<Width, int32_t> incr (make_brownian_increment<Width, int32_t>(stdev, rng));
-        tmp.push_back(incr);
+    if (saved.read_only()) {
+        size_t num_elts_file = saved.size() / sizeof(value_type);
+
+        assert(num_elts_file == length);
+
+        const value_type* start = reinterpret_cast<const value_type*>(saved.begin());
+        const value_type* end = start + std::min(length, num_elts_file);
+
+        tmp.insert(tmp.begin(), start, end);
+
+    } else {
+        mt19937 rng;
+        double stdev = 1.0 / sqrt(static_cast<double>(length));
+
+        for (std::size_t i=0; i<length; ++i) {
+            value_type incr (make_brownian_increment<Width, int32_t>(stdev, rng));
+            tmp.push_back(incr);
+        }
+
+        value_type* file_begin = reinterpret_cast<value_type*>(saved.begin());
+        std::copy(tmp.begin(), tmp.end(), file_begin);
     }
+
+    assert (tmp.size() == length);
+
 
     return generic_path<Width>(tmp);
 }
@@ -361,7 +388,7 @@ struct GenericFixture
 SUITE(brownian_path_5_5_10_tests) {
 
     static const float expected_float_error = 4e-5f;
-    static const double expected_double_error = 2e-13;
+    static const double expected_double_error = 2e-12;
 
     typedef GenericFixture<5U, 5U, 10U> Fixture;
 
