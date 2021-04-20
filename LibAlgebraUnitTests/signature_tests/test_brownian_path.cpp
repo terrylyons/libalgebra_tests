@@ -98,10 +98,6 @@ struct GenericFixture
 
     generic_path<Width> path;
 
-
-    float expected_float_error;
-    double expected_double_error;
-
     typedef typename alg_types<2, 2, Rational>::SCA Rat;
     struct rational_field
     {
@@ -346,9 +342,7 @@ struct GenericFixture
         typedef alg::maps<S, Q, width, depth, TENSOR, LIE> MAPS;
     };
 
-    GenericFixture() : path(make_brownian_path<Width>(Length)),
-                       expected_double_error(2.0e-12),
-                       expected_float_error(7.0e-4f)
+    GenericFixture() : path(make_brownian_path<Width>(Length))
     {}
 
     size_t sig_support(unsigned increments=length)
@@ -366,6 +360,9 @@ struct GenericFixture
 
 SUITE(brownian_path_5_5_10_tests) {
 
+    static const float expected_float_error = 4e-5f;
+    static const double expected_double_error = 2e-13;
+
     typedef GenericFixture<5U, 5U, 10U> Fixture;
 
 #include "double_path_suite.ins"
@@ -379,7 +376,10 @@ SUITE(brownian_path_5_5_10_tests) {
 
 SUITE(brownian_path_5_5_50_tests) {
 
-typedef GenericFixture<5U, 5U, 50U> Fixture;
+    static const float expected_float_error = 7e-3f;
+    static const double expected_double_error = 2e-11;
+
+    typedef GenericFixture<5U, 5U, 50U> Fixture;
 
 #include "double_path_suite.ins"
 #include "float_path_suite.ins"
@@ -391,6 +391,9 @@ typedef GenericFixture<5U, 5U, 50U> Fixture;
 
 
 SUITE(brownian_path_10_2_10_tests) {
+
+static const float expected_float_error = 2e-5f;
+static const double expected_double_error = 2e-13;
 
 typedef GenericFixture<10, 2, 10> Fixture;
 
