@@ -10,10 +10,12 @@ project(LibAlgebraUnitTests VERSION 1.0)
 #set(CMAKE_CXX_FLAGS_RELEASE  "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
 #set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -funroll-loops")
 
+
 if(WIN32)
 ## better remove this and add it to the command line as machine specific
-#list(APPEND CMAKE_MODULE_PATH "c:/dev/vcpkg/scripts/buildsystems/")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj")
+#list(APPEND CMAKE_MODULE_PATH  "c:/dev/vcpkg/scripts/buildsystems/")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /fp:strict")
 else()
 endif()
 
@@ -21,7 +23,7 @@ include(vcpkg OPTIONAL)
 
 find_package(UnitTest++ CONFIG REQUIRED)
 if((NOT DEFINED UnitTest++_INCLUDE_DIRS) AND (DEFINED UTPP_INCLUDE_DIRS))
-set(UnitTest++_INCLUDE_DIRS "${UTPP_INCLUDE_DIRS}")
+set(UnitTest++_INCLUDE_DIRS  "${UTPP_INCLUDE_DIRS}")
 ## have corrected the UnitTest++Config.cmake file to point UnitTest++_INCLUDE_DIRS to the correct path for the headers
 endif()
 
@@ -61,6 +63,10 @@ file(GLOB VECTOR_TESTS      "LibAlgebraUnitTests/vector/test_*.cpp")
 file(GLOB UTIL_TESTS        "LibAlgebraUnitTests/utils/test_*.cpp")
 file(GLOB ALGEBRA_TESTS     "LibAlgebraUnitTests/algebra/test_*.cpp")
 file(GLOB SIGNATURE_TESTS   "LibAlgebraUnitTests/signature_tests/test_*.cpp")
+
+file(GLOB BROWNIAN_PATHS "Brownian_path_*.raw")
+file(COPY ${BROWNIAN_PATHS} DESTINATION ${CMAKE_BINARY_DIR})
+
 
 add_executable(test ${SOURCES}
         ${TENSOR_TESTS}

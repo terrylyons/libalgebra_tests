@@ -81,7 +81,7 @@ generic_path<Width> make_brownian_path(size_t length=Width)
     std::vector<value_type> tmp;
     tmp.reserve(length);
     std::stringstream fns;
-    fns << "../Brownian_path_" << Width << '_' << length << ".raw";
+    fns << "Brownian_path_" << Width << '_' << length << ".raw";
 
     size_t num_bytes = length * sizeof(value_type);
     memfile saved(fns.str(), num_bytes);
