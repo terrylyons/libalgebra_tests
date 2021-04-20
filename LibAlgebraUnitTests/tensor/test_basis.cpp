@@ -22,7 +22,7 @@ struct BasisTool
     KEY make_key(const LET* letters, std::size_t N)
     {
         KEY k;
-        for (int i=0; i<N; ++i)
+        for (size_t i=0; i<N; ++i)
             k.push_back(letters[i]);
         return k;
     }
