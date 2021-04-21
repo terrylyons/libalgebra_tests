@@ -50,11 +50,18 @@ namespace {
         Integer tmp = fract_part_den * integral_part + fract_part_num;
         Integer gcd2 = boost::integer::gcd(tmp, fract_part_den);
         assert (gcd2 != 0);
-
         return generic_coefficient<Integer>(tmp / gcd2, fract_part_den / gcd2);
     }
 
 }
+
+
+
+
+
+
+
+
 
 template <unsigned Width, typename Integer, typename Rng>
 inline generic_lie_increment<Width, Integer>
@@ -78,26 +85,11 @@ generic_path<Width> make_brownian_path(size_t length=Width)
 {
     typedef generic_lie_increment<Width, int32_t> value_type;
     assert (length > 0);
-    std::vector<value_type> tmp;
-    tmp.reserve(length);
-    std::stringstream fns;
-    fns << "Brownian_path_" << Width << '_' << length << ".raw";
+    static std::vector<value_type> tmp;
+    if (tmp.empty()) {
+        tmp.reserve(length);
 
-    size_t num_bytes = length * sizeof(value_type);
-    memfile saved(fns.str(), num_bytes);
-
-    if (saved.read_only()) {
-        size_t num_elts_file = saved.size() / sizeof(value_type);
-
-        assert(num_elts_file == length);
-
-        const value_type* start = reinterpret_cast<const value_type*>(saved.begin());
-        const value_type* end = start + std::min(length, num_elts_file);
-
-        tmp.insert(tmp.begin(), start, end);
-
-    } else {
-        mt19937 rng;
+        mt19937 rng(12345);
         double stdev = 1.0 / sqrt(static_cast<double>(length));
 
         for (std::size_t i=0; i<length; ++i) {
@@ -105,8 +97,6 @@ generic_path<Width> make_brownian_path(size_t length=Width)
             tmp.push_back(incr);
         }
 
-        value_type* file_begin = reinterpret_cast<value_type*>(saved.begin());
-        std::copy(tmp.begin(), tmp.end(), file_begin);
     }
 
     assert (tmp.size() == length);
@@ -369,8 +359,10 @@ struct GenericFixture
         typedef alg::maps<S, Q, width, depth, TENSOR, LIE> MAPS;
     };
 
-    GenericFixture() : path(make_brownian_path<Width>(Length))
-    {}
+    GenericFixture()
+    {
+
+    }
 
     size_t sig_support(unsigned increments=length)
     {
@@ -390,7 +382,43 @@ SUITE(brownian_path_5_5_10_tests) {
     static const float expected_float_error = 4e-5f;
     static const double expected_double_error = 2e-12;
 
-    typedef GenericFixture<5U, 5U, 10U> Fixture;
+    struct Fixture : GenericFixture<5, 5, 10>
+    {
+        typedef GenericFixture<5, 5, 10> base;
+
+        using base::rational_field;
+        using base::rational_sparse_framework;
+        using base::rational_dense_framework;
+        using base::rational_hybrid_framework;
+
+        using base::double_field;
+        using base::double_sparse_framework;
+        using base::double_dense_framework;
+        using base::double_hybrid_framework;
+
+        using base::float_field;
+        using base::float_sparse_framework;
+        using base::float_dense_framework;
+        using base::float_hybrid_framework;
+
+        Fixture()
+        {
+            int32_t vals[][5][2] = {
+{{   81,  200 }, {   39,  125 }, {  -43, 1000 }, {  -71,  500 }, {   76,  125 }},
+{{    3,  250 }, {   61,  125 }, {  -71,  250 }, {  -29,  100 }, {   13,  500 }},
+{{ -313,  500 }, {  187,  500 }, {   73,  250 }, {  -43,  250 }, {  127, 1000 }},
+{{ -379,  500 }, {   17,  200 }, {  -43,  200 }, {   39,  200 }, {   17,  125 }},
+{{  459, 1000 }, { -207,  500 }, { -117,  200 }, { -123,  250 }, { -149, 1000 }},
+{{ -297,  500 }, {  -27,   50 }, {    3,   50 }, {  -69,  200 }, {  -11,   40 }},
+{{ -291, 1000 }, {   63, 1000 }, {   -3,   50 }, { -203, 1000 }, {   71,  200 }},
+{{   21,  500 }, {   99,  500 }, {   11, 1000 }, {   67, 1000 }, {   31,  500 }},
+{{   39, 1000 }, {    2,  125 }, {  -81,  250 }, {   -7,  250 }, { -227,  500 }},
+{{   19,   40 }, {  -53,  250 }, {   -1,  100 }, {  179, 1000 }, {   41,  200 }}
+            };
+
+            path = generic_path<5>(reinterpret_cast<int32_t *>(vals), 10);
+        }
+    };
 
 #include "double_path_suite.ins"
 #include "float_path_suite.ins"
@@ -406,7 +434,84 @@ SUITE(brownian_path_5_5_50_tests) {
     static const float expected_float_error = 7e-3f;
     static const double expected_double_error = 2e-11;
 
-    typedef GenericFixture<5U, 5U, 50U> Fixture;
+    struct Fixture : GenericFixture<5, 5, 50>
+    {
+        typedef GenericFixture<5, 5, 50> base;
+
+        using base::rational_field;
+        using base::rational_sparse_framework;
+        using base::rational_dense_framework;
+        using base::rational_hybrid_framework;
+
+        using base::double_field;
+        using base::double_sparse_framework;
+        using base::double_dense_framework;
+        using base::double_hybrid_framework;
+
+        using base::float_field;
+        using base::float_sparse_framework;
+        using base::float_dense_framework;
+        using base::float_hybrid_framework;
+
+        Fixture()
+        {
+            int32_t vals[][5][2] = {
+{{  -43,  500 }, {   67,  500 }, { -303, 1000 }, {   43,  500 }, {  -33, 1000 }},
+{{   81,  500 }, {   -3,  250 }, {    2,  125 }, { -133, 1000 }, {  149,  500 }},
+{{  -93, 1000 }, {    7,  200 }, {  237, 1000 }, {   21,  200 }, {  137, 1000 }},
+{{ -117, 1000 }, {  109, 1000 }, {   11, 1000 }, {   47, 1000 }, {    0,    1 }},
+{{ -113, 1000 }, {  -59, 1000 }, {  -51, 1000 }, {    3,   50 }, { -153, 1000 }},
+{{   59, 1000 }, {   -9,   50 }, {  -29,  500 }, {   13,  250 }, { -111, 1000 }},
+{{   29,  250 }, {  -19,  500 }, { -221, 1000 }, {  -89,  500 }, {  -51,  500 }},
+{{  -53,  250 }, {   77, 1000 }, {   27, 1000 }, {   -7,  200 }, {  -83,  500 }},
+{{  -47,  500 }, {  -41,  250 }, { -177, 1000 }, {   67, 1000 }, {   81, 1000 }},
+{{ -173, 1000 }, {   -1,    5 }, {   -1,   50 }, {  -43,  250 }, {  -21,  200 }},
+{{  131, 1000 }, {   39,  500 }, {  123,  500 }, {   27,  200 }, {  -23,  100 }},
+{{   69,  500 }, {   -7,  200 }, {   11,  125 }, { -261, 1000 }, {   -3, 1000 }},
+{{   87, 1000 }, {   -4,  125 }, {  211, 1000 }, {  -11,  125 }, {   79, 1000 }},
+{{  -41,  500 }, {   -1,   20 }, {   23,  500 }, {    9,  100 }, {    8,  125 }},
+{{  -87,  500 }, {   71,  500 }, {    1,   10 }, {  -13,  200 }, {   59, 1000 }},
+{{   -2,   25 }, { -113, 1000 }, {  -37,  250 }, {  -31,  500 }, {   77,  200 }},
+{{   29,  500 }, {   91, 1000 }, { -101, 1000 }, {    9,  125 }, {  -89, 1000 }},
+{{   23,  250 }, { -101, 1000 }, {   51,  500 }, {   33,  200 }, {  277, 1000 }},
+{{  -17,  250 }, {  -81, 1000 }, {   53, 1000 }, {   51,  500 }, {   87, 1000 }},
+{{  -27,  500 }, {  -13,  100 }, {  143,  500 }, {   27,  200 }, {   93,  500 }},
+{{  -41, 1000 }, {  -77,  250 }, {   61,  250 }, {    3,  100 }, {   67,  500 }},
+{{    4,  125 }, {   91, 1000 }, {   47, 1000 }, {   -6,  125 }, {  109,  500 }},
+{{   87, 1000 }, {  -13, 1000 }, {   13,  125 }, {  -47,  250 }, {  -57,  500 }},
+{{   -7, 1000 }, {  -71,  500 }, {   11,  250 }, {  -73, 1000 }, {   11,  500 }},
+{{   71, 1000 }, {  -11, 1000 }, {    6,  125 }, {   -3,  125 }, {   21,  200 }},
+{{  -11, 1000 }, {   39,  500 }, {   39, 1000 }, {    1,   50 }, {   29,  500 }},
+{{   12,  125 }, {  -79,  500 }, {   49,  500 }, {  -39, 1000 }, {  -11,  125 }},
+{{  -17,  200 }, { -169, 1000 }, {  153, 1000 }, {   -9,   50 }, {   21,  200 }},
+{{  -17, 1000 }, {   27,  100 }, {  127, 1000 }, {   53,  500 }, {  107, 1000 }},
+{{   39,  500 }, {    1,  250 }, {  -89,  500 }, {   67,  500 }, {   39, 1000 }},
+{{ -199,  500 }, {   63, 1000 }, {   19, 1000 }, {  151, 1000 }, {  -61,  200 }},
+{{    3,   40 }, {    9,   50 }, {  127, 1000 }, {  -79,  500 }, { -141, 1000 }},
+{{  -23,  250 }, {  -71, 1000 }, {   -8,  125 }, {  -97,  500 }, {  353, 1000 }},
+{{  -12,  125 }, { -101,  500 }, {   21, 1000 }, {   11,  100 }, { -193, 1000 }},
+{{    6,  125 }, { -151, 1000 }, {  -37,  250 }, {   -1,  250 }, {  157, 1000 }},
+{{   -7,  125 }, {    3,   25 }, {    3,   50 }, {  -29,  200 }, {  209, 1000 }},
+{{   13,   40 }, {  -21,  200 }, {   -1, 1000 }, {  103, 1000 }, {   -7,   50 }},
+{{ -211, 1000 }, {  -21,  100 }, {   73,  500 }, {    7,  500 }, {  -11,  125 }},
+{{  -47,  500 }, {    9,  125 }, {  401, 1000 }, {   91, 1000 }, {  101, 1000 }},
+{{   -3,  200 }, {   51,  500 }, { -123,  500 }, {    3,  100 }, {  -24,  125 }},
+{{    7,   50 }, {  -43, 1000 }, {   47,  200 }, {  167, 1000 }, {   63, 1000 }},
+{{  -27,  250 }, {   -3,   40 }, {  281, 1000 }, {   61,  250 }, {  -37,  250 }},
+{{  -31,  250 }, {   -1,   25 }, {  -59, 1000 }, {   31, 1000 }, {  129,  500 }},
+{{   39,  250 }, {   31,  500 }, { -181, 1000 }, {   39,  250 }, { -143, 1000 }},
+{{    0,    1 }, {   -9,  200 }, {    0,    1 }, {   53, 1000 }, {   43,  500 }},
+{{  -41, 1000 }, {    1, 1000 }, {  -57, 1000 }, { -163, 1000 }, {  -31,  200 }},
+{{   43,  250 }, {   -1,  200 }, {  -13,  200 }, {    3,  500 }, {  -33,  500 }},
+{{  -47, 1000 }, {   11,  200 }, {  -13,  200 }, {   11,  200 }, { -293, 1000 }},
+{{  -89, 1000 }, {   11,  125 }, {    1,   25 }, {  219, 1000 }, {  -37,  500 }},
+{{   -1,  100 }, {    3,  100 }, {   -7,  100 }, {  163, 1000 }, {   27, 1000 }}
+            };
+
+            path = generic_path<5>(reinterpret_cast<int32_t *>(vals), 50);
+        }
+
+    };
 
 #include "double_path_suite.ins"
 #include "float_path_suite.ins"
@@ -422,7 +527,47 @@ SUITE(brownian_path_10_2_10_tests) {
 static const float expected_float_error = 2e-5f;
 static const double expected_double_error = 2e-13;
 
-typedef GenericFixture<10, 2, 10> Fixture;
+//typedef GenericFixture<10, 2, 10> Fixture;
+
+struct Fixture : GenericFixture<10, 2, 10>
+{
+    typedef GenericFixture<10, 2, 10> base;
+
+    using base::rational_field;
+    using base::rational_sparse_framework;
+    using base::rational_dense_framework;
+    using base::rational_hybrid_framework;
+
+    using base::double_field;
+    using base::double_sparse_framework;
+    using base::double_dense_framework;
+    using base::double_hybrid_framework;
+
+    using base::float_field;
+    using base::float_sparse_framework;
+    using base::float_dense_framework;
+    using base::float_hybrid_framework;
+
+        Fixture()
+        {
+            int32_t vals[][10][2] = {
+                {{ -269,  500 }, {   17, 1000 }, {  163,  200 }, {   53,  250 }, {  903, 1000 }, {  -63, 1000 }, {  561, 1000 }, { -323, 1000 }, { -117,  500 }, {   56,  125 }},
+{{  -17,  200 }, { -103, 1000 }, {  551, 1000 }, {  -11,   50 }, {  371, 1000 }, {  359, 1000 }, {  191,  500 }, { -121,  500 }, {   61,  500 }, {  -63,  500 }},
+{{  141,  250 }, { -103, 1000 }, {   32,  125 }, {  521, 1000 }, {   37,  250 }, {  271, 1000 }, {    1,  100 }, {   49,  125 }, { -187,  500 }, { -111,  500 }},
+{{ -451, 1000 }, { -413, 1000 }, { -453, 1000 }, { -283,  500 }, {   51,  500 }, {  -27,  100 }, { -451, 1000 }, {  131,  250 }, {  601, 1000 }, { -213,  500 }},
+{{   57, 1000 }, { -141,  500 }, { -137,  500 }, {   79,  250 }, {  171,  500 }, {    9,  500 }, {  209, 1000 }, {  107,  250 }, {   59,  250 }, {   13,   50 }},
+{{    2,    5 }, { -697, 1000 }, {  419, 1000 }, {    3,    5 }, {   -1,   40 }, {   21,  100 }, {   -9,  250 }, {  373, 1000 }, {  -23,  250 }, {   89,  250 }},
+{{   51,  250 }, {    2,   25 }, {    1,   20 }, {   -9,  500 }, {  -97,  250 }, {  223, 1000 }, { -269, 1000 }, {   39,  200 }, {  -31,  200 }, {  367, 1000 }},
+{{ -517, 1000 }, {  -47, 1000 }, {  -69,  500 }, {  -37,  500 }, { -289, 1000 }, {  -13,  200 }, {  -87, 1000 }, {   73,  200 }, {   63,  200 }, {  -21,   40 }},
+{{ -303,  500 }, { -201, 1000 }, {  179,  500 }, {  119,  250 }, { -257, 1000 }, { -123, 1000 }, {  -13, 1000 }, {   11,  250 }, {  -33,  500 }, {  -19,  250 }},
+{{  -49, 1000 }, {    9,  100 }, {   27,  500 }, {  279, 1000 }, {  -57,  125 }, {  409, 1000 }, {  -13,  200 }, {  -29, 1000 }, {   41,  200 }, {   43,  100 }}
+            };
+
+            path = generic_path<10>(reinterpret_cast<int32_t*>(vals), 10);
+        }
+
+    };
+
 
 #include "double_path_suite.ins"
 #include "float_path_suite.ins"
