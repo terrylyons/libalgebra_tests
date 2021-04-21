@@ -49,7 +49,7 @@ endif()
 message(STATUS ">>> OpenMP_CXX_FLAGS = ${OpenMP_CXX_FLAGS}")
 
 include_directories(libalgebra ${Boost_INCLUDE_DIRS} ${UnitTest++_INCLUDE_DIRS} ${OpenMP_CXX_INCLUDE_DIRS} )
-message(STATUS ">>> Boost_INCLUDE_DIRS = ${Boost_INCLUDE_DIRS}")
+message(STATUS  ">>> Boost_INCLUDE_DIRS = ${Boost_INCLUDE_DIRS}")
 message(STATUS ">>> UnitTest++_INCLUDE_DIRS = ${UnitTest++_INCLUDE_DIRS}")
 message(STATUS ">>> OpenMP_CXX_INCLUDE_DIRS = ${OpenMP_CXX_INCLUDE_DIRS}")
 message(STATUS ">>> Boost libraries: ${Boost_LIBRARIES}")
@@ -63,10 +63,6 @@ file(GLOB VECTOR_TESTS      "LibAlgebraUnitTests/vector/test_*.cpp")
 file(GLOB UTIL_TESTS        "LibAlgebraUnitTests/utils/test_*.cpp")
 file(GLOB ALGEBRA_TESTS     "LibAlgebraUnitTests/algebra/test_*.cpp")
 file(GLOB SIGNATURE_TESTS   "LibAlgebraUnitTests/signature_tests/test_*.cpp")
-
-file(GLOB BROWNIAN_PATHS "Brownian_path_*.raw")
-file(COPY ${BROWNIAN_PATHS} DESTINATION ${CMAKE_BINARY_DIR})
-
 
 add_executable(test ${SOURCES}
         ${TENSOR_TESTS}
