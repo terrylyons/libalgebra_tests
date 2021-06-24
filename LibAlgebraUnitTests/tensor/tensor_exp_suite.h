@@ -86,5 +86,54 @@
         CHECK_VEC_CLOSE(expected, result, expected_error);
     }
 
+#ifdef LIBALGEBRA_FMEXP_AVAILABLE
+    // Tests for fused multiply exponentiate
+
+
+    TEST_FIXTURE(fixture, fused_multiply_exp_zero_zero) {
+        TENSOR t1, t2, zero;
+
+        CHECK_EQUAL(zero, t1.fmexp(t2));
+    }
+
+
+    TEST_FIXTURE(fixture, fused_multiply_exp_one_zero) {
+        KEY kunit;
+        TENSOR t1(kunit), t2, expected(kunit);
+
+        CHECK_EQUAL(expected, t1.fmexp(t2));
+    }
+
+    TEST_FIXTURE(fixture, fused_multiply_exp_equal_vs_old_single_key) {
+        KEY kunit, k1(KEY::LET(1));
+        TENSOR t1(kunit), t2(k1), expected(exp(t2));
+
+        CHECK_EQUAL(expected, t1.fmexp(t2));
+    }
+
+    TEST_FIXTURE(fixture, fused_multiply_exp_equal_vs_old_two_keys) {
+        KEY kunit, k1(KEY::LET(1)), k2(KEY::LET(2));
+        TENSOR lhs(kunit), t1(k1), t2(k2), rhs(t1 + t2);
+
+        CHECK_EQUAL(exp(rhs), lhs.fmexp(rhs));
+    }
+
+    TEST_FIXTURE(fixture, fused_multiply_exp_1_key_2_keys) {
+        KEY klhs(KEY::LET(3)), k1(KEY::LET(1)), k2(KEY::LET(2));
+        TENSOR lhs(klhs), t1(k1), t2(k2), rhs(t1 + t2);
+
+        CHECK_EQUAL(lhs*exp(rhs), lhs.fmexp(rhs));
+    }
+
+    TEST_FIXTURE(fixture, fused_multiply_exp_1_key_2_keys_shared) {
+        KEY klhs(KEY::LET(1)), k1(KEY::LET(1)), k2(KEY::LET(2));
+        TENSOR lhs(klhs), t1(k1), t2(k2), rhs(t1 + t2);
+
+        CHECK_EQUAL(lhs*exp(rhs), lhs.fmexp(rhs));
+    }
+
+
+#endif
+
 
 
