@@ -5,6 +5,7 @@
 #include <UnitTest++/UnitTest++.h>
 
 #include <libalgebra/libalgebra.h>
+#include <libalgebra/coefficients/coefficients.h>
 
 #include "../time_and_details.h"
 
@@ -14,9 +15,10 @@ using alg::LET;
 template <typename S, typename R, DEG W, DEG D>
 struct BasisTool
 {
-    typedef alg::tensor_basis<S, W, D> TBASIS;
-    typedef alg::free_tensor_basis<S, R, W, D> FTBASIS;
-    typedef alg::shuffle_tensor_basis<S, R, W, D> STBASIS;
+    typedef alg::coefficients::coefficient_field<S, R> Coefficients;
+    typedef alg::tensor_basis<W, D> TBASIS;
+    typedef alg::free_tensor_basis<W, D> FTBASIS;
+    typedef alg::shuffle_tensor_basis<W, D> STBASIS;
     typedef typename TBASIS::KEY KEY;
 
     KEY make_key(const LET* letters, std::size_t N)

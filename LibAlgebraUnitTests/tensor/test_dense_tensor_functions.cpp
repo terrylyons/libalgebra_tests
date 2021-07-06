@@ -22,9 +22,9 @@ struct fixture
     typedef typename Coeff::S S;
     typedef typename Coeff::Q Q;
 
-    typedef alg::free_tensor_basis<S, Q, Width, Depth> TBASIS;
+    typedef alg::free_tensor_basis<Width, Depth> TBASIS;
     typedef alg::vectors::dense_vector<TBASIS, Coeff, std::vector<S> > VECT;
-    typedef alg::free_tensor<S, Q, Width, Depth, VECT> TENSOR;
+    typedef alg::free_tensor<Coeff, Width, Depth, VECT> TENSOR;
 
     typedef typename TBASIS::KEY KEY;
 
@@ -71,10 +71,7 @@ struct fixture
 
 SUITE(dense_tensor_functions_float) {
 
-    struct float_field {
-        typedef float S;
-        typedef float Q;
-    };
+    typedef alg::coefficients::coefficient_field<float> float_field;
 
     static const double expected_error = 3e-8f;
     typedef fixture<float_field, 5, 5> fixture;
@@ -90,10 +87,7 @@ SUITE(dense_tensor_functions_float) {
 
 SUITE(dense_tensor_functions_double) {
 
-    struct double_field {
-        typedef double S;
-        typedef double Q;
-    };
+    typedef alg::coefficients::coefficient_field<double> double_field;
 
     typedef fixture<double_field, 5, 5> fixture;
     static const double expected_error = 2e-15;
@@ -110,11 +104,7 @@ SUITE(dense_tensor_functions_double) {
 SUITE(dense_tensor_functions_rational) {
 
     typedef typename alg_types<2, 2, Rational>::SCA Scalar;
-
-    struct rational_field {
-        typedef Scalar S;
-        typedef Scalar Q;
-    };
+    typedef alg::coefficients::coefficient_field<Scalar> rational_field;
 
     typedef fixture<rational_field, 5, 5> fixture;
     static const double expected_error = 0.0;

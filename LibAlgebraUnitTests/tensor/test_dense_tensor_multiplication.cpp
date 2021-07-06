@@ -23,17 +23,11 @@ SUITE (dense_tensor_multiplication) {
         typedef typename ALG_TYPES::TENSOR::BASIS TBASIS;
         typedef typename TBASIS::KEY TKEY;
 
-        struct field
-        {
-            typedef typename ALG_TYPES::S S;
-            typedef typename ALG_TYPES::Q Q;
-        };
+        typedef ALG_TYPES::COEFF field;
 
         typedef alg::vectors::dense_vector<TBASIS, field> DENSE;
         typedef alg::algebra<TBASIS, field,
-#ifdef LIBALGEBRA_ALGEBRAS_H
-                alg::algebras::default_multiply<TBASIS>,
-#endif
+            alg::free_tensor_multiplication<field>,
         DENSE> TENSOR;
         typedef typename TENSOR::SCALAR SCALAR;
 

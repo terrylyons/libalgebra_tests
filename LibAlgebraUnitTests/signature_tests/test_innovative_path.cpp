@@ -97,33 +97,29 @@ struct GenericFixture
 
     typedef typename alg_types<2, 2, Rational>::SCA Rat;
 
-    struct rational_field
-    {
-        typedef Rat S;
-        typedef Rat Q;
-    };
+    typedef alg::coefficients::coefficient_field<Rat> rational_field;
 
     struct rational_sparse_framework
     {
         typedef typename rational_field::S S;
         typedef typename rational_field::Q Q;
-        typedef alg::free_tensor_basis<S, Q, width, depth> TBASIS;
-        typedef alg::lie_basis<S, Q, width, depth> LBASIS;
+        typedef alg::free_tensor_basis<width, depth> TBASIS;
+        typedef alg::lie_basis<width, depth> LBASIS;
 
         typedef alg::vectors::sparse_vector<
                 TBASIS,
-                alg::TrivialCoeffs<TBASIS>,
+                rational_field,
                 std::map<typename TBASIS::KEY, S>
         > SPTENS;
 
         typedef alg::vectors::sparse_vector<
                 LBASIS,
-                alg::TrivialCoeffs<LBASIS>,
+                rational_field,
                 std::map<typename LBASIS::KEY, S>
         > SPLIE;
 
         typedef alg::free_tensor<S, Q, width, depth, SPTENS> TENSOR;
-        typedef alg::lie<S, Q, width, depth, SPLIE> LIE;
+        typedef alg::lie<rational_field, width, depth, SPLIE> LIE;
         typedef alg::maps<S, Q, width, depth, TENSOR, LIE> MAPS;
 
     };

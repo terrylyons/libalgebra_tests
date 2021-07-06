@@ -11,9 +11,9 @@ struct pointwise_multiplication
     typedef unsigned key_type;
 
     template <typename Transform>
-    struct key_transform
+    struct key_operator
     {
-        key_transform(Transform fn) : m_transform(fn)
+        key_operator(Transform fn) : m_transform(fn)
         {}
 
         template <typename Vector, typename Scalar>
@@ -29,60 +29,53 @@ struct pointwise_multiplication
         Transform m_transform;
     };
 
-    template <typename Algebra, typename Transform>
-    void operator()(Algebra& result, const Algebra& lhs, const Algebra& rhs, Transform fn) const
+    template <typename Algebra, typename Operator>
+    Algebra &multiply_and_add(Algebra &result, Algebra const &lhs, Algebra const &rhs, Operator op) const
     {
-        key_transform<Transform> key_fn(fn);
-        lhs.buffered_apply_binary_transform(result, rhs, key_fn);
+        key_operator <Operator> kt(op);
+        lhs.buffered_apply_binary_transform(result, rhs, kt);
+        return result;
+    }
+
+    template <typename Algebra, typename Operator> Algebra &
+    multiply_and_add(Algebra &result, Algebra const &lhs, Algebra const &rhs, Operator op, DEG const max_depth) const
+    {
+        key_operator <Operator> kt(op);
+        lhs.buffered_apply_binary_transform(result, rhs, kt, max_depth);
+        return result;
+    }
+
+    template <typename Algebra, typename Operator>
+    Algebra multiply(Algebra const &lhs, Algebra const &rhs, Operator op) const
+    {
+        Algebra result;
+        multiply_and_add(result, lhs, rhs, op);
+        return result;
+    }
+
+    template <typename Algebra, typename Operator>
+    Algebra multiply(Algebra const &lhs, Algebra const &rhs, Operator op, DEG const max_depth) const
+    {
+        Algebra result;
+        multiply_and_add(result, lhs, rhs, op, max_depth);
+        return result;
+    }
+
+    template <typename Algebra, typename Operator>
+    Algebra &multiply_inplace(Algebra &lhs, Algebra const &rhs, Operator op) const
+    {
+        key_operator <Operator> kt(op);
+        lhs.unbuffered_apply_binary_transform(rhs, kt);
+        return lhs;
+    }
+
+    template <typename Algebra, typename Operator>
+    Algebra &multiply_inplace(Algebra &lhs, Algebra const &rhs, Operator op, DEG const max_depth) const
+    {
+        key_operator <Operator> kt(op);
+        lhs.unbuffered_apply_binary_transform(rhs, kt, max_depth);
+        return lhs;
     }
 };
 
-
-/*
- * The simple algebra basis exercises the square_buffered_apply_binary_transform
- * methods on the underlying vector types. The degree level optimisations can be
- * exercised more readily using the basis classes from libalgebra.
- *
- */
-template <DEG Dimension, typename Field>
-class simple_algebra_basis : public SimpleIntegerBasis<Dimension, typename Field::Q>
-{
-
-public:
-
-    typedef typename Field::Q RATIONAL;
-    typedef unsigned KEY;
-
-
-    typedef alg::algebra<simple_algebra_basis, Field,
-            //alg::vectors::dense_vector<simple_algebra_basis, Field> > ALG;
-            //alg::vectors::sparse_vector<simple_algebra_basis, Field> > ALG;
-            ALGEBRA_TESTS_VECT_TYPE < simple_algebra_basis, Field> > ALG;
-
-    static const DEG dimension = Dimension;
-    static const DEG MAX_DEGREE = 0;
-
-    // Property tags
-    typedef alg::basis::without_degree degree_tag;
-    typedef alg::basis::ordered<std::less<KEY> > ordering_tag;
-
-    const ALG m_algzero;
-    std::vector<ALG> m_mulcache;
-
-    simple_algebra_basis() : m_algzero(), m_mulcache()
-    {
-        m_mulcache.reserve(Dimension);
-        for (KEY i = 0; i < Dimension; ++i) {
-            m_mulcache.push_back(ALG(i, typename Field::S(1)));
-        }
-    }
-
-    const ALG& prod(const KEY& k1, const KEY& k2) const
-    {
-        if (k1 == k2) {
-            return m_mulcache[k1];
-        }
-        return m_algzero;
-    }
-};
 

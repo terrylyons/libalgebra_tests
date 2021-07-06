@@ -21,7 +21,7 @@ struct Fixture
         typedef typename BASIS::KEY KEY;
         typedef typename FIELD::LET LET;
 
-        typedef alg::free_tensor_basis<S, Q, 2, 5> TBASIS;
+        typedef alg::free_tensor_basis<2, 5> TBASIS;
         typedef typename TBASIS::KEY TKEY;
         typedef _VECTOR_TYPE<TBASIS
 #ifdef LIBALGEBRA_VECTORS_H

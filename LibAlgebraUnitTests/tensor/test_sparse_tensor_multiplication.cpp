@@ -27,11 +27,7 @@ struct Fixture : public alg_types<5, 5, Rational>
     typedef typename ALG_TYPES::TENSOR::BASIS TBASIS;
     typedef typename TBASIS::KEY KEY;
 
-    struct field
-    {
-        typedef typename ALG_TYPES::S S;
-        typedef typename ALG_TYPES::Q Q;
-    };
+    typedef typename ALG_TYPES::COEFF field;
 
     typedef alg::vectors::sparse_vector<
             TBASIS,
@@ -39,9 +35,7 @@ struct Fixture : public alg_types<5, 5, Rational>
             std::map<KEY, typename field::S>
     > SPARSE;
     typedef alg::algebra<TBASIS, field,
-#ifdef LIBALGEBRA_ALGEBRAS_H
-            alg::algebras::default_multiply<TBASIS>,
-#endif
+                         alg::free_tensor_multiplication<field>,
             SPARSE> TENSOR;
 
     const TENSOR tunit;

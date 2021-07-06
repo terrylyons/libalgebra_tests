@@ -23,8 +23,10 @@ SUITE(hall_basis) {
     typedef double TestScalarType;
     typedef double TestRationalType;
 
-    typedef alg::lie<TestScalarType, TestRationalType, test_alphabet_size, test_max_degree> LIE;
-    typedef alg::lie_basis<TestScalarType, TestRationalType, test_alphabet_size, test_max_degree> LIEBASIS;
+    typedef alg::coefficients::coefficient_field<double> coeff_t;
+
+    typedef alg::lie<coeff_t, test_alphabet_size, test_max_degree> LIE;
+    typedef alg::lie_basis<test_alphabet_size, test_max_degree> LIEBASIS;
 
     class TestBasis : public alg::hall_basis<test_alphabet_size>
     {

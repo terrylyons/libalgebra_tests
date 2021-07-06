@@ -26,11 +26,7 @@ SUITE (hybrid_tensor_multiplication) {
         typedef typename ALG_TYPES::TENSOR::BASIS TBASIS;
         typedef typename TBASIS::KEY KEY;
 
-        struct field
-        {
-            typedef typename ALG_TYPES::S S;
-            typedef typename ALG_TYPES::Q Q;
-        };
+        typedef typename ALG_TYPES::COEFF field;
 
         typedef alg::vectors::hybrid_vector<
                 TBASIS,
@@ -40,9 +36,7 @@ SUITE (hybrid_tensor_multiplication) {
                 std::map<KEY, typename field::S>
                 > HYBRID;
         typedef alg::algebra<TBASIS, field,
-#ifdef LIBALGEBRA_ALGEBRAS_H
-        alg::algebras::default_multiply<TBASIS>,
-#endif
+        alg::free_tensor_multiplication<field>,
         HYBRID> TENSOR;
 
         const TENSOR tunit;

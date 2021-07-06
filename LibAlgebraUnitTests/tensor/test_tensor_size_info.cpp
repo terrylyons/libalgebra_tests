@@ -13,7 +13,7 @@ SUITE(tensor_size_info) {
 #define TEST_TENSOR_SIZE(WIDTH, DEPTH, EXPECTED)                \
     TEST(test_tensor_size_info_ ## WIDTH ## _ ## DEPTH) {       \
         TEST_DETAILS();                                         \
-        alg::tensor_basis<void, WIDTH, DEPTH> basis;            \
+        alg::tensor_basis<WIDTH, DEPTH> basis;            \
         CHECK_EQUAL(EXPECTED, basis.start_of_degree(DEPTH));    \
     }
 

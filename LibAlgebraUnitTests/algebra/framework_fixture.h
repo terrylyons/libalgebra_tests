@@ -8,19 +8,13 @@ struct Fixture
 {
     typedef alg_types<5, 5, Rational> ALG_TYPES;
 
-    struct field
-    {
-        typedef typename ALG_TYPES::S S;
-        typedef typename ALG_TYPES::Q Q;
-    };
+    typedef typename ALG_TYPES::COEFF field;
 
-    typedef simple_algebra_basis<5, field> BASIS;
+    typedef SimpleIntegerBasis<5, field> BASIS;
     typedef alg::vectors::vector<BASIS, field,
     ALGEBRA_TESTS_VECT_TYPE<BASIS, field> > VECT;
     typedef alg::algebra<BASIS, field,
-#ifdef LIBALGEBRA_ALGEBRAS_H
     pointwise_multiplication,
-#endif
     ALGEBRA_TESTS_VECT_TYPE<BASIS, field> > ALG;
 
     typedef typename BASIS::KEY KEY;

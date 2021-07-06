@@ -23,10 +23,10 @@ struct fixture
     typedef typename Coeff::S S;
     typedef typename Coeff::Q Q;
 
-    typedef alg::free_tensor_basis<S, Q, Width, Depth> TBASIS;
+    typedef alg::free_tensor_basis<Width, Depth> TBASIS;
     typedef typename TBASIS::KEY KEY;
     typedef alg::vectors::sparse_vector<TBASIS, Coeff, std::map<KEY, S> > VECT;
-    typedef alg::free_tensor<S, Q, Width, Depth, VECT> TENSOR;
+    typedef alg::free_tensor<Coeff, Width, Depth, VECT> TENSOR;
 
 
     template<class T>
@@ -72,10 +72,7 @@ struct fixture
 
 SUITE(hybrid_tensor_functions_float) {
 
-    struct float_field {
-        typedef float S;
-        typedef float Q;
-    };
+    typedef alg::coefficients::coefficient_field<float> float_field;
 
     static const double expected_error = 3e-8f;
     typedef fixture<float_field, 5, 5> fixture;
@@ -91,10 +88,7 @@ SUITE(hybrid_tensor_functions_float) {
 
 SUITE(hybrid_tensor_functions_double) {
 
-    struct double_field {
-        typedef double S;
-        typedef double Q;
-    };
+    typedef alg::coefficients::coefficient_field<double> double_field;
 
     typedef fixture<double_field, 5, 5> fixture;
     static const double expected_error = 2e-15;
@@ -111,10 +105,7 @@ SUITE(hybrid_tensor_functions_double) {
 SUITE(hybrid_tensor_functions_rational) {
 
     typedef typename alg_types<2, 2, Rational>::SCA Rat;
-    struct rational_field {
-        typedef Rat S;
-        typedef Rat Q;
-    };
+    typedef alg::coefficients::coefficient_field<Rat> rational_field;
 
     typedef fixture<rational_field, 5, 5> fixture;
     static const double expected_error = 0.0;
