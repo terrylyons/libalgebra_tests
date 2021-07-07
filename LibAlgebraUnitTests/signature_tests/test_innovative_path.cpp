@@ -98,6 +98,8 @@ struct GenericFixture
     typedef typename alg_types<2, 2, Rational>::SCA Rat;
 
     typedef alg::coefficients::coefficient_field<Rat> rational_field;
+    typedef alg::coefficients::double_field double_field;
+    typedef alg::coefficients::float_field float_field;
 
     struct rational_sparse_framework
     {
@@ -118,9 +120,9 @@ struct GenericFixture
                 std::map<typename LBASIS::KEY, S>
         > SPLIE;
 
-        typedef alg::free_tensor<S, Q, width, depth, SPTENS> TENSOR;
+        typedef alg::free_tensor<rational_field, width, depth, SPTENS> TENSOR;
         typedef alg::lie<rational_field, width, depth, SPLIE> LIE;
-        typedef alg::maps<S, Q, width, depth, TENSOR, LIE> MAPS;
+        typedef alg::maps<rational_field, width, depth, TENSOR, LIE> MAPS;
 
     };
 
@@ -128,34 +130,34 @@ struct GenericFixture
     {
         typedef typename rational_field::S S;
         typedef typename rational_field::Q Q;
-        typedef alg::free_tensor_basis<S, Q, width, depth> TBASIS;
-        typedef alg::lie_basis<S, Q, width, depth> LBASIS;
+        typedef alg::free_tensor_basis<width, depth> TBASIS;
+        typedef alg::lie_basis<width, depth> LBASIS;
 
         typedef alg::vectors::dense_vector<
                 TBASIS,
-                alg::TrivialCoeffs<TBASIS>
+                rational_field
         > DTENS;
 
         typedef alg::vectors::sparse_vector<
                 LBASIS,
-                alg::TrivialCoeffs<LBASIS>
+                rational_field
         > DLIE;
 
-        typedef alg::free_tensor<S, Q, width, depth, DTENS> TENSOR;
-        typedef alg::lie<S, Q, width, depth, DLIE> LIE;
-        typedef alg::maps<S, Q, width, depth, TENSOR, LIE> MAPS;
+        typedef alg::free_tensor<rational_field, width, depth, DTENS> TENSOR;
+        typedef alg::lie<rational_field, width, depth, DLIE> LIE;
+        typedef alg::maps<rational_field, width, depth, TENSOR, LIE> MAPS;
     };
 
     struct rational_hybrid_framework
     {
         typedef typename rational_field::S S;
         typedef typename rational_field::Q Q;
-        typedef alg::free_tensor_basis<S, Q, width, depth> TBASIS;
-        typedef alg::lie_basis<S, Q, width, depth> LBASIS;
+        typedef alg::free_tensor_basis<width, depth> TBASIS;
+        typedef alg::lie_basis<width, depth> LBASIS;
 
         typedef alg::vectors::hybrid_vector<
                 TBASIS,
-                alg::TrivialCoeffs<TBASIS>,
+                rational_field,
                 alg::vectors::policy::basic_resize_policy,
                 std::vector<S>,
                 std::map<typename TBASIS::KEY, S>
@@ -163,80 +165,74 @@ struct GenericFixture
 
         typedef alg::vectors::hybrid_vector<
                 LBASIS,
-                alg::TrivialCoeffs<LBASIS>,
+                rational_field,
                 alg::vectors::policy::basic_resize_policy,
                 std::vector<S>,
                 std::map<typename LBASIS::KEY, S>
         > HLIE;
 
-        typedef alg::free_tensor<S, Q, width, depth, HTENS> TENSOR;
-        typedef alg::lie<S, Q, width, depth, HLIE> LIE;
-        typedef alg::maps<S, Q, width, depth, TENSOR, LIE> MAPS;
+        typedef alg::free_tensor<rational_field, width, depth, HTENS> TENSOR;
+        typedef alg::lie<rational_field, width, depth, HLIE> LIE;
+        typedef alg::maps<rational_field, width, depth, TENSOR, LIE> MAPS;
     };
 
-
-    struct double_field
-    {
-        typedef double S;
-        typedef double Q;
-    };
 
     struct double_sparse_framework
     {
         typedef typename double_field::S S;
         typedef typename double_field::Q Q;
-        typedef alg::free_tensor_basis<S, Q, width, depth> TBASIS;
-        typedef alg::lie_basis<S, Q, width, depth> LBASIS;
+        typedef alg::free_tensor_basis<width, depth> TBASIS;
+        typedef alg::lie_basis<width, depth> LBASIS;
 
         typedef alg::vectors::sparse_vector<
                 TBASIS,
-                alg::TrivialCoeffs<TBASIS>,
+                double_field,
                 std::map<typename TBASIS::KEY, S>
         > SPTENS;
 
         typedef alg::vectors::sparse_vector<
                 LBASIS,
-                alg::TrivialCoeffs<LBASIS>,
+                double_field,
                 std::map<typename LBASIS::KEY, S>
         > SPLIE;
 
-        typedef alg::free_tensor<S, Q, width, depth, SPTENS> TENSOR;
-        typedef alg::lie<S, Q, width, depth, SPLIE> LIE;
-        typedef alg::maps<S, Q, width, depth, TENSOR, LIE> MAPS;
+        typedef alg::free_tensor<double_field, width, depth, SPTENS> TENSOR;
+        typedef alg::lie<double_field, width, depth, SPLIE> LIE;
+        typedef alg::maps<double_field, width, depth, TENSOR, LIE> MAPS;
     };
 
     struct double_dense_framework
     {
         typedef typename double_field::S S;
         typedef typename double_field::Q Q;
-        typedef alg::free_tensor_basis<S, Q, width, depth> TBASIS;
-        typedef alg::lie_basis<S, Q, width, depth> LBASIS;
+        typedef alg::free_tensor_basis<width, depth> TBASIS;
+        typedef alg::lie_basis<width, depth> LBASIS;
 
         typedef alg::vectors::dense_vector<
                 TBASIS,
-                alg::TrivialCoeffs<TBASIS>
+                double_field
         > DTENS;
 
         typedef alg::vectors::sparse_vector<
                 LBASIS,
-                alg::TrivialCoeffs<LBASIS>
+                double_field
         > DLIE;
 
-        typedef alg::free_tensor<S, Q, width, depth, DTENS> TENSOR;
-        typedef alg::lie<S, Q, width, depth, DLIE> LIE;
-        typedef alg::maps<S, Q, width, depth, TENSOR, LIE> MAPS;
+        typedef alg::free_tensor<double_field, width, depth, DTENS> TENSOR;
+        typedef alg::lie<double_field, width, depth, DLIE> LIE;
+        typedef alg::maps<double_field, width, depth, TENSOR, LIE> MAPS;
     };
 
     struct double_hybrid_framework
     {
         typedef typename double_field::S S;
         typedef typename double_field::Q Q;
-        typedef alg::free_tensor_basis<S, Q, width, depth> TBASIS;
-        typedef alg::lie_basis<S, Q, width, depth> LBASIS;
+        typedef alg::free_tensor_basis<width, depth> TBASIS;
+        typedef alg::lie_basis<width, depth> LBASIS;
 
         typedef alg::vectors::hybrid_vector<
                 TBASIS,
-                alg::TrivialCoeffs<TBASIS>,
+                double_field,
                 alg::vectors::policy::basic_resize_policy,
                 std::vector<S>,
                 std::map<typename TBASIS::KEY, S>
@@ -244,80 +240,73 @@ struct GenericFixture
 
         typedef alg::vectors::hybrid_vector<
                 LBASIS,
-                alg::TrivialCoeffs<LBASIS>,
+                double_field,
                 alg::vectors::policy::basic_resize_policy,
                 std::vector<S>,
                 std::map<typename LBASIS::KEY, S>
         > HLIE;
 
-        typedef alg::free_tensor<S, Q, width, depth, HTENS> TENSOR;
-        typedef alg::lie<S, Q, width, depth, HLIE> LIE;
-        typedef alg::maps<S, Q, width, depth, TENSOR, LIE> MAPS;
-    };
-
-
-    struct float_field
-    {
-        typedef float S;
-        typedef float Q;
+        typedef alg::free_tensor<double_field, width, depth, HTENS> TENSOR;
+        typedef alg::lie<double_field, width, depth, HLIE> LIE;
+        typedef alg::maps<double_field, width, depth, TENSOR, LIE> MAPS;
     };
 
     struct float_sparse_framework
     {
         typedef typename float_field::S S;
         typedef typename float_field::Q Q;
-        typedef alg::free_tensor_basis<S, Q, width, depth> TBASIS;
-        typedef alg::lie_basis<S, Q, width, depth> LBASIS;
+        typedef alg::free_tensor_basis<width, depth> TBASIS;
+        typedef alg::lie_basis<width, depth> LBASIS;
 
         typedef alg::vectors::sparse_vector<
                 TBASIS,
-                alg::TrivialCoeffs<TBASIS>,
+                float_field,
                 std::map<typename TBASIS::KEY, S>
         > SPTENS;
 
         typedef alg::vectors::sparse_vector<
                 LBASIS,
-                alg::TrivialCoeffs<LBASIS>,
+                float_field,
                 std::map<typename LBASIS::KEY, S>
         > SPLIE;
 
-        typedef alg::free_tensor<S, Q, width, depth, SPTENS> TENSOR;
-        typedef alg::lie<S, Q, width, depth, SPLIE> LIE;
-        typedef alg::maps<S, Q, width, depth, TENSOR, LIE> MAPS;
+        typedef alg::free_tensor<float_field, width, depth, SPTENS> TENSOR;
+        typedef alg::lie<float_field, width, depth, SPLIE> LIE;
+        typedef alg::maps<float_field, width, depth, TENSOR, LIE> MAPS;
     };
 
     struct float_dense_framework
     {
         typedef typename float_field::S S;
         typedef typename float_field::Q Q;
-        typedef alg::free_tensor_basis<S, Q, width, depth> TBASIS;
-        typedef alg::lie_basis<S, Q, width, depth> LBASIS;
+        typedef alg::free_tensor_basis<width, depth> TBASIS;
+        typedef alg::lie_basis<width, depth> LBASIS;
 
         typedef alg::vectors::dense_vector<
                 TBASIS,
-                alg::TrivialCoeffs<TBASIS>
+                float_field
         > DTENS;
 
         typedef alg::vectors::sparse_vector<
                 LBASIS,
-                alg::TrivialCoeffs<LBASIS>
+                float_field
         > DLIE;
 
-        typedef alg::free_tensor<S, Q, width, depth, DTENS> TENSOR;
-        typedef alg::lie<S, Q, width, depth, DLIE> LIE;
-        typedef alg::maps<S, Q, width, depth, TENSOR, LIE> MAPS;
+        typedef alg::free_tensor<float_field, width, depth, DTENS> TENSOR;
+        typedef alg::lie<float_field, width, depth, DLIE> LIE;
+        typedef alg::maps<float_field, width, depth, TENSOR, LIE> MAPS;
     };
 
     struct float_hybrid_framework
     {
         typedef typename float_field::S S;
         typedef typename float_field::Q Q;
-        typedef alg::free_tensor_basis<S, Q, width, depth> TBASIS;
-        typedef alg::lie_basis<S, Q, width, depth> LBASIS;
+        typedef alg::free_tensor_basis<width, depth> TBASIS;
+        typedef alg::lie_basis<width, depth> LBASIS;
 
         typedef alg::vectors::hybrid_vector<
                 TBASIS,
-                alg::TrivialCoeffs<TBASIS>,
+                float_field,
                 alg::vectors::policy::basic_resize_policy,
                 std::vector<S>,
                 std::map<typename TBASIS::KEY, S>
@@ -325,15 +314,15 @@ struct GenericFixture
 
         typedef alg::vectors::hybrid_vector<
                 LBASIS,
-                alg::TrivialCoeffs<LBASIS>,
+                float_field,
                 alg::vectors::policy::basic_resize_policy,
                 std::vector<S>,
                 std::map<typename LBASIS::KEY, S>
         > HLIE;
 
-        typedef alg::free_tensor<S, Q, width, depth, HTENS> TENSOR;
-        typedef alg::lie<S, Q, width, depth, HLIE> LIE;
-        typedef alg::maps<S, Q, width, depth, TENSOR, LIE> MAPS;
+        typedef alg::free_tensor<float_field, width, depth, HTENS> TENSOR;
+        typedef alg::lie<float_field, width, depth, HLIE> LIE;
+        typedef alg::maps<float_field, width, depth, TENSOR, LIE> MAPS;
     };
 
     GenericFixture() : path(make_innovative_path<width>(width)),
