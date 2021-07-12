@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="LibAlgebraUnitTests"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\local\;CMake Files\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\usr\local\lib\cmake\UnitTest++\;CMake Files\..\..\..\..\usr\lib64\;CMake Files\..\..\..\..\usr\lib64\cmake\;CMake Files\..\..\..\..\usr\lib64\cmake\Boost-1.76.0\;CMake Files\..\..\..\..\usr\lib64\cmake\boost_headers-1.76.0\;CMake Files\..\..\..\..\usr\lib64\cmake\boost_thread-1.76.0\;CMake Files\..\..\..\..\usr\lib64\cmake\boost_filesystem-1.76.0\;CMake Files\..\..\..\..\usr\lib64\cmake\boost_iostreams-1.76.0\;CMake Files\..\..\..\..\usr\lib64\cmake\boost_chrono-1.76.0\;CMake Files\..\..\..\..\usr\lib64\cmake\boost_random-1.76.0\;CMake Files\..\..\..\..\usr\lib64\cmake\boost_container-1.76.0\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_utils">
+				<Option output="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/test_utils" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_RANDOM_DYN_LINK"/>
+					<Add option="-DBOOST_CONTAINER_DYN_LINK"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/libalgebra"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_utils"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_utils/fast">
+				<Option output="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/test_utils" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_RANDOM_DYN_LINK"/>
+					<Add option="-DBOOST_CONTAINER_DYN_LINK"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/libalgebra"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_utils/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_algebra">
+				<Option output="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/test_algebra" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_RANDOM_DYN_LINK"/>
+					<Add option="-DBOOST_CONTAINER_DYN_LINK"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/libalgebra"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_algebra"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_algebra/fast">
+				<Option output="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/test_algebra" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_RANDOM_DYN_LINK"/>
+					<Add option="-DBOOST_CONTAINER_DYN_LINK"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/libalgebra"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_algebra/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test">
+				<Option output="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_RANDOM_DYN_LINK"/>
+					<Add option="-DBOOST_CONTAINER_DYN_LINK"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/libalgebra"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 test"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test/fast">
+				<Option output="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_RANDOM_DYN_LINK"/>
+					<Add option="-DBOOST_CONTAINER_DYN_LINK"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/libalgebra"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 test/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_signatures">
+				<Option output="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/test_signatures" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_RANDOM_DYN_LINK"/>
+					<Add option="-DBOOST_CONTAINER_DYN_LINK"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/libalgebra"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_signatures"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_signatures/fast">
+				<Option output="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/test_signatures" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_RANDOM_DYN_LINK"/>
+					<Add option="-DBOOST_CONTAINER_DYN_LINK"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/libalgebra"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_signatures/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_tensor">
+				<Option output="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/test_tensor" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_RANDOM_DYN_LINK"/>
+					<Add option="-DBOOST_CONTAINER_DYN_LINK"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/libalgebra"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_tensor"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_tensor/fast">
+				<Option output="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/test_tensor" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_RANDOM_DYN_LINK"/>
+					<Add option="-DBOOST_CONTAINER_DYN_LINK"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/libalgebra"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_tensor/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_lie">
+				<Option output="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/test_lie" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_RANDOM_DYN_LINK"/>
+					<Add option="-DBOOST_CONTAINER_DYN_LINK"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/libalgebra"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_lie"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_lie/fast">
+				<Option output="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/test_lie" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_RANDOM_DYN_LINK"/>
+					<Add option="-DBOOST_CONTAINER_DYN_LINK"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/libalgebra"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_lie/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_vector">
+				<Option output="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/test_vector" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_RANDOM_DYN_LINK"/>
+					<Add option="-DBOOST_CONTAINER_DYN_LINK"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/libalgebra"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_vector"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_vector/fast">
+				<Option output="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/test_vector" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_RANDOM_DYN_LINK"/>
+					<Add option="-DBOOST_CONTAINER_DYN_LINK"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/libalgebra"/>
+					<Add directory="/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../include/c++/11.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_vector/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/sam/CLionProjects/libalgebra_tests/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/AlgebaFunctionsTests.cpp">
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/HallSetTests.cpp">
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/LatticePathTests.cpp">
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/LibAlgebraUnitTests.cpp">
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/OMPSigsTests.cpp">
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/TreeBufferHelper.cpp">
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/TreeBufferHelper.h">
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/algebra/test_algebra_product.cpp">
+			<Option target="test_algebra"/>
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/lie/run_tests.cpp">
+			<Option target="test_lie"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/lie/test_basis.cpp">
+			<Option target="test"/>
+			<Option target="test_lie"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/lie/test_dense_lie_multiplication.cpp">
+			<Option target="test"/>
+			<Option target="test_lie"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/lie/test_hall_basis.cpp">
+			<Option target="test"/>
+			<Option target="test_lie"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/lie/test_lie_multiplication.cpp">
+			<Option target="test"/>
+			<Option target="test_lie"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/makebm.cpp">
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/makebm.h">
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/memfile.cpp">
+			<Option target="test"/>
+			<Option target="test_signatures"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/memfile.h">
+			<Option target="test"/>
+			<Option target="test_signatures"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/reporter.cpp">
+			<Option target="test_utils"/>
+			<Option target="test_algebra"/>
+			<Option target="test"/>
+			<Option target="test_signatures"/>
+			<Option target="test_tensor"/>
+			<Option target="test_lie"/>
+			<Option target="test_vector"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/reporter.h">
+			<Option target="test_utils"/>
+			<Option target="test_algebra"/>
+			<Option target="test"/>
+			<Option target="test_signatures"/>
+			<Option target="test_tensor"/>
+			<Option target="test_lie"/>
+			<Option target="test_vector"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/signature_tests/run_tests.cpp">
+			<Option target="test_signatures"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/signature_tests/test_brownian_path.cpp">
+			<Option target="test"/>
+			<Option target="test_signatures"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/signature_tests/test_innovative_path.cpp">
+			<Option target="test"/>
+			<Option target="test_signatures"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/speed_tests.cpp">
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/tensor/run_tests.cpp">
+			<Option target="test_tensor"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/tensor/test_basis.cpp">
+			<Option target="test"/>
+			<Option target="test_tensor"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/tensor/test_dense_tensor_functions.cpp">
+			<Option target="test"/>
+			<Option target="test_tensor"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/tensor/test_dense_tensor_multiplication.cpp">
+			<Option target="test"/>
+			<Option target="test_tensor"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/tensor/test_hybrid_tensor_functions.cpp">
+			<Option target="test"/>
+			<Option target="test_tensor"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/tensor/test_hybrid_tensor_multiplication.cpp">
+			<Option target="test"/>
+			<Option target="test_tensor"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/tensor/test_sparse_tensor_functions.cpp">
+			<Option target="test"/>
+			<Option target="test_tensor"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/tensor/test_sparse_tensor_multiplication.cpp">
+			<Option target="test"/>
+			<Option target="test_tensor"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/tensor/test_tensor_functions.cpp">
+			<Option target="test"/>
+			<Option target="test_tensor"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/tensor/test_tensor_multiplication.cpp">
+			<Option target="test"/>
+			<Option target="test_tensor"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/tensor/test_tensor_size_info.cpp">
+			<Option target="test"/>
+			<Option target="test_tensor"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/tests_TENSOR_LIE_CBH_MAPS.cpp">
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/tests_libalgebra-demo.cpp">
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/utils/run_tests.cpp">
+			<Option target="test_utils"/>
+			<Option target="test_algebra"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/utils/test_integer_maths.cpp">
+			<Option target="test_utils"/>
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/vector/run_tests.cpp">
+			<Option target="test_vector"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/vector/test_dense.cpp">
+			<Option target="test"/>
+			<Option target="test_vector"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/vector/test_hybrid.cpp">
+			<Option target="test"/>
+			<Option target="test_vector"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/vector/test_sparse.cpp">
+			<Option target="test"/>
+			<Option target="test_vector"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/LibAlgebraUnitTests/x64sigs.cpp">
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/libalgebra/libalgebra/multiplication_helpers.h">
+			<Option target="test"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/local/lib/cmake/UnitTest++/UnitTest++Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\UnitTest++\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/local/lib/cmake/UnitTest++/UnitTest++Targets-noconfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\UnitTest++\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/local/lib/cmake/UnitTest++/UnitTest++Targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\UnitTest++\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/BoostDetectToolset-1.76.0.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/Boost-1.76.0/BoostConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\Boost-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/Boost-1.76.0/BoostConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\Boost-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_headers-1.76.0/boost_headers-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_headers-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_headers-1.76.0/boost_headers-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_headers-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_thread-1.76.0/boost_thread-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_thread-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_thread-1.76.0/boost_thread-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_thread-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_thread-1.76.0/libboost_thread-variant-shared.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_thread-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_thread-1.76.0/libboost_thread-variant-static.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_thread-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_filesystem-1.76.0/boost_filesystem-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_filesystem-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_filesystem-1.76.0/boost_filesystem-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_filesystem-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_filesystem-1.76.0/libboost_filesystem-variant-shared.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_filesystem-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_filesystem-1.76.0/libboost_filesystem-variant-static.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_filesystem-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_iostreams-1.76.0/boost_iostreams-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_iostreams-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_iostreams-1.76.0/boost_iostreams-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_iostreams-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_iostreams-1.76.0/libboost_iostreams-variant-shared.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_iostreams-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_iostreams-1.76.0/libboost_iostreams-variant-static.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_iostreams-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_chrono-1.76.0/boost_chrono-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_chrono-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_chrono-1.76.0/boost_chrono-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_chrono-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_chrono-1.76.0/libboost_chrono-variant-shared.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_chrono-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_chrono-1.76.0/libboost_chrono-variant-static.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_chrono-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_random-1.76.0/boost_random-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_random-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_random-1.76.0/boost_random-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_random-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_random-1.76.0/libboost_random-variant-shared.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_random-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_random-1.76.0/libboost_random-variant-static.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_random-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_container-1.76.0/boost_container-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_container-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_container-1.76.0/boost_container-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_container-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_container-1.76.0/libboost_container-variant-shared.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_container-1.76.0\"/>
+		</Unit>
+		<Unit filename="/home/sam/CLionProjects/libalgebra_tests/../../../../usr/lib64/cmake/boost_container-1.76.0/libboost_container-variant-static.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_container-1.76.0\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
