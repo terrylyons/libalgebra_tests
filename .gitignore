@@ -353,7 +353,7 @@ build/compile_commands.json
 build/Makefile
 
 
-cmake-build-*/
+[Cc]make-[Bb]uild-*/
 
 */out/
 
