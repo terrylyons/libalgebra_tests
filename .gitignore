@@ -352,6 +352,9 @@ build/CMakeCache.txt
 build/compile_commands.json
 build/Makefile
 
+
+cmake-build-*/
+
 */out/
 
 *.raw
