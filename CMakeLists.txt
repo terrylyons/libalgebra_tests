@@ -71,7 +71,7 @@ add_executable(test ${SOURCES}
         ${UTIL_TESTS}
         ${ALGEBRA_TESTS}
         ${SIGNATURE_TESTS}
-        LibAlgebraUnitTests/reporter.cpp LibAlgebraUnitTests/reporter.h libalgebra/libalgebra/multiplication_helpers.h)
+        LibAlgebraUnitTests/reporter.cpp LibAlgebraUnitTests/reporter.h)
 
 target_include_directories(test PRIVATE "${PROJECT_BINARY_DIR}")
 target_link_libraries(test PRIVATE UnitTest++ "${Bignum_LIBRARY}" ${Boost_LIBRARIES})
