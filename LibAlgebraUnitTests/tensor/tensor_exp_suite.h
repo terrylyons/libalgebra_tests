@@ -86,7 +86,7 @@
         CHECK_VEC_CLOSE(expected, result, expected_error);
     }
 
-#ifdef LIBALGEBRA_FMEXP_AVAILABLE
+
     // Tests for fused multiply exponentiate
 
 
@@ -133,7 +133,7 @@
     }
 
 
-#endif
+
 
 
 

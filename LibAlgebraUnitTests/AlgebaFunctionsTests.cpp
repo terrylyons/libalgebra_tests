@@ -48,7 +48,7 @@ TEST_FIXTURE(pathsetup5560, logsignature_versus_cbh)
 	LIE logsig2 = cbh.full(vec_of_ptr_to_lie);
 
 	// compare logsignatures
-	CHECK_VEC_CLOSE(logsig1, logsig2, 7.0e-16);
+	CHECK_VEC_CLOSE(logsig1, logsig2, 1e-15);
 	//LIE err = logsig1 - logsig2;
 	//for (auto k : err) {
 	//	CHECK_CLOSE(k.second, 0., 7.0e-16);
