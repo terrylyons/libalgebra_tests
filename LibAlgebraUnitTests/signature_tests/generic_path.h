@@ -66,8 +66,8 @@ public:
 
         Tensor result(typename Tensor::SCALAR(1));
         for (size_t i=start_increment; i<end; ++i) {
-            //result *= exp(maps.l2t(m_increments[i].template to_lie<Lie>()));
-            result.fmexp_inplace(maps.l2t(m_increments[i].template to_lie<Lie>()));
+            result *= exp(maps.l2t(m_increments[i].template to_lie<Lie>()));
+            //result.fmexp_inplace(maps.l2t(m_increments[i].template to_lie<Lie>()));
         }
         return result;
     }
