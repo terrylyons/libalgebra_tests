@@ -178,7 +178,6 @@ struct GenericFixture
                 TBASIS,
                 rational_field,
                 alg::vectors::policy::basic_resize_policy,
-                std::vector<S>,
                 std::map<typename TBASIS::KEY, S>
         > HTENS;
 
@@ -186,7 +185,6 @@ struct GenericFixture
                 LBASIS,
                 rational_field,
                 alg::vectors::policy::basic_resize_policy,
-                std::vector<S>,
                 std::map<typename LBASIS::KEY, S>
         > HLIE;
 
@@ -252,7 +250,6 @@ struct GenericFixture
                 TBASIS,
                 double_field,
                 alg::vectors::policy::basic_resize_policy,
-                std::vector<S>,
                 std::map<typename TBASIS::KEY, S>
         > HTENS;
 
@@ -260,7 +257,6 @@ struct GenericFixture
                 LBASIS,
                 double_field,
                 alg::vectors::policy::basic_resize_policy,
-                std::vector<S>,
                 std::map<typename LBASIS::KEY, S>
         > HLIE;
 
@@ -326,7 +322,6 @@ struct GenericFixture
                 TBASIS,
                 float_field,
                 alg::vectors::policy::basic_resize_policy,
-                std::vector<S>,
                 std::map<typename TBASIS::KEY, S>
         > HTENS;
 
@@ -334,7 +329,6 @@ struct GenericFixture
                 LBASIS,
                 float_field,
                 alg::vectors::policy::basic_resize_policy,
-                std::vector<S>,
                 std::map<typename LBASIS::KEY, S>
         > HLIE;
 

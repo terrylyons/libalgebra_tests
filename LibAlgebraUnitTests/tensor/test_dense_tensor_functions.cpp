@@ -23,7 +23,7 @@ struct fixture
     typedef typename Coeff::Q Q;
 
     typedef alg::free_tensor_basis<Width, Depth> TBASIS;
-    typedef alg::vectors::dense_vector<TBASIS, Coeff, std::vector<S> > VECT;
+    typedef alg::vectors::dense_vector<TBASIS, Coeff> VECT;
     typedef alg::free_tensor<Coeff, Width, Depth, VECT> TENSOR;
 
     typedef typename TBASIS::KEY KEY;
