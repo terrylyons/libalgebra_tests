@@ -21,6 +21,9 @@ struct BasisTool
     typedef alg::shuffle_tensor_basis<W, D> STBASIS;
     typedef typename TBASIS::KEY KEY;
 
+    static const DEG n_letters = W;
+    static const DEG max_depth = D;
+
     KEY make_key(const LET* letters, std::size_t N)
     {
         KEY k;
@@ -89,6 +92,39 @@ SUITE (tensor_basis) {
         CHECK_EQUAL(make_key(expected, 3), basis.nextkey(k));
 
     }
+
+
+    TEST_FIXTURE(Framework55Double, test_key_to_index_empty) {
+        KEY k;
+
+        FTBASIS basis;
+        CHECK_EQUAL(0, basis.key_to_index(k));
+    }
+
+    TEST_FIXTURE(Framework55Double, test_key_to_index_letters) {
+        KEY k;
+
+        FTBASIS basis;
+
+        for (LET i=1; i<=n_letters; ++i) {
+            CHECK_EQUAL(i, basis.key_to_index(KEY(i)));
+        }
+
+    }
+
+    TEST_FIXTURE(Framework55Double, test_key_to_index_deg_2) {
+        KEY k (KEY(LET(1)) * KEY(LET(1)));
+
+        FTBASIS basis;
+
+        size_t idx = n_letters;
+        while (basis.degree(k) == 2) {
+            CHECK_EQUAL( ++idx, basis.key_to_index(k));
+            k = basis.nextkey(k);
+        }
+    }
+
+
 }
 
 
@@ -142,8 +178,6 @@ SUITE(free_tensor_basis) {
         CHECK_EQUAL((DEG) 3, basis.degree(result));
         CHECK_EQUAL(expected, result);
     }
-
-
 
 
 }
