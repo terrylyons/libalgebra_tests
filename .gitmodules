@@ -1,3 +1,4 @@
 [submodule "libalgebra"]
 	path = libalgebra
 	url = https://github.com/terrylyons/libalgebra.git
+	branch = stage-2

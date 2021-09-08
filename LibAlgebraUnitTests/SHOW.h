@@ -25,7 +25,7 @@
 //namespace {
 
 template <class T>
-T&& SHO_(const char* message, T&& value, const char* message1, unsigned line,
+T SHO_(const char* message, T value, const char* message1, unsigned line,
 	std::ostream& os = std::cout)
 {
 	os << message << ' ' << ':' << ' ' << value ;	// dont use an array so arrays can be overloaded
@@ -43,7 +43,7 @@ T&& SHO_(const char* message, T&& value, const char* message1, unsigned line,
 #pragma warning( pop )
 #endif
 	os << std::endl << std::endl;
-	return std::forward<T> (value);
+	return value;
 }
 //}
 #pragma warning( pop )

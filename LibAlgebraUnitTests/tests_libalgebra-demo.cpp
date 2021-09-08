@@ -1,7 +1,7 @@
 /* *************************************************************
 
 Copyright 2010-2019 Terry Lyons, Stephen Buckley, Djalil Chafai,
-Greg Gyurkó and Arend Janssen.
+Greg Gyurkï¿½ and Arend Janssen.
 
 Distributed under the terms of the GNU General Public License,
 Version 3. (See accompanying file License.txt)
@@ -113,7 +113,11 @@ namespace {
 		std::cout << "p3 * p3 derivative in the 2 co-ordinate is " << z << std::endl;
 	}
 
-
+    struct test_letter_transform
+    {
+	    template <typename LET>
+        LET operator()(LET in) const { return in + LET(1); }
+    };
 
 	TEST_FIXTURE(uni_env2, LibAlgebraTestLieandCBH)
 	{
@@ -183,10 +187,12 @@ namespace {
 			cout << (TT &= t) << endl;
 
 			// compute the linear transformation of tensors induced by a map of letters
-			auto h = [](LET in)->LET {return in + LET(1); };
-			MAPS2::t2t H(h);
+
+/*
+			MAPS2::t2t H(test_letter_transform);
 			tt *= tt += TENSOR(TENSOR::SCALAR(7));
 			cout << tt << "\n" << H(tt) << endl;
+			*/
 		}
 	}
 

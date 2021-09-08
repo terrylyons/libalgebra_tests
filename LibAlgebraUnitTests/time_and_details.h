@@ -1,12 +1,26 @@
 #pragma once
+
+
+
+#if __cplusplus >= 201103L
 #include <chrono>
+#else
+#include <boost/random.hpp>
+#endif
+
+
+#if __cplusplus >= 201103L
+namespace chrono = std::chrono;
+#else
+namespace chrono = boost::chrono;
+#endif
 
 struct timer
 {
-	std::chrono::time_point<std::chrono::steady_clock> start;
-	std::chrono::time_point<std::chrono::steady_clock> stop;
+	chrono::time_point<chrono::steady_clock> start;
+	chrono::time_point<chrono::steady_clock> stop;
 
-	timer() :start{ std::chrono::steady_clock::now() }
+	timer() :start(chrono::steady_clock::now())
 	{}
 
 	~timer()
@@ -16,24 +30,24 @@ struct timer
 
 	void Adaptive()
 	{
-		stop = std::chrono::steady_clock::now();
-		std::chrono::nanoseconds time = stop - start;
+		stop = chrono::steady_clock::now();
+		chrono::nanoseconds time = stop - start;
 
 		long long ntime;
-		if ((ntime = std::chrono::duration_cast<std::chrono::nanoseconds>(time).count())< 10000LL)
+		if ((ntime = chrono::duration_cast<chrono::nanoseconds>(time).count())< 10000LL)
 		std::cout << "Elapsed time : "
 			<< ntime
 			<< " ns" << std::endl;
-		else if ((ntime = std::chrono::duration_cast<std::chrono::microseconds>(time).count()) < 10000LL)
+		else if ((ntime = chrono::duration_cast<chrono::microseconds>(time).count()) < 10000LL)
 			std::cout << "Elapsed time : "
 			<< ntime
 			<< " micros" << std::endl;
-		else if ((ntime = std::chrono::duration_cast<std::chrono::milliseconds>(time).count()) < 10000LL)
+		else if ((ntime = chrono::duration_cast<chrono::milliseconds>(time).count()) < 10000LL)
 			std::cout << "Elapsed time : "
 			<< ntime
 			<< " ms" << std::endl;
 		else {
-			ntime = std::chrono::duration_cast<std::chrono::seconds>(time).count();
+			ntime = chrono::duration_cast<chrono::seconds>(time).count();
 			std::cout << "Elapsed time : "
 				<< ntime
 				<< " s" << std::endl;
@@ -42,37 +56,37 @@ struct timer
 
 	void NanoSecs()
 	{
-		stop = std::chrono::steady_clock::now();
+		stop = chrono::steady_clock::now();
 		std::cout << "Elapsed time in nanoseconds : "
-			<< std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count()
+			<< chrono::duration_cast<chrono::nanoseconds>(stop - start).count()
 			<< " ns" << std::endl;
 	}
 
 	void MicroSecs()
 	{
-		stop = std::chrono::steady_clock::now();
+		stop = chrono::steady_clock::now();
 		std::cout << "Elapsed time in microseconds : "
-			<< std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count()
-			<< " µs" << std::endl;
+			<< chrono::duration_cast<chrono::microseconds>(stop - start).count()
+			<< " ï¿½s" << std::endl;
 	}
 
 	void MilliSecs()
 	{
-		stop = std::chrono::steady_clock::now();
+		stop = chrono::steady_clock::now();
 		std::cout << "Elapsed time in milliseconds : "
-			<< std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count()
+			<< chrono::duration_cast<chrono::milliseconds>(stop - start).count()
 			<< " ms" << std::endl;
 	}
 
 	void Secs()
 	{
-		stop = std::chrono::steady_clock::now();
+		stop = chrono::steady_clock::now();
 		std::cout << "Elapsed time in seconds : "
-			<< std::chrono::duration_cast<std::chrono::seconds>(stop - start).count()
+			<< chrono::duration_cast<chrono::seconds>(stop - start).count()
 			<< " sec";
 	}
 };
-
+#if 0
 // a macro to identify and time a test to cout
 #ifndef TEST_DETAILS
 #ifndef SHO_NO
@@ -81,4 +95,7 @@ struct timer
 #define TEST_DETAILS()
 #endif
 #else
+#endif
+#else
+#define TEST_DETAILS()
 #endif

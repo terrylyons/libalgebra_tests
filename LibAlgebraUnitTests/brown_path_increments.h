@@ -14,10 +14,13 @@
 		brown_path_increments(const unsigned steps = STEPS)
 		{
 			std::vector<double> path;
+			path.reserve(steps);
 			makebm(path, steps, ALPHABET_SIZE);
 			// convert sampled path to LIE increments
-			for (auto i = path.cbegin(); (i + ALPHABET_SIZE) != path.cend(); i += ALPHABET_SIZE) {
-				increments.emplace_back(LieDifference(i, ALPHABET_SIZE));
+			typename std::vector<double>::const_iterator pend(path.end());
+			for (typename std::vector<double>::const_iterator i = path.begin(); (i + ALPHABET_SIZE) != pend; i +=
+			        ALPHABET_SIZE) {
+				increments.push_back(LieDifference(i, ALPHABET_SIZE));
 			}
 		}
 

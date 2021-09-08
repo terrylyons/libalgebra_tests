@@ -11,6 +11,11 @@
 #include <algorithm>
 // the unit test framework
 #include <UnitTest++/UnitTest++.h>
+#include <libalgebra/libalgebra.h>
+#include "compat.h"
+#include "helpers.h"
+
+#include <libalgebra/basis/basis.h>
 
 struct	memfile
 {
@@ -46,21 +51,30 @@ template <typename SPARSEVECTOR_T, typename PATH_T>
 void CHECK_compare_with_file(const SPARSEVECTOR_T& sig, const PATH_T& filepath)
 {
 	size_t numberOfElements = sig.size();
-	typedef typename std::pair< typename SPARSEVECTOR_T::KEY, typename SPARSEVECTOR_T::SCALAR > value_type;
+	typedef std::pair< typename SPARSEVECTOR_T::KEY, typename SPARSEVECTOR_T::SCALAR > value_type;
 	size_t numberOfBytes = numberOfElements * sizeof(value_type);
 	
 	memfile sigfile(filepath, numberOfBytes);
 
 	// construct content if not readonly
 	if (!sigfile.read_only()) {
+	    std::vector<value_type> tmp;
+	    tmp.reserve(numberOfElements);
+	    for (typename SPARSEVECTOR_T::const_iterator cit(sig.begin());
+	         cit != sig.end(); ++cit)
+        {
+	        tmp.push_back(value_type(iter::key<SPARSEVECTOR_T>(cit), iter::value<SPARSEVECTOR_T>(cit)));
+        }
+
 		value_type* data_begin = (value_type*)(sigfile.begin());
 		value_type* data_end = data_begin + numberOfElements;
 		// initialize sigfile
-		auto temp = sig.size();
-		auto temp2 = data_begin - data_end;
-		std::copy(sig.begin(), sig.end(), data_begin);
-		std::sort(data_begin, data_end
-			, [](const value_type lhs, const value_type rhs) {return lhs.first < rhs.first; });
+		size_t temp = sig.size();
+		size_t temp2 = data_begin - data_end;
+		std::copy(tmp.begin(), tmp.end(), data_begin);
+
+		typename alg::basis::basis_traits<typename SPARSEVECTOR_T::BASIS>::ordering_tag::pair_order order;
+		std::sort(data_begin, data_end, order);
 	}
 
 	// check the read only allocation is the anticipated size
@@ -73,8 +87,9 @@ void CHECK_compare_with_file(const SPARSEVECTOR_T& sig, const PATH_T& filepath)
 	// compare the calculated with the stored data
 	CHECK_EQUAL(sig.size(), numberOfElements);
 	SPARSEVECTOR_T sig_saved_version;
-	for (auto a = data_cbegin; a < data_cend; a++)
+	for (const value_type *a = data_cbegin; a != data_cend; a++)
 		sig_saved_version[a->first] = a->second;
-	SPARSEVECTOR_T err = sig - sig_saved_version;
-	CHECK_EQUAL(SPARSEVECTOR_T(), err);
+	//SPARSEVECTOR_T err = sig - sig_saved_version;
+	//CHECK_EQUAL(SPARSEVECTOR_T(), err);
+	CHECK_VEC_CLOSE(sig_saved_version, sig, 1e-15);
 }

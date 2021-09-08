@@ -7,6 +7,7 @@
 // the unit test framework
 #include <UnitTest++/UnitTest++.h>
 #include "time_and_details.h"
+#include "compat.h"
 
 // validates the hall set and lie multiplication over it
 SUITE(hallset)
@@ -32,7 +33,7 @@ SUITE(hallset)
 			// each hall basis instance contains one (such tree defining) hall set
 			const std::vector<PARENTS>& hall_set = basis.hall_set;
 			// where the vector is indexed by the keys; the first entry is not a basis element.
-			const auto& reverse_map = LIE::basis.reverse_map;
+			const typename LIE::BASIS::REVERSE_MAP& reverse_map = LIE::basis.reverse_map;
 			// and we follow Hall in having a degree compatible with the key ordering
 			// basis.degree(k)
 
@@ -46,13 +47,13 @@ SUITE(hallset)
 				CHECK((std::pair<LET, LET>(0, i))==(hall_set[i]));
 
 			// order property
-			for (const PARENTS& k : hall_set)
-				if (k != PARENTS(0, 0))
-					CHECK(k.first < k.second);
+			for (typename std::vector<PARENTS>::const_iterator it(hall_set.begin()); it != hall_set.end(); ++it)
+				if (*it != PARENTS(0, 0))
+					CHECK(it->first < it->second);
 
 			// husband younger than father in-law property
-			for (const auto& k : hall_set)
-				CHECK(k.first >= hall_set[k.second].first);
+			for (typename std::vector<PARENTS>::const_iterator it(hall_set.begin()); it != hall_set.end(); ++it)
+				CHECK(it->first >= hall_set[it->second].first);
 
 			// sanity tests
 
@@ -110,8 +111,9 @@ SUITE(hallset)
 							CHECK(LIE()== k);
 						else {
 							CHECK(k.size() > 0);
-							for (const auto& p : k)
-								CHECK(basis.degree(p.first) == basis.degree(i) + basis.degree(j));
+							for (typename LIE::iterator p(k.begin()); p != k.end(); ++p)
+								CHECK(basis.degree(iter::key<LIE>(p))
+								      == basis.degree(i) + basis.degree(j));
 						}
 
 						// check that items not in the hall basis are not in reversemap
