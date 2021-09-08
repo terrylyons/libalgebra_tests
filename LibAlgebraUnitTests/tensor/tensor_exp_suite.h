@@ -48,6 +48,20 @@
 
     }
 
+    TEST_FIXTURE(fixture, tensor_exp_two_letters_plus_unit) {
+        TENSOR arg(S(1));
+        KEY key1(KEY::LET(1UL)), key2(KEY::LET(2UL));
+        arg.add_scal_prod(key1, S(0.256147));
+        arg.add_scal_prod(key2, S(0.852625));
+        TENSOR result (exp(arg));
+
+        TENSOR expected(exp_to_depth(arg, S(1)));
+
+        CHECK_EQUAL(63, result.size());
+        CHECK_VEC_CLOSE(expected, result, expected_error);
+    }
+
+
     TEST_FIXTURE(fixture, tensor_exp_degree_2_key) {
         TEST_DETAILS();
 
