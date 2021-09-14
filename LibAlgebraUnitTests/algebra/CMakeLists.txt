@@ -1,7 +1,7 @@
 
 
 
-add_library(algebra_tests STATIC
+add_library(algebra_tests OBJECT
         test_algebra_product.cpp
         )
 
