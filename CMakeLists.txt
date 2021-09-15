@@ -63,6 +63,7 @@ file(GLOB VECTOR_TESTS      "LibAlgebraUnitTests/vector/test_*.cpp")
 file(GLOB UTIL_TESTS        "LibAlgebraUnitTests/utils/test_*.cpp")
 file(GLOB ALGEBRA_TESTS     "LibAlgebraUnitTests/algebra/test_*.cpp")
 file(GLOB SIGNATURE_TESTS   "LibAlgebraUnitTests/signature_tests/test_*.cpp")
+file(GLOB SHUFFLE_TENSOR_TESTS   "LibAlgebraUnitTests/shuffle_tensor/test_*.cpp")
 
 add_executable(test ${SOURCES}
         ${TENSOR_TESTS}
@@ -71,6 +72,7 @@ add_executable(test ${SOURCES}
         ${UTIL_TESTS}
         ${ALGEBRA_TESTS}
         ${SIGNATURE_TESTS}
+        ${SHUFFLE_TENSOR_TESTS}
         LibAlgebraUnitTests/reporter.cpp LibAlgebraUnitTests/reporter.h)
 
 target_include_directories(test PRIVATE "${PROJECT_BINARY_DIR}")
@@ -111,3 +113,9 @@ add_executable(test_signatures "LibAlgebraUnitTests/signature_tests/run_tests.cp
 target_include_directories(test_signatures PUBLIC "${PROJECT_BINARY_DIR}")
 target_link_libraries(test_signatures PRIVATE  UnitTest++ "${Bignum_LIBRARY}" ${Boost_LIBRARIES})
 target_link_libraries(test_signatures PUBLIC OpenMP::OpenMP_CXX)
+
+add_executable(test_shuffle_tensor "LibAlgebraUnitTests/shuffle_tensor/run_tests.cpp" "LibAlgebraUnitTests/memfile.cpp"
+        ${SHUFFLE_TENSOR_TESTS} LibAlgebraUnitTests/reporter.cpp LibAlgebraUnitTests/reporter.h)
+target_include_directories(test_shuffle_tensor PUBLIC "${PROJECT_BINARY_DIR}")
+target_link_libraries(test_shuffle_tensor PRIVATE  UnitTest++ "${Bignum_LIBRARY}" ${Boost_LIBRARIES})
+target_link_libraries(test_shuffle_tensor PUBLIC OpenMP::OpenMP_CXX)
