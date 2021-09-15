@@ -90,7 +90,7 @@ TEST_FIXTURE(Fixture, test_product_unidim_deg_1_1_copy) {
             CHECK_EQUAL(expected, lhs * rhs);
     }
 
-TEST_FIXTURE(Fixture, test_product_unidim_deg_1_1) {
+TEST_FIXTURE(Fixture, test_shuffle_product_unidim_deg_1_1) {
     TEST_DETAILS();
 
     LET k1[] = {1};
