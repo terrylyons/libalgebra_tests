@@ -120,7 +120,7 @@ TEST_FIXTURE(Fixture, test_shuffle_product_unidim_deg_1_1) {
     
            // CHECK_EQUAL(expected, lhs * rhs);
 
-            CHECK_EQUAL(expected, prod(lhs,rhs));
+            CHECK_EQUAL(expected, prod(lhs,rhs)); // don't think this is the right prod - how does prod interact with shuffle tensor class?
     }
 
 
