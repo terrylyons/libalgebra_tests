@@ -96,17 +96,27 @@ TEST_FIXTURE(Fixture, test_product_unidim_deg_1_1) {
     LET k1[] = {1};
     LET k2[] = {2};
 
-    // STEP1: Turn these into shuffle tensors
-    TENSOR lhs(make_key(k1, 1)), rhs(make_key(k2, 1));
+    //// STEP1: Turn these into shuffle tensors
 
-    // STEP2: Create a tensor for the expected shuffle product
+    // TENSOR lhs(make_key(k1, 1)), rhs(make_key(k2, 1));
+
+    // ?? SHUFFLE_TENSOR lhs(make_key(k1, 1)), rhs(make_key(k2, 1)); // from alg_types?? can this be done with shuffle tensor?
+
+    shuffle_tensor<Coeff?, 1, 1> lhs(make_key(k1, 1));
+
+    shuffle_tensor<Coeff?, 1, 1> rhs(make_key(k2, 1));
+
+    //// STEP2: Create a tensor for the expected shuffle product
+
+    // LET ek[] = {1, 2};
+    // TENSOR expected(make_key(ek,2));
 
     LET ek[] = {1, 2};
-    TENSOR expected(make_key(ek,2));
+    shuffle_tensor<Coeff?, 1, 1> expected(make_key(ek, 2));
 
-    // STEP3: Evaluate with the shuffle tensor multiplication class, rather than lhs * rhs
+    //// STEP3: Evaluate with the shuffle tensor multiplication class, prod(tensor,tensor), rather than lhs * rhs
 
-            CHECK_EQUAL(expected, lhs * rhs);
+            CHECK_EQUAL(expected, prod(lhs,rhs));
     }
 
 
