@@ -114,6 +114,9 @@ TEST_FIXTURE(Fixture, test_shuffle_product_unidim_deg_1_1) {
     LET ek[] = {1, 2};
     shuffle_tensor<Coeff?, 1, 1> expected(make_key(ek, 2));
 
+    shuffle_tensor expected;
+    expected.add_scal_prod(tkey {1, 2}, 1.0);
+    expected.add_scal_prod(tkey {2, 1}, 1.0);
     
     // expected of product { 1(1) } * { 1(2) } = { 1(1,2) 1(2, 1) }
     // as a dense vector {0, 0, ... (width), 0, 1, 0, ...(width), 0, 1, ...(more zeroes) }
