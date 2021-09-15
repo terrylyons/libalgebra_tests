@@ -102,7 +102,7 @@ TEST_FIXTURE(Fixture, test_product_unidim_deg_1_1) {
 
     // ?? SHUFFLE_TENSOR lhs(make_key(k1, 1)), rhs(make_key(k2, 1)); // from alg_types?? can this be done with shuffle tensor?
 
-    shuffle_tensor<Coeff?, 1, 1> lhs(make_key(k1, 1));
+    shuffle_tensor<Coeff?, 1, 1> lhs(make_key(k1, 1)); // not sure on Coeff - SCA? RAT?
 
     shuffle_tensor<Coeff?, 1, 1> rhs(make_key(k2, 1));
 
@@ -114,7 +114,11 @@ TEST_FIXTURE(Fixture, test_product_unidim_deg_1_1) {
     LET ek[] = {1, 2};
     shuffle_tensor<Coeff?, 1, 1> expected(make_key(ek, 2));
 
+    // expected should be {1, 2} + {2, 1} = {3, 3} I think ? need to look into how keys work
+
     //// STEP3: Evaluate with the shuffle tensor multiplication class, prod(tensor,tensor), rather than lhs * rhs
+    
+           // CHECK_EQUAL(expected, lhs * rhs);
 
             CHECK_EQUAL(expected, prod(lhs,rhs));
     }
