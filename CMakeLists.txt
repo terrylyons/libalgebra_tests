@@ -51,6 +51,9 @@ add_subdirectory(libalgebra)
 add_subdirectory(LibAlgebraUnitTests)
 
 add_executable(all_tests LibAlgebraUnitTests/LibAlgebraUnitTests.cpp)
+target_link_libraries(all_tests PRIVATE UnitTest++)
+target_include_directories(all_tests PUBLIC ${UnitTest++_INCLUDE_DIRS})
+
 target_link_libraries(all_tests PRIVATE
         integration_tests
         algebra_tests

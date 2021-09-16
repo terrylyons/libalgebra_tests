@@ -4,6 +4,7 @@ add_library(reporter STATIC
         reporter.cpp
         )
 target_link_libraries(reporter PUBLIC UnitTest++)
+target_include_directories(reporter PUBLIC ${UnitTest++_INCLUDE_DIRS})
 
 
 add_subdirectory(algebra)
