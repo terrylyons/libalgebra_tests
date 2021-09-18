@@ -14,22 +14,11 @@ endif()
 include(vcpkg OPTIONAL)
 
 find_package(UnitTest++ CONFIG REQUIRED)
-if((NOT DEFINED UnitTest++_INCLUDE_DIRS) AND (DEFINED UTPP_INCLUDE_DIRS))
-set(UnitTest++_INCLUDE_DIRS  "${UTPP_INCLUDE_DIRS}")
-## have corrected the UnitTest++Config.cmake file to point UnitTest++_INCLUDE_DIRS to the correct path for the headers
-endif()
+find_path(UnitTest++_INCLUDE_DIRS "UnitTest++/UnitTest++.h")
+# include_directories(SYSTEM "${UnitTest++_INCLUDE_DIRS})
+# target_link_libraries(main PRIVATE UnitTest++)
 
 find_package(Boost COMPONENTS thread filesystem iostreams chrono random container REQUIRED)
-
-if(WIN32)
-# for Windows operating system in general
-# https://github.com/Microsoft/vcpkg/issues/2979
-# this picks up the debug verson of mpir - the files have the fix.
-find_library(Bignum_LIBRARY mpir)
-else()
-# otherwise
-find_library(Bignum_LIBRARY gmp)
-endif()
 
 find_package(OpenMP)
 if(OpenMP_CXX_FOUND AND MSVC)
@@ -44,7 +33,7 @@ message(STATUS ">>> UnitTest++_INCLUDE_DIRS = ${UnitTest++_INCLUDE_DIRS}")
 message(STATUS ">>> OpenMP_CXX_INCLUDE_DIRS = ${OpenMP_CXX_INCLUDE_DIRS}")
 message(STATUS ">>> OpenMP_CXX_FLAGS = ${OpenMP_CXX_FLAGS}")
 message(STATUS ">>> Boost libraries: ${Boost_LIBRARIES}")
-message(STATUS ">>> Bignum library: ${Bignum_LIBRARY}")
+
 
 
 add_subdirectory(libalgebra)

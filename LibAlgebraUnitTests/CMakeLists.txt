@@ -1,8 +1,14 @@
 
+find_package(UnitTest++ CONFIG REQUIRED)
+find_path(UnitTest++_INCLUDE_DIRS "UnitTest++/UnitTest++.h")
+# include_directories(SYSTEM "${UnitTest++_INCLUDE_DIRS})
+# target_link_libraries(main PRIVATE UnitTest++)
+
+message(STATUS ">>> UnitTest++_INCLUDE_DIRS = ${UnitTest++_INCLUDE_DIRS}")
 
 add_library(reporter STATIC
-        reporter.cpp
-        )
+        reporter.cpp reporter.h "${UnitTest++_INCLUDE_DIRS}/UnitTest++/UnitTest++.h")
+target_include_directories(reporter SYSTEM PRIVATE "${UnitTest++_INCLUDE_DIRS}")
 target_link_libraries(reporter PUBLIC UnitTest++)
 
 
