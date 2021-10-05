@@ -29,6 +29,7 @@ SUITE(shuffle_tensor)
         typedef typename TENSOR::BASIS TBASIS;
         typedef typename TENSOR::KEY KEY;
 
+        using SHUFFLE_TENSOR_MULTIPLICATION = alg::shuffle_tensor_multiplication<typename ALG_TYPES::COEFF>;
         typedef typename ALG_TYPES::SHUFFLE_TENSOR SHUFFLE_TENSOR;
 
         // const TENSOR tunit;
@@ -179,7 +180,7 @@ TEST_FIXTURE(Fixture, test_shuffle_product_unidim_deg_1_1) {
 
     std::cout << "expected: " << expected << std::endl;
 
-    // SHUFFLE_TENSOR direct_multiplication = lhs*rhs; // TODO: doesn't work, wrong number of arguments
+    SHUFFLE_TENSOR direct_multiplication = lhs*rhs; // TODO: doesn't work, wrong number of arguments
     // std::cout << "direct_multiplication: " << direct_multiplication << std::endl;
     
     // full function calls attempts
