@@ -177,7 +177,7 @@ SUITE(shuffle_tensor)
     } // TEST test_multiply_inplace_tunit_zero_op
     
     TEST_FIXTURE(Fixture, test_multiply_inplace_tunit_zero_op_max_depth) {
-        EST_DETAILS();
+        TEST_DETAILS();
 
         // test: {1()} * {} == {}
 
