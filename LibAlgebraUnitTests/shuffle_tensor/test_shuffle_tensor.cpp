@@ -696,9 +696,29 @@ SUITE(shuffle_tensor)
     TEST_FIXTURE(Fixture, test_shuffle_product_accuracy){
         TEST_DETAILS();
 
-        // TENSOR t1(TKey(LET(1))), t2(TKey(LET(2))), t3(TKey(LET(3))), t4(TKey(LET(4))), t5(TKey(LET(5)));
-        // TENSOR sig = exp(t1)*exp(t2)*exp(t3)*exp(t4)*exp(t5);
-            
+        LET k1[] = {1};
+        LET k2[] = {2};
+        LET k3[] = {3};
+        LET k4[] = {4};
+        LET k5[] = {5};
+
+        TENSOR t1(make_key(k1, 1));
+        TENSOR t2(make_key(k2, 1));
+        TENSOR t3(make_key(k3, 1));
+        TENSOR t4(make_key(k4, 1));
+        TENSOR t5(make_key(k5, 1));
+
+        std::cout << "t1 = " << t1 << ", t2 = " << t2 << ", t3 = " << t3 << ", t4 = " << t4 << ", t5 = " << t5 << std::endl;
+
+        TENSOR sig = exp(t1)*exp(t2)*exp(t3)*exp(t4)*exp(t5);
+
+        std::cout << "signature = " << sig << std::endl;
+
+        SHUFFLE_TENSOR st1(make_key(k1, 1));
+        SHUFFLE_TENSOR st2(make_key(k2, 1));
+
+        pairing<COEFF, 5, 5> my_pairing;
+
         SHUFFLE_TENSOR lhs;
         SHUFFLE_TENSOR rhs;
 
