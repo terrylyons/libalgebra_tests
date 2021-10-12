@@ -51,6 +51,24 @@ SUITE(shuffle_tensor)
 
     };
 
+    template <typename Coeff, DEG Width, DEG Depth>
+    struct pairing{   
+        
+        using scalar_t = typename Coeff::S;
+        using free_tensor_t = alg::free_tensor<Coeff, Width, Depth>;
+        using shuffle_tensor_t = alg::shuffle_tensor<Coeff, Width, Depth>;
+
+        scalar_t operator()(const shuffle_tensor_t& functional, const free_tensor_t* vector) const
+        {
+           scalar_t result {0};
+           for (auto cit = functional.begin(); cit != functional.end(); ++cit) {
+                result += cit->value() * vector[cit->key()];
+           }
+           return result;
+        }
+
+    };
+
 // #define ADD_KEY(N, ...) \
 //     {                     \
 //         LET tmp[N] = {__VA_ARGS__};  \
@@ -672,5 +690,20 @@ SUITE(shuffle_tensor)
                 CHECK_EQUAL(expected, result);
             
     } // TEST test_multiply_deg_2_deg_1_op_max_depth
+
+    // test: < Sh(t1), S(x) > x < Sh(t2), S(x) > = <Sh(t1) x Sh(t2), S(x) >
+
+    TEST_FIXTURE(Fixture, test_shuffle_product_accuracy){
+        TEST_DETAILS();
+
+        // TENSOR t1(TKey(LET(1))), t2(TKey(LET(2))), t3(TKey(LET(3))), t4(TKey(LET(4))), t5(TKey(LET(5)));
+        // TENSOR sig = exp(t1)*exp(t2)*exp(t3)*exp(t4)*exp(t5);
+            
+        SHUFFLE_TENSOR lhs;
+        SHUFFLE_TENSOR rhs;
+
+                CHECK_EQUAL(lhs, rhs);
+
+    } // test_shuffle_product_accuracy
 
 } // SUITE shuffle_tensor
