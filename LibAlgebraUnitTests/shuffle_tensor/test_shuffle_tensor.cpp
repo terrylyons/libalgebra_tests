@@ -353,6 +353,46 @@ SUITE(shuffle_tensor)
 
     // test: {1()} * {1()} == {1()}
 
+    TEST_FIXTURE(Fixture, test_multiply_and_add_tunit_tunit_op) {
+        TEST_DETAILS();
+
+        // test: {1()} * {1()} == {1()}
+
+        SHUFFLE_TENSOR lhs(tunit); // {1()}
+        SHUFFLE_TENSOR rhs(tunit); // {1()}
+        SHUFFLE_TENSOR expected(tunit); // {1()}
+
+        std::cout << "lhs = " << lhs << ", rhs = " << rhs << ", expected = " << expected << std::endl;
+
+        SHUFFLE_TENSOR result;
+        SHUFFLE_TENSOR_MULTIPLICATION my_shuffle_tensor_product;
+        alg::mult::scalar_passthrough my_scalar_passthrough; 
+        my_shuffle_tensor_product.multiply_and_add<SHUFFLE_TENSOR, alg::mult::scalar_passthrough>(result, lhs, rhs, my_scalar_passthrough);
+            
+                CHECK_EQUAL(expected, result);
+
+    } // TEST test_multiply_and_add_tunit_tunit_op
+
+    TEST_FIXTURE(Fixture, test_multiply_and_add_tunit_tunit_op_max_depth) {
+        TEST_DETAILS();
+
+    // test: {1()} * {1()} == {1()}
+
+        SHUFFLE_TENSOR lhs(tunit); // {1()}
+        SHUFFLE_TENSOR rhs(tunit); // {1()}
+        SHUFFLE_TENSOR expected(tunit); // {1()}
+
+        std::cout << "lhs = " << lhs << ", rhs = " << rhs << ", expected = " << expected << std::endl;
+
+        SHUFFLE_TENSOR result;
+        SHUFFLE_TENSOR_MULTIPLICATION my_shuffle_tensor_product;
+        alg::mult::scalar_passthrough my_scalar_passthrough; 
+        my_shuffle_tensor_product.multiply_and_add<SHUFFLE_TENSOR, alg::mult::scalar_passthrough>(result, lhs, rhs, my_scalar_passthrough, 5);
+            
+                CHECK_EQUAL(expected, result);
+
+    } // TEST test_multiply_and_add_tunit_tunit_op_max_depth
+
     TEST_FIXTURE(Fixture, test_star_tunit_tunit) {
         TEST_DETAILS();
 
@@ -410,6 +450,44 @@ SUITE(shuffle_tensor)
                 CHECK_EQUAL(expected, result);
 
     } // TEST test_multiply_tunit_tunit_op_max_depth
+
+    TEST_FIXTURE(Fixture, test_multiply_inplace_tunit_tunit_op) {
+        TEST_DETAILS();
+
+        // test: {1()} * {1()} == {1()}
+
+        SHUFFLE_TENSOR lhs(tunit); // {1()}
+        SHUFFLE_TENSOR rhs(tunit); // {1()}
+        SHUFFLE_TENSOR expected(tunit); // {1()}
+
+        std::cout << "lhs = " << lhs << ", rhs = " << rhs << ", expected = " << expected << std::endl;
+
+        SHUFFLE_TENSOR_MULTIPLICATION my_shuffle_tensor_product;
+        alg::mult::scalar_passthrough my_scalar_passthrough; 
+        my_shuffle_tensor_product.multiply_inplace<SHUFFLE_TENSOR, alg::mult::scalar_passthrough>(lhs, rhs, my_scalar_passthrough);
+            
+                CHECK_EQUAL(expected, lhs);
+
+    } // TEST test_multiply_inplace_tunit_tunit_op
+
+    TEST_FIXTURE(Fixture, test_multiply_inplace_tunit_tunit_op_max_depth) {
+        TEST_DETAILS();
+
+    // test: {1()} * {1()} == {1()}
+
+        SHUFFLE_TENSOR lhs(tunit); // {1()}
+        SHUFFLE_TENSOR rhs(tunit); // {1()}
+        SHUFFLE_TENSOR expected(tunit); // {1()}
+
+        std::cout << "lhs = " << lhs << ", rhs = " << rhs << ", expected = " << expected << std::endl;
+
+        SHUFFLE_TENSOR_MULTIPLICATION my_shuffle_tensor_product;
+        alg::mult::scalar_passthrough my_scalar_passthrough; 
+        my_shuffle_tensor_product.multiply_inplace<SHUFFLE_TENSOR, alg::mult::scalar_passthrough>(lhs, rhs, my_scalar_passthrough, 5);
+            
+                CHECK_EQUAL(expected, lhs);
+
+    } // TEST test_multiply_inplace_tunit_tunit_op_max_depth
 
     // test: {1()} * {1(1)} ==  {1(1)}
 
