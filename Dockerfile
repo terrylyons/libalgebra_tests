@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu AS builder
 # suppress input
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -17,8 +17,19 @@ RUN mkdir libalgebra_tests
 WORKDIR /libalgebra_tests
 COPY . .
 WORKDIR /libalgebra_tests/build
-RUN cmake -DCMAKE_BUILD_TYPE=Release "$@" ..
-RUN cmake --build .
+ENTRYPOINT cmake -DCMAKE_BUILD_TYPE=Release "$@" .. && cmake --build .
 
 # Run the tests
-CMD ./test
+FROM builder AS tester
+ENTRYPOINT cmake -DCMAKE_BUILD_TYPE=Release "$@" .. && cmake --build . && ./test
+
+# docker volume create libalgebra_volume
+# docker build -t libalgebra . --target builder
+# docker run -v libalgebra_volume:/libalgebra_tests/build -it libalgebra
+#
+# OR
+#
+# docker volume create libalgebra_tests_volume
+# docker build -t libalgebra_tests . --target tester
+# docker run -v libalgebra_tests_volume:/libalgebra_tests/build -it libalgebra_tests
+
