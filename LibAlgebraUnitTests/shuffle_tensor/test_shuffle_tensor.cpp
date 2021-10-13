@@ -719,10 +719,16 @@ SUITE(shuffle_tensor)
 
         pairing<COEFF, 5, 5> my_pairing;
 
-        SHUFFLE_TENSOR lhs;
-        SHUFFLE_TENSOR rhs;
+        COEFF lhs;
+        COEFF rhs;
 
-                CHECK_EQUAL(lhs, rhs);
+        // TODO: Change types below
+
+        // lhs = my_pairing.operator()(st1, sig) * my_pairing.operator()(st2, sig)
+
+        // rhs = my_pairing.operator()(st1*st2, sig)
+
+                CHECK_EQUAL(0,0);
 
     } // test_shuffle_product_accuracy
 
