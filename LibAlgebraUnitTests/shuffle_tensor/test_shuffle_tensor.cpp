@@ -1359,8 +1359,8 @@ SUITE(shuffle_tensor)
         COEFF::S lhs;
         COEFF::S rhs;
 
-        lhs = my_pairing.operator()(st1, &sig) * my_pairing.operator()(st2, &sig);
-        rhs = my_pairing.operator()(st1*st2, &sig);
+        lhs = my_pairing(st1, &sig) * my_pairing(st2, &sig);
+        rhs = my_pairing(st1*st2, &sig);
 
                 CHECK_EQUAL(lhs, rhs);
 
