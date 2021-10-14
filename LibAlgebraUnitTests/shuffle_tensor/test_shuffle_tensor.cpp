@@ -1344,13 +1344,17 @@ SUITE(shuffle_tensor)
         COEFF lhs;
         COEFF rhs;
 
+        TENSOR* ptr_to_sig = &sig;
+
+        my_pairing.operator()(st1, ptr_to_sig);
+
         // TODO: Change types below
 
         // lhs = my_pairing.operator()(st1, sig) * my_pairing.operator()(st2, sig)
 
         // rhs = my_pairing.operator()(st1*st2, sig)
 
-                CHECK_EQUAL(0,0);
+                CHECK_EQUAL(0, 0);
 
     } // test_shuffle_product_accuracy
 
