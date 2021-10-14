@@ -58,11 +58,11 @@ SUITE(shuffle_tensor)
         using free_tensor_t = alg::free_tensor<Coeff, Width, Depth>;
         using shuffle_tensor_t = alg::shuffle_tensor<Coeff, Width, Depth>;
 
-        scalar_t operator()(const shuffle_tensor_t& functional, const free_tensor_t& vector) const
+        scalar_t operator()(const shuffle_tensor_t& functional, const free_tensor_t* vector) const
         {
            scalar_t result {0};
            for (auto cit = functional.begin(); cit != functional.end(); ++cit) {
-                result += cit->value() * vector[cit->key()];
+                result += cit->value() * (*vector)[cit->key()];
            }
            return result;
         }
@@ -1359,14 +1359,11 @@ SUITE(shuffle_tensor)
         COEFF::S lhs;
         COEFF::S rhs;
 
-        // std::cout << "first contribution = " << my_pairing.operator()(st1, sig) << std::endl;
-        // std::cout << "second contribution = " << my_pairing.operator()(st2, sig) << std::endl;
-        // std::cout << "rhs = " << my_pairing.operator()(st1*st2, sig) << std::endl;
-
-        lhs = my_pairing.operator()(st1, sig) * my_pairing.operator()(st2, sig);
-        rhs = my_pairing.operator()(st1*st2, sig);
+        lhs = my_pairing.operator()(st1, &sig) * my_pairing.operator()(st2, &sig);
+        rhs = my_pairing.operator()(st1*st2, &sig);
 
                 CHECK_EQUAL(lhs, rhs);
+
 
     } // test_shuffle_product_accuracy
 
