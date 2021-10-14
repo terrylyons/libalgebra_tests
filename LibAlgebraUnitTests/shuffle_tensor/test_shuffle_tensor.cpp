@@ -58,7 +58,7 @@ SUITE(shuffle_tensor)
         using free_tensor_t = alg::free_tensor<Coeff, Width, Depth>;
         using shuffle_tensor_t = alg::shuffle_tensor<Coeff, Width, Depth>;
 
-        scalar_t operator()(const shuffle_tensor_t& functional, const free_tensor_t* vector) const
+        scalar_t operator()(const shuffle_tensor_t& functional, const free_tensor_t& vector) const
         {
            scalar_t result {0};
            for (auto cit = functional.begin(); cit != functional.end(); ++cit) {
@@ -1330,31 +1330,43 @@ SUITE(shuffle_tensor)
         TENSOR t4(make_key(k4, 1));
         TENSOR t5(make_key(k5, 1));
 
-        std::cout << "t1 = " << t1 << ", t2 = " << t2 << ", t3 = " << t3 << ", t4 = " << t4 << ", t5 = " << t5 << std::endl;
+        // std::cout << "t1 = " << t1 << ", t2 = " << t2 << ", t3 = " << t3 << ", t4 = " << t4 << ", t5 = " << t5 << std::endl;
 
         TENSOR sig = exp(t1)*exp(t2)*exp(t3)*exp(t4)*exp(t5);
 
-        std::cout << "signature = " << sig << std::endl;
+        // std::cout << "signature = " << sig << std::endl;
 
-        SHUFFLE_TENSOR st1(make_key(k1, 1));
-        SHUFFLE_TENSOR st2(make_key(k2, 1));
+        LET k11[] = {1, 1};
+        LET k111[] = {1, 1, 1};
+
+        SHUFFLE_TENSOR st1;
+
+        st1.add_scal_prod(make_key(k11,2), 0.5);
+        st1.add_scal_prod(make_key(k111,3), 0.5);
+
+        LET k22[] = {2, 2};
+        LET k222[] = {2, 2, 2};
+
+        SHUFFLE_TENSOR st2;
+
+        st2.add_scal_prod(make_key(k22,2), 0.5);
+        st2.add_scal_prod(make_key(k222,3), 0.5);
+
+        // std::cout << "st1 = " << st1 << ", st2 = " << st2 << std::endl;
 
         pairing<COEFF, 5, 5> my_pairing;
 
-        COEFF lhs;
-        COEFF rhs;
+        COEFF::S lhs;
+        COEFF::S rhs;
 
-        TENSOR* ptr_to_sig = &sig;
+        // std::cout << "first contribution = " << my_pairing.operator()(st1, sig) << std::endl;
+        // std::cout << "second contribution = " << my_pairing.operator()(st2, sig) << std::endl;
+        // std::cout << "rhs = " << my_pairing.operator()(st1*st2, sig) << std::endl;
 
-        my_pairing.operator()(st1, ptr_to_sig);
+        lhs = my_pairing.operator()(st1, sig) * my_pairing.operator()(st2, sig);
+        rhs = my_pairing.operator()(st1*st2, sig);
 
-        // TODO: Change types below
-
-        // lhs = my_pairing.operator()(st1, sig) * my_pairing.operator()(st2, sig)
-
-        // rhs = my_pairing.operator()(st1*st2, sig)
-
-                CHECK_EQUAL(0, 0);
+                CHECK_EQUAL(lhs, rhs);
 
     } // test_shuffle_product_accuracy
 
