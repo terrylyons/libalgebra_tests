@@ -656,7 +656,6 @@ SUITE(shuffle_tensor)
 
     } // TEST test_multiply_inplace_deg_1_tunit_op_max_depth
 
-
     // test: {1(1)} * {1(2)} == {1(1,2) 1(2,1)} 
 
     TEST_FIXTURE(Fixture, test_star_deg_1_deg_1) {
@@ -865,7 +864,6 @@ SUITE(shuffle_tensor)
                 CHECK_EQUAL(expected, lhs);
 
     } // TEST test_multiply_inplace_deg_1_deg_1_op_max_depth
-
 
     // test: {1(1)} * {1(2,3)} == {1(1,2,3) 1(2,1,3) 1(2,3,1)}
 
